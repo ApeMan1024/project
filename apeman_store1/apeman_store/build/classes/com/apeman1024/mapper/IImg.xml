@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.IImg">
+	<!--获取商品信息 -->
+	<select id="getCom" resultType="hashmap">
+		SELECT
+		tab.count,
+		tab.id,
+		tab.name,
+		tab.qian,
+		tab.src,
+		tab.title,
+		tab.img,
+		xian
+		FROM
+		(
+		SELECT com.count AS count,com.id AS id,com.`name` AS name,com.qian AS
+		qian,com.src AS src,com.title AS title,img.img AS img FROM com,img
+		WHERE com.id = img.id AND com.id = #{id}
+		) AS tab left join discount on tab.id=discount.id and
+		discount.data=#{data}
+	</select>
+
+	<update id="updateCar">
+		update car set num=num+#{num} where
+		username=#{username} and id=#{id}
+	</update>
+
+	<insert id="addCar">
+		insert into
+		car(id,bool,src,name,title,qian,xian,num,username)
+		value(#{id},#{bool},#{src},#{name},#{title},#{qian},#{xian},#{num},#{username})
+	</insert>
+</mapper>

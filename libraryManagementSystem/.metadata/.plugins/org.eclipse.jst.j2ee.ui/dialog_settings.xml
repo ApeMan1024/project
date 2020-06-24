@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="J2EE_EXPORT_OVERWRITE" value="false"/>
+	<item key="J2EE_EXPORT_SOURCE" value="false"/>
+	<list key="J2EE_EXPORT_JST_WEB">
+		<item value="E:\软件\桌面\web2.war"/>
+		<item value="E:\软件\编程软件\apache\apache-tomcat-9.0.16\webapps\web2.war"/>
+	</list>
+</section>

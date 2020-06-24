@@ -1,0 +1,59 @@
+package com.apeman1024.sql;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.apeman1024.Isql.IOpinion;
+import com.apeman1024.entity.Ping;
+import com.apeman1024.util.Sql_util;
+
+public class Opinion implements IOpinion{
+	Connection  conn = Sql_util.getConn();
+	@Override
+	public List<Ping> select(int pa, int num) {
+		String sql="select * from ping limit ?,? DESC";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setInt(1, pa);
+			pre.setInt(2, num);
+			ResultSet exe = pre.executeQuery();
+			List<Ping>list=new ArrayList<Ping>();
+			while(exe.next()) {
+				Ping ping = new Ping();
+				ping.setUsername(exe.getString("username"));
+				ping.setNei(exe.getString("nei"));
+				ping.setTime(exe.getString("time"));
+				ping.setId(exe.getInt("id"));
+				ping.setHead(exe.getString("head"));
+				list.add(ping);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public Ping addPing(Ping ping) {
+		String sql="insert into ping(username,head,nei,time) value(?,?,?,?)";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, ping.getUsername());
+			pre.setString(2, ping.getHead());
+			pre.setString(3, ping.getNei());
+			pre.setString(4, ping.getTime());
+			int exe = pre.executeUpdate();
+			if(exe>0) {
+				return ping;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+}

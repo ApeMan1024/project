@@ -1,0 +1,47 @@
+I"N<p>小知识日积月累就是大知识，程序员的道路越走越踏实</p>
+
+<h4 id="css文本溢出问题">css文本溢出问题：</h4>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 
+<span class="c">/*多行文本溢出时显示...*/</span>
+<span class="nt">display</span><span class="nd">:-webkit-box</span><span class="o">;</span>
+ <span class="nt">-webkit-box-orient</span><span class="nd">:vertical</span><span class="o">;</span> 
+ <span class="nt">-webkit-line-clamp</span><span class="nd">:2</span><span class="o">;</span>
+ <span class="nt">text-overflow</span><span class="o">:</span> <span class="nt">ellipsis</span><span class="o">;</span>
+ <span class="nt">overflow</span><span class="o">:</span> <span class="nt">hidden</span><span class="o">;</span>
+
+
+<span class="c">/*单行文本溢出显示...*/</span>
+<span class="nt">overflow</span><span class="nd">:hidden</span>
+<span class="nt">text-overflow</span><span class="nd">:ellipsis</span>
+<span class="nt">white-space</span><span class="nd">:nowrap</span>
+</code></pre></div></div>
+
+<h4 id="为未来元素添加事件脚本生成的元素">为未来元素添加事件（脚本生成的元素）：</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">.box</span><span class="dl">"</span><span class="p">).</span><span class="nx">delegate</span><span class="p">(</span><span class="dl">"</span><span class="s2">.btn1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+     <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">assasa</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">.btn</span><span class="dl">"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+     <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">clone</span><span class="p">(</span><span class="kc">false</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">btn</span><span class="dl">"</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="dl">"</span><span class="s2">btn1</span><span class="dl">"</span><span class="p">).</span><span class="nx">appendTo</span><span class="p">(</span><span class="dl">"</span><span class="s2">.box</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">btn</span><span class="dl">"</span><span class="o">&gt;</span><span class="err">按钮</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">box</span><span class="dl">"</span><span class="o">&gt;</span>
+       
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/body</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h4 id="json与对象的相互转换">json与对象的相互转换:</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//将json对象转化为字符串</span>
+<span class="nx">dataStr</span><span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="c1">//使用eval()函数进行转换=&gt;json字符串转换为json对象</span>
+<span class="kd">var</span> <span class="nx">jsonObj</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="dl">'</span><span class="s1">(</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">jsonStr</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">)</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">//使用JSON.parse()方法进行转换=&gt;json字符串转换为json对象</span>
+<span class="kd">var</span> <span class="nx">jsonObj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
+<span class="c1">//jq=&gt;json字符串转换为json对象</span>
+<span class="kd">var</span> <span class="nx">jsonObj</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">parseJSON</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
+
+</code></pre></div></div>
+:ET

@@ -1,0 +1,413 @@
+body {
+    background: #d6cfbf url("../images/bj_top.jpg") 30% top scroll no-repeat;
+}
+a.xia{
+    text-decoration: none;
+}
+a.xia:hover{
+    text-align: none;
+    color: #000;
+}
+.box {
+    width: 30px;
+    height: 30px;
+    background: url("../images/xing.png") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    z-index: 10;
+}
+
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100001;
+}
+header::before {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: #000 -webkit-gradient(linear, right top, left top, from(#4cd964), color-stop(#5ac8fa), color-stop(#007aff), color-stop(#34aadc), color-stop(#5856d6), to(#ff2d55));
+    background: #000 linear-gradient(to left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+}
+
+header.nav_h {
+    background: rgba(195, 176, 140, 0.68);
+    border: none;
+    border-radius: 0px;
+    margin-top: 300px;
+}
+
+.nav_h .container_nav {
+    margin: 0 10%;
+}
+
+.nav_h .container_nav .navbar-header {
+    padding: 0px 5px;
+    margin-right: 5%;
+}
+
+.nav_h .container_nav .navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.nav_h .container_nav .nav li {
+    padding: 0 10px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.nav_h .container_nav .nav li:not(.active):hover {
+    border-radius: 50px 0;
+    background: #E15782;
+}
+
+.nav_h .container_nav .nav a {
+    background: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+.nav_h .container_nav .nav .active {
+    border-radius: 50px 0;
+    background: #a6926c;
+}
+
+.nav_h .container_nav .nav .active a {
+    color: #00c1de;
+}
+
+.nav_h .container_nav .nav a:hover {
+    background: none;
+    color: #00c1de;
+}
+article {
+    width: 1200px;
+    margin: 10px auto;
+}
+article::after{
+    display: inline-block;
+    width:100%;
+    height:0px;
+    content: "";
+}
+
+.blo_left {
+    width: 75%;
+    padding: 5px 10px;
+    float: left;
+}
+.blo_left .browse{
+    padding:10px 20px;
+    min-height:1000px;
+    background:#F1F0EE;
+    border-radius: 5px;
+}
+.blo_left .browse .browse_1{
+    padding:5px 0px;
+    border-bottom: 1px solid #ddd;
+}
+.blo_left .browse .browse_1 span{
+    display:inline-block;
+    color: #000;
+    font-size:16px;
+}
+.blo_left .browse .browse_1 span:after{
+    display: block;
+    content: "";
+    width:70px;
+    height:2px;
+    background:#000;
+    position: relative;
+    top:5px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.blo_left .browse .browse_1 span:hover::after{
+    width:80px;
+}
+.blo_left .browse .browse_1 p{
+    padding:0px;
+    margin:0px;
+    float: right;
+    color: #666;
+}
+.blo_left .browse .browse_1 p i{
+    font-style: normal;
+}
+.blo_left .browse .browse_1 p a{
+    color:#666;
+    display: inline-block;
+    padding:0 10px;
+}
+.blo_left .browse .browse_1 p a:hover{
+    text-decoration: none;
+    color:#000;
+}
+.blo_left .browse .bo{
+    display: block;
+    width:20px;
+    height:20px;
+    margin-top:5px;
+    float: right;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 2em;
+    padding-right:30px;
+}
+.blo_left .browse .browse_2{
+    text-align: center;
+}
+.blo_left .browse .browse_2 h1{
+    font-size:2em;
+    padding-top:10px;
+   
+}
+.blo_left .browse .browse_2 .user_img{
+    display: inline-block;
+    width:20px;
+    height:20px;
+    background:url("../images/browse1_2.net.png") no-repeat;
+    background-size:100% 100%;
+    position: relative;
+    top:3px;
+}
+.blo_left .browse .browse_2 h5{
+    color: #666;
+}
+.blo_left .browse .browse_3 i{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    border-radius: 100%;
+    margin-top:5px;
+    background:-webkit-gradient(linear, left bottom, right top, from(rgba(0,153,255,.9)), to(rgba(42,228,197,.7)));
+    background:linear-gradient(to top right, rgba(0,153,255,.9), rgba(42,228,197,.7));
+}
+.blo_left .browse .browse_3{
+    padding:10px;
+    float: right;
+    margin-top:-10px;
+}
+.blo_left .browse .browse_3 i img{
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+.blo_left .browse .browse_3 span{
+    display: inline-block;
+    padding:0 5px;
+    position: relative;
+    top:2px;
+    color: #666;
+}
+.blo_left .browse .browse_4{
+    text-indent: 2em;
+    line-height: 2em;
+    padding-top:10px;
+    overflow: hidden;
+}
+.blo_left .browse .br_center{
+    text-align: center;
+}
+
+.blo_left .browse .browse_4  img{
+    max-height:400px;
+    vertical-align: auto;
+}
+.blo_left .browse .browse_4 img.img_left{
+    float:left;
+    max-width: 60%;
+}
+.blo_left .browse .browse_4 img.img_right{
+    float:right;
+    max-width: 60%;
+}
+.blo_left .browse .browse_4 img.img_cen{
+    display: block;
+    max-width: 90%;
+    margin:auto;
+    padding:10px;
+}
+.blo_left .browse .browse_4 img.img_man{
+    width: 95%;
+}
+.blo_left .browse .browse_5 ul{
+    list-style: none;
+}
+.blo_left .browse .browse_5 ul li{
+    padding:10px 0;
+}
+.blo_left .browse .browse_5 ul li a{
+    color: #666;
+}
+.blo_left .browse .browse_5 ul li a:hover{
+    color: #000;
+    text-decoration: none;
+}
+.blo_left .browse .browse_5 ul li span{
+    color: #000;
+    font-weight: bold;
+}
+.blo_right{
+    width:24%;
+    float: left;
+    padding:6px;
+}
+.blo_right .lbox,.blo_right .lbox_1,.blo_right .lbox_2{
+    width:100%;
+    height:300px;
+    background:#F1F0EE;
+    border-radius: 5px;
+    padding:10px;
+}
+.blo_right .lbox .box_1,.blo_right .lbox_2 .box_1{
+    padding-top:2px;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+    font-size: 16px;
+}
+.blo_right .lbox .box_1 p,.blo_right .lbox_2 .box_1 p{
+    margin-bottom:2px;
+    padding-bottom: 6px;
+}
+.blo_right .lbox .box_1 p::after,.blo_right .lbox_2 .box_1 p::after{
+    display: block;
+    width:70px;
+    height:2px;
+    content: "";
+    background:#000;
+    position: relative;
+    top:10px;
+    transition: all 0.5s;
+}
+.blo_right .lbox .box_1 p:hover::after,.blo_right .lbox_2 .box_1 p:hover::after{
+    width:80px;
+}
+.blo_right .lbox .box_2{
+    margin-top:4px;
+    width:100%;
+    height:100px;
+    background:#000;
+    overflow: hidden;
+}
+.blo_right .lbox .box_2 img{
+    width:100%;
+    height:100%;
+    opacity: 0.7;
+    transition: all 0.5s;
+}
+.blo_right .lbox .box_2:hover img{
+    opacity: 1;
+    transform: scale(1.1);
+}
+.blo_right .lbox .box_2 .p1{
+    position: relative;
+    bottom: 60px;
+    color: #fff;
+    text-align: center;
+    font-size:16px;
+    display:-webkit-box;
+    -webkit-box-orient:vertical; 
+     -webkit-line-clamp:2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.blo_right .lbox .box_3{
+    margin-top:10px;
+    width:100%;
+}
+.blo_right .lbox .box_3 ul{
+    list-style: none;
+    padding:0px;
+    margin:0px;
+    font-size:16px;
+    color: #000;
+    width:100%;
+}
+.blo_right .lbox .box_3 ul li{
+    width:100%;
+    height:50px;
+    margin:10px 0;
+    cursor: pointer;
+}
+.blo_right .lbox .box_3 ul li .li_img{
+    width:30%;
+    height:100%;
+    float: left;
+    padding-right:5px;
+    overflow: hidden;
+}
+.blo_right .lbox .box_3 ul li .li_img img{
+    width:100%;
+    height:100%;
+    transition: all 0.5s;
+}
+.blo_right .lbox .box_3 ul li:hover{
+    background:#f7f7f7;
+}
+.blo_right .lbox .box_3 ul li:hover .li_img img{
+    transform: scale(1.1);
+}
+.blo_right .lbox .box_3 ul li span{
+    float: left;
+    line-height: 50px;
+    width:70%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color: #000;
+}
+.blo_right .lbox_1{
+    margin-top:20px;
+    height:180px;
+}
+.blo_right .lbox_1 .bo_1{
+    height:80%;
+    width:90%;
+    margin-left:15px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin-top:15px;
+    background:#000;
+}
+.blo_right .lbox_1 img{
+   width:100%;
+   height:100%;
+   vertical-align: top;
+   transition: all 0.5s;
+   opacity: 0.7;
+}
+.blo_right .lbox_1:hover img{
+    transform: scale(1.1);
+    opacity: 1;
+}
+.blo_right .lbox_2{
+    margin-top:20px;
+}
+.blo_right .lbox_2 .bo_2{
+    margin-top:20px;
+    margin-left:10px;
+}
+.blo_right .lbox_2 .bo_2 span{
+    display: inline-block;
+    margin:5px;
+    width:50px;
+    height:30px;
+    text-align: center;
+    line-height: 30px;
+}
+.blo_right .lbox_2 .bo_2 span.oc{
+    display: inline-block;
+    margin:5px;
+    width:100px;
+    height:30px;
+    text-align: center;
+}

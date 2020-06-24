@@ -1,0 +1,156 @@
+package com.apeman1024.sql;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+
+import com.apeman1024.Isql.ICommodity;
+import com.apeman1024.entity.Com;
+import com.apeman1024.util.Sql_util;
+
+public class Commodity implements ICommodity{
+	Connection conn= Sql_util.getConn();
+	
+	public List<String> getTitle() {
+		//获取所有的商品类型
+		String sql="select title from classify";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			ResultSet exe = pre.executeQuery();
+			List<String> list=new ArrayList<String>();
+			while(exe.next()) {
+				list.add(exe.getString("title"));
+			}
+			if(!list.isEmpty()) {
+				return list;
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public List<Com> getComs(int num,int ye,String title){
+		String sql="select * from com where title=? limit ? ,?";
+		PreparedStatement pre;
+		try {
+			pre = conn.prepareStatement(sql);
+			pre.setString(1, title);
+			pre.setInt(2, (ye-1)*num);
+			pre.setInt(3, num);
+			ResultSet exe = pre.executeQuery();
+			List<Com> list=new ArrayList<Com>();
+			while(exe.next()) {
+				Com com=new Com();
+				com.setId(exe.getString("id"));
+				com.setName(exe.getString("name"));
+				com.setSrc(exe.getString("src"));
+				com.setCount(exe.getInt("count"));
+				com.setQian(exe.getDouble("qian"));
+				list.add(com);
+			}
+			if(!list.isEmpty())return list;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	@Override
+	public List<Object> getDis(String parameter) {
+		String sql="select time from miao where data=?";
+		String sql1="select * from discount where time=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, parameter);
+			ResultSet exe = pre.executeQuery();
+			if(exe.next()) {
+				PreparedStatement pre2 = conn.prepareStatement(sql1);
+				pre2.setString(1, exe.getString("time"));
+				ResultSet exe2 = pre2.executeQuery();
+				Map<String , String>map=null;
+				List<Object>list1=new ArrayList<Object>();
+				list1.add(exe.getString("time"));
+				List<Object>list=new ArrayList<Object>();
+				while(exe2.next()) {
+					map=new HashMap<String,String>();
+					map.put("id",exe2.getString("id"));
+					map.put("src",exe2.getString("src"));
+					map.put("name",exe2.getString("name"));
+					map.put("qian",exe2.getString("qian"));
+					map.put("xian",exe2.getString("xian"));
+					list.add(map);
+				}
+				if(!list.isEmpty()) {
+					list1.add(list);
+					return list1;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public List<Object> getSales(int num) {
+		String sql="select * from com order by count desc limit 0,?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			Map<String , String>map=null;
+			pre.setInt(1, num);
+			ResultSet exe = pre.executeQuery();
+			List<Object>list=new ArrayList<Object>();
+			while(exe.next()) {
+				map=new HashMap<String, String>();
+				map.put("id", exe.getString("id"));
+				map.put("src", exe.getString("src"));
+				map.put("name", exe.getString("name"));
+				list.add(map);
+			}
+			if(!list.isEmpty())return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public List<Object> getSearch(String parameter) {
+		String sql="select * from com where id=? or name like '%'?'%' or title like '%'?'%'";
+		String sql1="select xian from id=?";
+		try {
+			System.out.println(1111);
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, parameter);
+			pre.setString(2, parameter);
+			pre.setString(3, parameter);
+			ResultSet exe = pre.executeQuery();
+			List<Object>list=new ArrayList<Object>();
+			Map<String, Object>map=null;
+			while(exe.next()) {
+				map.put("id", exe.getString("id"));
+				map.put("src", exe.getString("src"));
+				map.put("name", exe.getString("name"));
+				map.put("qian", exe.getDouble("count"));
+				map.put("count", exe.getInt("count"));
+				map.put("title", exe.getString("title"));
+				map.put("xian", 0);
+				PreparedStatement pre1 = conn.prepareStatement(sql1);
+				pre1.setString(1, exe.getString("id"));
+				ResultSet exe1 = pre1.executeQuery();
+				if(exe1.next()) {
+					map.put("xian", exe1.getDouble("xian"));
+				}
+				list.add(map);
+			}
+			if(!list.isEmpty())return list;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

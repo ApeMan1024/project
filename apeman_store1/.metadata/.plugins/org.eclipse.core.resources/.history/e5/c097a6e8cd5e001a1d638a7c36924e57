@@ -1,0 +1,119 @@
+package com.apeman1024.sql;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.apeman1024.Isql.IMy;
+import com.apeman1024.entity.Indent;
+import com.apeman1024.util.Sql_util;
+
+public class My implements IMy {
+	Connection conn = Sql_util.getConn();
+	@Override
+	public boolean pd(String  card, String pass2,String username) {
+		String sql="select * from card where username=? and card=? and pass=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, username);
+			pre.setString(2, card);
+			pre.setString(3, pass2);
+			ResultSet exe = pre.executeQuery();
+			if(exe.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public Double getBalance(String card, String pass2, String username) {
+		String sql="select balance from card where card=? and pass=? and username=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, card);
+			pre.setString(2, pass2);
+			pre.setString(3, username);
+			ResultSet exe = pre.executeQuery();
+			if(exe.next()) {
+				double double1 = exe.getDouble("balance");
+				return double1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public boolean addIndent(Indent ind) {
+		String sql="insert into my(id,src,name,title,num,number,price,address,username) value(?,?,?,?,?,?,?,?,?)";
+		String sql1="update com set count=count+? where id=? ";
+		String sql2="update classify set count=count+? where title=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, ind.getId());
+			pre.setString(2, ind.getSrc());
+			pre.setString(3, ind.getName());
+			pre.setString(4, ind.getTitle());
+			pre.setInt(5, ind.getNum());
+			pre.setString(6, ind.getNumber());
+			pre.setDouble(7, ind.getPrice());
+			pre.setString(8, ind.getAddress());
+			pre.setString(9, ind.getUsername());
+			int exe = pre.executeUpdate();
+			if(exe>0) {
+				PreparedStatement pre1 = conn.prepareStatement(sql1);
+				pre1.setInt(1, ind.getNum());
+				pre1.setString(2, ind.getId());
+				int exe1 = pre1.executeUpdate();
+				if(exe1>0) {
+					PreparedStatement pre2 = conn.prepareStatement(sql2);
+					pre2.setString(2, ind.getTitle());
+					pre2.setInt(1, ind.getNum());
+					int exe2 = pre2.executeUpdate();
+				}
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
+	@Override
+	public boolean expen(String username, String card, double balance1) {
+		String sql="update card set balance=balance-? where username=? and card=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setDouble(1, balance1);
+			pre.setString(2, username);
+			pre.setString(3, card);
+			int exe = pre.executeUpdate();
+			if(exe>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
+	@Override
+	public boolean pd1(String guid) {
+		String sql="select number from my where number=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, guid);
+			ResultSet exe = pre.executeQuery();
+			if(exe.next())return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+}

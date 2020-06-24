@@ -1,0 +1,36 @@
+package com.apeman1024.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.apeman1024.Isql.IAdministrator;
+import com.apeman1024.sql.Administrator;
+import com.apeman1024.util.Rand;
+
+
+@WebServlet("/recharge2")
+public class Recharge2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+    public Recharge2() {
+        super();
+        
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+	}
+
+}

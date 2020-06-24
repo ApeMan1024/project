@@ -1,0 +1,103 @@
+@import "./css-1/hun.css";
+@import "./css-1/head.css";
+nav #logo {
+  transform-origin: center 46%;
+  position: relative;
+}
+nav #logo a {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: red;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+main .host {
+  margin: 10px 0;
+}
+main .host > ul:nth-child(1) {
+  list-style: none;
+}
+main .host > ul:nth-child(1) > li {
+  border: 1px solid #ccc;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) {
+  list-style: none;
+  display: inline-block;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li {
+  display: inline-block;
+  vertical-align: top;
+  height: 100px;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li img {
+  width: 100px;
+  height: inherit;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(1) {
+  line-height: 100px;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) {
+  width: 200px;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  margin-top: 26px;
+  cursor: pointer;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p > span {
+  line-height: 20px;
+  display: inline-block;
+  background: red;
+  border-radius: 2px;
+  padding: 0 2px;
+  font-size: 10px;
+  margin-right: 5px;
+  color: #fff;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p a {
+  text-decoration: none;
+  color: #000;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p a:hover {
+  color: red;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(3) {
+  width: 200px;
+  margin-left: 28px;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(3) p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  margin-top: 26px;
+  text-align: center;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(2) {
+  list-style: none;
+  float: right;
+  margin-right: 10px;
+  line-height: 100px;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(2) li {
+  display: inline-block;
+  margin: 0 25px;
+  width: 100px;
+  text-align: center;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(2) li a {
+  text-decoration: none;
+  color: #000;
+}
+main .host > ul:nth-child(1) > li ul:nth-child(2) li span {
+  margin: 0 10px;
+}

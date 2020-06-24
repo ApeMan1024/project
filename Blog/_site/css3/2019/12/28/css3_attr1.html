@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客日记</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <script src="/public/lib/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/public/js/snowy.js"></script>
+    <link rel="stylesheet" href="/public/css/see.css">
+    <script src="/public/js/see.js"></script>
+</head>
+
+<body>
+    <div class="snow-container"></div>
+    <header class="navbar  nav_h" role="navigation">
+        <div class="container_nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">猿人博客</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/index.html">网站首页</a></li>
+                    
+                    <li class="active"><a href="/css3/2019/12/28/css3_attr1.html">文章阅读</a></li>
+                    
+                    <li><a href="#">设计心得</a></li>
+                    <li><a href="#">给我留言</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="blo_left">
+            <div class="browse">
+                <div class="browse_1">
+                    <span>个人博客</span>
+                    <p><i>你现在的位置是：</i><a href="/index.html">首页</a><i>&gt;</i><a href="/css3/2019/12/28/css3_attr1.html">个人博客</a></p>
+                </div>
+                <span class="bo glyphicon glyphicon-play-circle" title="语音播放"></span>
+                <div class="browse_2">
+                    <h1>css3之常用的属性下篇</h1>
+                    <h5><span class="user_img"></span><span>作者：</span><span class="user">程序猿</span></h5>
+                </div>
+
+                <div class="browse_4">
+                 <p>css3中animation动画和transition过渡</p>
+
+<h2 id="animation动画">animation动画</h2>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">animation-name</code>： 设置动画名称</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">animation-duration</code>：设置动画持续时间</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">animation-timing-function</code>：设置动画的过渡类型 linear(平滑过渡)   ease(平滑过渡)   ease-in(由慢到快)   ease-out(由快到慢)   ease-in-out（由慢到快再到慢）</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">animation-delay</code>：设置过渡的延迟时间</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">animation-iteration-count</code>：设置动画的持续时间 infinite：无限循环   可以指定循环的次数</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">animation-direction</code>：设置动画的方向：normal：正常方向   alternate：正常与反向交替</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">animation-play-state</code>：设置动画的状态（running：运动    paused：暂停）</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">配合@keyframes</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">动画的过渡类型中的steps()函数:</code></p>
+    <ol>
+      <li>steps（）有两个参数：参数一是把这次过渡分成几段，这几段其实是在时间上分为几段去显示执行。参数二是表示分成几段后，他是start还是end去执行动画。参数二有两个可选值start和end，默认是end</li>
+      <li>steps()允许我们将动画或者过渡分割成段，而不是从一种状态持续到另一种状态的过渡</li>
+      <li>方向为”start”表示一个左–持续函数，在动画开始时，动画的第一段将会马上完成。以左侧端点为起点，立即跳到第一个step的结尾处。它会立即跳到第一段的结束并且保持这样的状态直到第一步的持续时间结束。后面的每一帧都将按照此模式来完成动画。</li>
+      <li>方向为”end”表示一个右–持续函数。动画执行时，在每一帧里，动画保持当前状态直到这一段的持续时间完成，才会跳到下一步的起点，后面的每一帧都按照这个模式来进行，在最后一帧的起点，等到这一帧的持续时间结束，整个动画的执行也已经结束，执行动画的元素来不及跳到这一帧的终点，直接回到了整个动画起点，开始了第二次动画。</li>
+      <li><a href="https://designmodo.com/demo/stepscss/car.html" class="xia">steps()动画 </a>
+        <ul>
+          <li><img src="/public/images/css3_attr2.gif" class="img_cen" /></li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="transition过渡">transition过渡</h2>
+
+<ul>
+  <li>
+    <p>transition-property：检索或设置对象中的参与过渡的属性。   值:all(说有的属性)   属性名称</p>
+  </li>
+  <li>
+    <p>transition-duration：检索或设置对象过渡的持续时间。</p>
+  </li>
+  <li>
+    <p>transition-timing-function：检索或设置对象中过渡的动画类型。值:linear(平滑过渡)   ease(平滑过渡)   ease-in(由慢到快)   ease-out(由快到慢)   ease-in-out（由慢到快再到慢）</p>
+  </li>
+  <li>
+    <p>transition-delay：设置过渡延迟时间</p>
+  </li>
+</ul>
+
+                </div>
+                <div class="browse_3">
+                    <i><img src="/public/images/browse1_3.png" alt=""></i>
+                    <span class="span1">程序猿</span> <span class="time">2019-12-28</span><span
+                        class="title1">[css3]</span>
+                </div>
+                <div class="browse_5">
+                    <ul>
+                        
+                        <li><span>上一篇：</span><a href="/css3/2019/12/28/css3_attr.html">css3之常用的属性上篇</a></li>
+                        
+                        
+                        <li><span>下一篇：</span><a href="/git/2019/12/28/git_fen.html">git分支</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="blo_right">
+            <div class="lbox">
+                <div class="box_1"><p>本站推荐</p></div>
+                <div class="box_2">
+                    
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                            <a href="/react/2020/05/15/react_basics.html" class="xia">
+                                <img src="/public/images/wen2.jpg" alt="wen2">
+                                <p class="p1">React基础学习</p>
+                            </a>
+                            
+                </div>
+                <div class="box_3">
+                    
+                        
+                        
+                        
+                            
+                        
+                            
+                        
+                        
+                            
+                   
+                    <ul>
+                   
+                        
+   
+                            <li>
+                                <a href="/data_structure/2019/12/27/sort_algorithm.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen1.jpg" alt="wen1">
+                                    </div>
+                                    <span>java排序算法</span>
+                                </a>
+                            </li>
+                        
+   
+                            <li>
+                                <a href="/vue/2020/01/06/vue2.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen2.jpg" alt="wen2">
+                                    </div>
+                                    <span>vue自定义指令</span>
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="lbox_1">
+                <div class="bo_1">
+                    <img src="/public/images/lbox5_1.jpg" alt="lbox5_1">
+                </div>
+            </div>
+            <div class="lbox_2">
+                <div class="box_1"><p>标签云</p></div>
+                <div class="bo_2">
+                   <span>程序员</span>
+                   <span class="oc">旅游</span>
+                   <span>幽默</span>
+                   <span>爱玩</span>
+                   <span >勤奋</span>
+                   <span class="oc">梦想</span>
+                   <span  class="oc">努力</span>
+                   <span>珍惜</span>
+                   <span>朋友</span>
+                   <span>随缘</span>
+                   <span>2020</span>
+                   <span class="oc">爱生活</span>
+                   <span>风景</span>
+                   <span >修行</span >
+                   <span class="oc">人生</span>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

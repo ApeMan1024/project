@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.IMy">
+
+	<select id="pd" resultType="Card">
+		select * from card where username=#{username} and card=#{card} and pass=#{pass}
+	</select>
+	
+	<select id="getBalance" resultType="Double">
+		select balance from card where card=#{card} and pass=#{pass} and username=#{username}
+	</select>
+	
+	<insert id="addIndent">
+		insert into my(id,src,name,title,num,number,price,address,username) value(#{id},#{src},#{name},#{title},#{num},#{number},#{price},#{address},#{username})
+	</insert>
+	
+	<update id="updateCom">
+		update com set count=count+#{num} where id=#{id} ;
+		update classify set count=count+#{num} where title=#{title}
+	</update>
+	
+	<update id="expen">
+		update card set balance=balance-#{balance} where username=#{username} and card=#{card}
+	</update>
+	
+	<select id="pd1" resultType="boolean">
+		select number from my where number=#{number}
+	</select>
+</mapper>

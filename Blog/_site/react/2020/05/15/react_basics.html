@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客日记</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <script src="/public/lib/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/public/js/snowy.js"></script>
+    <link rel="stylesheet" href="/public/css/see.css">
+    <script src="/public/js/see.js"></script>
+</head>
+
+<body>
+    <div class="snow-container"></div>
+    <header class="navbar  nav_h" role="navigation">
+        <div class="container_nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">猿人博客</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/index.html">网站首页</a></li>
+                    
+                    <li class="active"><a href="/react/2020/05/15/react_basics.html">文章阅读</a></li>
+                    
+                    <li><a href="#">设计心得</a></li>
+                    <li><a href="#">给我留言</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="blo_left">
+            <div class="browse">
+                <div class="browse_1">
+                    <span>个人博客</span>
+                    <p><i>你现在的位置是：</i><a href="/index.html">首页</a><i>&gt;</i><a href="/react/2020/05/15/react_basics.html">个人博客</a></p>
+                </div>
+                <span class="bo glyphicon glyphicon-play-circle" title="语音播放"></span>
+                <div class="browse_2">
+                    <h1>React基础学习</h1>
+                    <h5><span class="user_img"></span><span>作者：</span><span class="user">猿人</span></h5>
+                </div>
+
+                <div class="browse_4">
+                 <p>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了</p>
+
+<h3 id="jsx">jsx</h3>
+
+<ul>
+  <li>
+    <p>优点</p>
+
+    <ul>
+      <li>jsx执行更快，编译为js代码时进行优化</li>
+      <li>类型更安全，编译过程如果出错就不能编译，及时发现错误</li>
+      <li>jsx编写规范模板更加简单快速</li>
+    </ul>
+  </li>
+  <li>
+    <p>注意：</p>
+
+    <ul>
+      <li>jsx必须要有根节点</li>
+      <li>正常的普通html元素要小写，如果是大写，默认认为是组件</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="jsx表达式">jsx表达式</h3>
+
+<ul>
+  <li>
+    <p>在<code class="highlighter-rouge">{}</code>中写js代码</p>
+  </li>
+  <li>
+    <p>特殊的属性class和for：使用className和htmlFor代替</p>
+  </li>
+  <li>
+    <p>由html元素构成</p>
+  </li>
+  <li>
+    <p>{}中间表达式中可以使用jsx对象</p>
+  </li>
+  <li>
+    <p>属性和html内容一样，都使用{}插入内容</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span>
+  
+<span class="kd">let</span> <span class="nx">ele1</span><span class="o">=</span><span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>jsx语法<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>jsx学习<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+  
+<span class="kd">let</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">./logo192.png</span><span class="dl">"</span>
+<span class="kd">let</span> <span class="nx">ele2</span><span class="o">=</span><span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">className=</span><span class="si">{</span><span class="dl">'</span><span class="s1">box</span><span class="dl">'</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src=</span><span class="si">{</span><span class="nx">src</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+  
+<span class="kd">let</span> <span class="nx">ele</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>你好react<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="mi">10</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">?</span> <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>react<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span> <span class="p">:</span> <span class="nx">ele1</span><span class="si">}</span>
+    <span class="si">{</span><span class="nx">ele2</span><span class="si">}</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+  
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">ele</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">))</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="jsx样式">jsx样式</h3>
+
+<ul>
+  <li>
+    <p>不可以存在多个className属性，否则后面的className会覆盖前面</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{[</span><span class="nx">box1</span><span class="p">,</span><span class="dl">'</span><span class="s1">div2</span><span class="dl">'</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)}</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">box2</span><span class="p">}</span><span class="o">&gt;</span>
+      <span class="mi">11111</span>
+<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>style样式中的属性必须使用驼峰命名法</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">box</span><span class="o">=</span><span class="p">{</span>
+  <span class="na">width</span><span class="p">:</span><span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">height</span><span class="p">:</span><span class="dl">"</span><span class="s2">100px</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">backgroundColor</span><span class="p">:</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="cm">/*驼峰命名*/</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>为元素设置多个类名</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">ele1</span><span class="o">=</span><span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="p">[</span><span class="nx">box1</span><span class="p">,</span><span class="dl">'</span><span class="s1">div2</span><span class="dl">'</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)</span><span class="si">}</span> <span class="p">&gt;</span>
+      11111
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">hr</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="dl">'</span><span class="s1">box1 </span><span class="dl">'</span><span class="o">+</span><span class="dl">'</span><span class="s1">box2</span><span class="dl">'</span><span class="si">}</span> <span class="p">&gt;</span>
+      11111
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>注释<code class="highlighter-rouge">{/**/}</code></p>
+  </li>
+</ul>
+
+<h3 id="react组件">react组件</h3>
+
+<ul>
+  <li>
+    <p>函数式组件</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./goods.css</span><span class="dl">"</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Ge</span><span class="p">(){</span>
+    <span class="kd">let</span> <span class="nx">box</span><span class="o">=</span><span class="dl">"</span><span class="s2">box</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">box</span><span class="si">}</span><span class="p">&gt;</span>鼠标移入背景颜色改变<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>类组件</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span>
+<span class="k">import</span> <span class="nx">Ge</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../goods/goods.jsx</span><span class="dl">"</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWord</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+        <span class="c1">// 相当于vue中data</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xiaohong</span><span class="dl">"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>类组件<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+                <span class="si">{</span><span class="cm">/* this.props相当于vue中的props */</span><span class="si">}</span>
+                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>---<span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">age</span><span class="si">}</span>---<span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">sex</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  
+                <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Ge</span><span class="p">/&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>两种组件的区别</p>
+
+    <ul>
+      <li>函数式组件没有私有数据，类组件有</li>
+      <li>类组件可以有交互和生命周期函数，函数式没有</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="react-state">React State</h3>
+
+<ul>
+  <li>相当于vue中的data</li>
+  <li>修改state中的数据，使用<code class="highlighter-rouge">this.setState({})</code></li>
+</ul>
+
+<h3 id="react-props">React props</h3>
+
+<ul>
+  <li>
+    <p>props用于父向子传递数据，数据是单向流动的，不能子向父传递</p>
+  </li>
+  <li>
+    <p>props中传输的值可以是任意类型</p>
+  </li>
+  <li>
+    <p>props设置默认值的方式</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Props是组件名</span>
+<span class="nx">Props</span><span class="p">.</span><span class="nx">defaultProps</span><span class="o">=</span><span class="p">{</span><span class="na">name</span><span class="p">:</span><span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>props可以传递函数，父元素通过props向子元素传递函数，子元素通过该函数修改父元素的state，从而达到子向父传递数据</p>
+  </li>
+</ul>
+
+<h3 id="react事件">React事件</h3>
+
+<ul>
+  <li>
+    <p>react事件的事件名，采用驼峰命名法</p>
+  </li>
+  <li>
+    <p>事件绑定的函数，使用{}</p>
+  </li>
+  <li>
+    <p>原生的事件绑定，只要事件函数<code class="highlighter-rouge">return false</code>就能阻止默认事件，但是react中不能采用这种方式，要阻止默认事件必须使用<code class="highlighter-rouge">event.preventDefault()</code></p>
+  </li>
+  <li>
+    <p>向事件函数传参</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="o">=&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">e</span><span class="p">)}</span><span class="o">&gt;</span><span class="err">按钮</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>事件函数中的this</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//这种情况事件函数show中的this为undefined</span>
+<span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">show</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>  
+<span class="c1">//这种情况事件函数show中的this为组件实例</span>
+<span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="o">=&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">show</span><span class="p">()}</span><span class="sr">/</span><span class="err">&gt;
+</span>  
+<span class="c1">//这种情况事件函数show中的this为组件实例</span>
+<span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="kd">function</span><span class="p">(){</span><span class="k">this</span><span class="p">.</span><span class="nx">show</span><span class="p">()}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)}</span><span class="sr">/</span><span class="err">&gt;
+</span>  
+<span class="c1">//绑定this也可以在组件的构造函数中</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">shu</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">shu</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="react条件渲染">React条件渲染</h3>
+
+<ul>
+  <li>
+    <p>react中条件渲染和js中的条件运算相同，即<code class="highlighter-rouge">if...elseif..else</code>或三元运算符</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">bool</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">(&lt;</span><span class="nc">Greet</span><span class="p">/&gt;)</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+    <span class="k">return</span> <span class="p">(&lt;</span><span class="nc">Login</span><span class="p">/&gt;)</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>列表渲染</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//需要将列表中数据拼装成jsx对象</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">java</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">c++</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">python</span><span class="dl">"</span> <span class="p">},</span>
+<span class="p">]</span>
+<span class="kd">let</span> <span class="nx">arr1</span><span class="o">=</span><span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span> <span class="na">key=</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span>---<span class="si">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="生命周期">生命周期</h3>
+
+<ul>
+  <li>
+    <p>生命周期：组件的创建，渲染，销毁</p>
+
+    <p><img src="/public/images/react.png" /></p>
+  </li>
+</ul>
+
+<h3 id="react插槽">React插槽</h3>
+
+<ul>
+  <li>
+    <p>组件中可以写入内容，并且写入的内容能够被识别和控制</p>
+  </li>
+  <li>
+    <p>React中的插槽功能需要自己开发</p>
+  </li>
+  <li>
+    <p>原理</p>
+
+    <ul>
+      <li>
+        <p>在组件中写入的内容，传入到props中</p>
+
+        <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//内容全部放入组件</span>
+<span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">}</span>
+    
+<span class="c1">//将内容放入指定的位置</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"header"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">props</span><span class="p">[</span><span class="dl">'</span><span class="s1">data-name</span><span class="dl">'</span><span class="p">]</span><span class="o">===</span><span class="dl">'</span><span class="s1">header</span><span class="dl">'</span>
+    <span class="p">})</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"main"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">props</span><span class="p">[</span><span class="dl">'</span><span class="s1">data-name</span><span class="dl">'</span><span class="p">]</span><span class="o">===</span><span class="dl">'</span><span class="s1">main</span><span class="dl">'</span>
+    <span class="p">})</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"footer"</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">props</span><span class="p">[</span><span class="dl">'</span><span class="s1">data-name</span><span class="dl">'</span><span class="p">]</span><span class="o">===</span><span class="dl">'</span><span class="s1">footer</span><span class="dl">'</span>
+    <span class="p">})</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="react中的路由">React中的路由</h3>
+
+<ul>
+  <li>
+    <p>安装路由<code class="highlighter-rouge">cnpm i react-router-dom -s</code></p>
+  </li>
+  <li>
+    <p>ReactRouter三大组件</p>
+
+    <ul>
+      <li>
+        <p>Router：所有路由组件的根组件(底层组件)，包裹路由规则的最外层容器</p>
+
+        <ul>
+          <li>basename属性：设置此路由根路径，router可以在1个组件中写多个</li>
+        </ul>
+      </li>
+      <li>
+        <p>route：路由规则匹配组件，显示当前规则对应的组件</p>
+      </li>
+      <li>
+        <p>Like：路由跳转的组件</p>
+      </li>
+      <li>
+        <p><span style="color:red">需要精确匹配，可以为route设置exact属性</span></p>
+      </li>
+    </ul>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span>
+<span class="k">import</span>  <span class="p">{</span><span class="nx">BrowserRouter</span> <span class="k">as</span> <span class="nx">Router</span><span class="p">,</span><span class="nx">Link</span><span class="p">,</span><span class="nx">Route</span><span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-router-dom</span><span class="dl">"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Route</span><span class="p">)</span>
+<span class="kd">function</span> <span class="nx">Me</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>java<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+  
+<span class="kd">function</span> <span class="nx">Sd</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Vue<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+  
+<span class="kd">function</span> <span class="nx">Home</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>欢迎使用路由<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+  
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Router1</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="o">=</span><span class="p">{}</span>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nc">Router</span> <span class="na">basename=</span><span class="s2">"/admin"</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"nav"</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to=</span><span class="s2">"/"</span> <span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to=</span><span class="s2">"/me"</span> <span class="p">&gt;</span>me<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to=</span><span class="s2">"/sd"</span> <span class="p">&gt;</span>sd<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path=</span><span class="s2">"/"</span> <span class="na">component=</span><span class="si">{</span><span class="nx">Home</span><span class="si">}</span> <span class="nt">exact</span><span class="p">&gt;&lt;/</span><span class="nc">Route</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path=</span><span class="s2">"/me"</span>  <span class="na">component=</span><span class="si">{</span><span class="nx">Me</span><span class="si">}</span><span class="p">&gt;&lt;/</span><span class="nc">Route</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nc">Route</span> <span class="na">path=</span><span class="s2">"/sd"</span>  <span class="na">component=</span><span class="si">{</span><span class="nx">Sd</span><span class="si">}</span><span class="p">&gt;&lt;/</span><span class="nc">Route</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nc">Router</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p>Link中的to属性，设置跳转的路径</p>
+
+        <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//直接设置</span>
+<span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">to</span><span class="o">=</span><span class="dl">"</span><span class="s2">/me</span><span class="dl">"</span> <span class="o">&gt;</span><span class="nx">me</span><span class="o">&lt;</span><span class="sr">/Link</span><span class="err">&gt;
+</span>    
+<span class="c1">//配置对象的形式设置</span>
+<span class="kd">let</span> <span class="nx">meObj</span><span class="o">=</span><span class="p">{</span>
+            <span class="na">pathname</span><span class="p">:</span><span class="dl">"</span><span class="s2">/me</span><span class="dl">"</span><span class="p">,</span><span class="c1">//跳转的路径</span>
+            <span class="na">search</span><span class="p">:</span><span class="dl">"</span><span class="s2">?username=name</span><span class="dl">"</span><span class="p">,</span><span class="c1">//gen请求参数</span>
+            <span class="na">hash</span><span class="p">:</span><span class="dl">"</span><span class="s2">#adc</span><span class="dl">"</span><span class="p">,</span><span class="c1">//hash值</span>
+            <span class="na">state</span><span class="p">:{</span><span class="na">msg</span><span class="p">:</span><span class="dl">"</span><span class="s2">路由的挂载信息</span><span class="dl">"</span><span class="p">}</span><span class="c1">//传入组件的数据</span>
+            <span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">Link</span> <span class="na">to=</span><span class="si">{</span> <span class="nx">meObj</span> <span class="si">}</span> <span class="p">&gt;</span>me<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Link中的replace属性，点击链接后，将新地址替换成历史访问的原地址</p>
+      </li>
+      <li>
+        <p>重定向</p>
+
+        <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="k">as</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">Route</span><span class="p">,</span> <span class="nx">Link</span><span class="p">,</span> <span class="nx">Redirect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-router-dom</span><span class="dl">"</span>
+<span class="c1">//登录信息组件</span>
+<span class="kd">function</span> <span class="nx">LoginInfo</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">loginState</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">success</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Redirect</span> <span class="na">to=</span><span class="s2">"/admin"</span><span class="p">&gt;&lt;/</span><span class="nc">Redirect</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Redirect</span> <span class="na">to=</span><span class="s2">"/login"</span><span class="p">&gt;&lt;/</span><span class="nc">Redirect</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Switch组件：让switch组件内容中的router只匹配一个，只要匹配到了，剩余的路由规则将不再匹配</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="react中状态管理redux">React中状态管理Redux</h3>
+
+<ul>
+  <li>
+    <p>redux解决react数据管理(状态管理)，用于中大型、数据比较庞大，组件之间数据交互多的情况下使用，如果不知道是否需要使用redux，则不需要使用redux</p>
+
+    <ul>
+      <li>解决组件的数据通信</li>
+      <li>解决数据和交互多的应用</li>
+      <li>store：数据仓库，保存数据的地方</li>
+      <li>state：state是1个对象，数据仓库里所有数据都放到一个state中</li>
+      <li>action：一个动作，用来触发数据改变的方法</li>
+      <li>dispatch:将动作触发成方法</li>
+      <li>reducer：是一个函数，通过获取动作，改变数据，生成一个新state，从而改变页面</li>
+    </ul>
+  </li>
+  <li>
+    <p>安装<code class="highlighter-rouge">cnpm i redux -S</code></p>
+  </li>
+  <li>
+    <p>初始化数据</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">store</span><span class="o">=</span><span class="nx">createStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">)</span><span class="c1">//创建仓库，传入一个回调函数</span>
+  
+<span class="c1">//通过动作，创建新的state</span>
+<span class="c1">//reducer：1.初始化数据，2，通过获取动作，改变数据</span>
+<span class="c1">//状态管理</span>
+<span class="kd">const</span> <span class="nx">reducer</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="p">{</span><span class="na">num</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="nx">action</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">action</span><span class="p">)</span>
+  
+  <span class="k">switch</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">){</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">add</span><span class="dl">'</span><span class="p">:</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">num</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">decrement</span><span class="dl">'</span><span class="p">:</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">num</span><span class="o">--</span>
+      <span class="k">break</span><span class="p">;</span>
+  
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{...</span><span class="nx">state</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>获取数据</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改数据(通过动作修改数据)</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过仓库的方法dispatch进行修改数据</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span><span class="na">type</span><span class="p">:</span><span class="dl">"</span><span class="s2">decrement</span><span class="dl">"</span><span class="p">,</span><span class="na">obj</span><span class="p">:{</span><span class="na">id</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="na">msg</span><span class="p">:</span><span class="dl">"</span><span class="s2">这是传数据</span><span class="dl">"</span><span class="p">}})</span><span class="c1">//obj等可选</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改视图(监听数据的变化，重新渲染内容)</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//监听store中数据的变化</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Counter</span><span class="p">&gt;&lt;/</span><span class="nc">Counter</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;,</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><a href="https://www.redux.org.cn/docs/introduction/ThreePrinciples.html">官网</a></p>
+  </li>
+</ul>
+
+<h3 id="react中的react-redux">React中的react-redux</h3>
+
+<ul>
+  <li>
+    <p>安装<code class="highlighter-rouge">cnpm i react-redux -S</code></p>
+  </li>
+  <li>
+    <p>Provider组件：自动的将store里的state和组件进行关联</p>
+  </li>
+  <li>
+    <p>connect方法：将组件和数据（方法）进行连接</p>
+  </li>
+  <li>
+    <p>初始化数据</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">num</span><span class="p">:</span> <span class="mi">0</span> <span class="p">},</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">'</span><span class="s1">add</span><span class="dl">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nx">state</span><span class="p">.</span><span class="nx">num</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span> <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">createStore</span><span class="p">(</span><span class="nx">reducer</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>数据的获取，数据的修改</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//将state映射到组件里，将修改数据的方法映射到组件的props中</span>
+<span class="c1">//将state映射到props函数，state必须</span>
+<span class="kd">function</span> <span class="nx">mapStateToProps</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="nx">state</span><span class="p">.</span><span class="nx">num</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="c1">//将修改数据的方法，映射到props,默认传入store里的dispatch方法，dispatch必须</span>
+<span class="kd">function</span> <span class="nx">mapDispatchToProps</span><span class="p">(</span><span class="nx">dispatch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">onAddClick</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">addAction</span><span class="p">)</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+  
+<span class="kd">class</span> <span class="nx">Counter</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//用于计数的，通过store的state传给props，直接通过props就可以将state的数据获取</span>
+    <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="c1">//将修改数据的事件或者方法传入到props</span>
+    <span class="kd">const</span> <span class="nx">onAddClick</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onAddClick</span><span class="p">;</span>
+  
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>计数数量：<span class="si">{</span><span class="nx">value</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick=</span><span class="si">{</span><span class="nx">onAddClick</span><span class="si">}</span><span class="p">&gt;</span>+1<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="ant-蚂蚁框架">Ant 蚂蚁框架</h3>
+
+<ul>
+  <li>
+    <p><a href="https://mobile.ant.design/docs/react/introduce-cn">移动端官网</a></p>
+  </li>
+  <li>
+    <p>安装使用<code class="highlighter-rouge">cnpm i antd-mobile -S</code></p>
+  </li>
+  <li>
+    <p>全部导入样式和js</p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">antd-mobile/dist/antd-mobile.css</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">antd-mobile</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>按需导入</p>
+
+    <ul>
+      <li>
+        <p>安装插件<code class="highlighter-rouge"> cnpm i babel-plugin-imponpm i babel-plugin-import -S</code></p>
+      </li>
+      <li>
+        <p>配置</p>
+
+        <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//npm run eject开启全部的配置</span>
+<span class="c1">//在packjson中进行相应的配置</span>
+ <span class="dl">"</span><span class="s2">babel</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">presets</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">react-app</span><span class="dl">"</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">plugins</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">[</span><span class="dl">"</span><span class="s2">import</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">libraryName</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">antd-mobile</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">style</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">css</span><span class="dl">"</span> <span class="p">}]</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+                </div>
+                <div class="browse_3">
+                    <i><img src="/public/images/browse1_3.png" alt=""></i>
+                    <span class="span1">程序猿</span> <span class="time">2020-05-15</span><span
+                        class="title1">[React]</span>
+                </div>
+                <div class="browse_5">
+                    <ul>
+                        
+                        <li><span>上一篇：</span><a href="/css/2020/05/15/less_css.html">less与css</a></li>
+                        
+                        
+                        <li><span>下一篇：</span><a href="/node/2020/05/27/node.html">node基本语法</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="blo_right">
+            <div class="lbox">
+                <div class="box_1"><p>本站推荐</p></div>
+                <div class="box_2">
+                    
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                            <a href="/git/2019/12/27/git2.html" class="xia">
+                                <img src="/public/images/wen16.jpg" alt="wen16">
+                                <p class="p1">github常用指令</p>
+                            </a>
+                            
+                </div>
+                <div class="box_3">
+                    
+                        
+                        
+                        
+                            
+                        
+                            
+                        
+                        
+                            
+                   
+                    <ul>
+                   
+                        
+   
+                            <li>
+                                <a href="/vue/2020/01/06/vue1.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen1.jpg" alt="wen1">
+                                    </div>
+                                    <span>vue修饰符</span>
+                                </a>
+                            </li>
+                        
+   
+                            <li>
+                                <a href="/javascript/2019/12/27/carousel.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen2.jpg" alt="wen2">
+                                    </div>
+                                    <span>三种实现轮播的方式</span>
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="lbox_1">
+                <div class="bo_1">
+                    <img src="/public/images/lbox5_1.jpg" alt="lbox5_1">
+                </div>
+            </div>
+            <div class="lbox_2">
+                <div class="box_1"><p>标签云</p></div>
+                <div class="bo_2">
+                   <span>程序员</span>
+                   <span class="oc">旅游</span>
+                   <span>幽默</span>
+                   <span>爱玩</span>
+                   <span >勤奋</span>
+                   <span class="oc">梦想</span>
+                   <span  class="oc">努力</span>
+                   <span>珍惜</span>
+                   <span>朋友</span>
+                   <span>随缘</span>
+                   <span>2020</span>
+                   <span class="oc">爱生活</span>
+                   <span>风景</span>
+                   <span >修行</span >
+                   <span class="oc">人生</span>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

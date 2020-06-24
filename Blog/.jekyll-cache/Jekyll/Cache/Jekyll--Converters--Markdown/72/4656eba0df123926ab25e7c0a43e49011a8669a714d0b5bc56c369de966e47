@@ -1,0 +1,191 @@
+I"�@<p>除了核心功能默认内置的指令 (v-model 和 v-show)，Vue 也允许注册自定义指令。注意，在 Vue2.0 中，代码复用和抽象的主要形式是组件。然而，有的情况下，你仍然需要对普通 DOM 元素进行底层操作，这时候就会用到自定义指令</p>
+
+<h4 id="vue常用的指令">vue常用的指令</h4>
+<ul>
+  <li>v-text:相当于innerText</li>
+  <li>v-html:相当于innerHTML</li>
+  <li>v-for：循环遍历对象或数组
+    <ul>
+      <li>v-for=”item in arr”或v-for=”item in obj”</li>
+      <li>v-for=”(item,index) in arr”</li>
+      <li>v-for=”(value,key,index) in obj”</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in arr"</span><span class="nt">&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;hr&gt;</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"(item,index) in arr"</span><span class="nt">&gt;</span>=&gt;<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;hr&gt;</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in obj"</span><span class="nt">&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;hr&gt;</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"(item,key,index) in obj"</span><span class="nt">&gt;</span>=&gt;:<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="kd">var</span> <span class="nx">vm</span><span class="o">=</span><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+            <span class="na">el</span><span class="p">:</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:{</span>
+                <span class="na">arr</span><span class="p">:[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">],</span>
+                <span class="na">obj</span><span class="p">:{</span>
+                    <span class="na">a</span><span class="p">:</span><span class="dl">"</span><span class="s2">xiao</span><span class="dl">"</span><span class="p">,</span>
+                    <span class="na">b</span><span class="p">:</span><span class="dl">"</span><span class="s2">hong</span><span class="dl">"</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>v-if….v-else-if….v-else:决定是否插入元素</li>
+  <li>v-show:隐藏元素，实际上是操作display</li>
+  <li>v-bind:将属性与某个变量或常量绑定，简写‘：’</li>
+  <li>v-model:双向数据绑定，一般用在表单中</li>
+  <li>v-on:为元素绑定一个事件，简写‘@’</li>
+</ul>
+
+<h4 id="自定义指令">自定义指令</h4>
+
+<ul>
+  <li>
+    <p>注册一个全局指令，Vue.directive()
+<img src="/public/images/vue2_1.png" class="img_man" /></p>
+  </li>
+  <li>
+    <p>注册一个局部指令</p>
+  </li>
+</ul>
+
+<p><img src="/public/images/vue2_2.png" class="img_man" /></p>
+
+<h4 id="钩子函数对应指令的五个生命周期">钩子函数对应指令的五个生命周期</h4>
+
+<ul>
+  <li>bind: 只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行一次的初始化动作。</li>
+  <li>inserted: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nt">&lt;script&gt;</span>
+        <span class="kd">var</span> <span class="nx">app</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">div</span><span class="dl">"</span><span class="p">)</span>
+        <span class="nx">app</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">app</span><span class="dl">"</span><span class="p">);</span>
+       <span class="kd">var</span> <span class="nx">p</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">);</span>
+       <span class="kd">var</span> <span class="nx">span</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">span</span><span class="dl">"</span><span class="p">);</span>
+       <span class="nx">span</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">v-name</span><span class="dl">"</span><span class="p">,</span><span class="dl">""</span><span class="p">);</span>
+        <span class="nx">p</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">span</span><span class="p">);</span>
+        <span class="nx">app</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">vm</span><span class="o">=</span><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+            <span class="na">el</span><span class="p">:</span><span class="nx">app</span><span class="p">,</span>
+            <span class="na">directives</span><span class="p">:{</span>
+                <span class="na">name</span><span class="p">:{</span>
+                    <span class="na">bind</span><span class="p">:</span><span class="kd">function</span><span class="p">(){</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">指令的一个生命周期</span><span class="dl">"</span><span class="p">);</span>
+                    <span class="p">},</span>
+                    <span class="na">inserted</span><span class="p">:</span><span class="kd">function</span><span class="p">(){</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">被绑定元素插入父节点时调用，不管父节点是否在dom文档中</span><span class="dl">"</span><span class="p">)</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;p</span> <span class="na">v-name</span><span class="nt">&gt;</span>我是p标签<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">v-model=</span><span class="s">"m"</span><span class="nt">&gt;</span>
+       
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="kd">var</span> <span class="nx">vm</span><span class="o">=</span><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+            <span class="na">el</span><span class="p">:</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:{</span>
+                <span class="na">m</span><span class="p">:</span><span class="dl">"</span><span class="s2">true</span><span class="dl">"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="na">directives</span><span class="p">:{</span>
+                <span class="na">name</span><span class="p">:{</span>
+                    <span class="na">bind</span><span class="p">:</span><span class="kd">function</span><span class="p">(){</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">指令的一个生命周期</span><span class="dl">"</span><span class="p">);</span>
+                    <span class="p">},</span>
+                    <span class="na">inserted</span><span class="p">:</span><span class="kd">function</span><span class="p">(){</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">被绑定元素插入父节点时调用，不管父节点是否在dom文档中</span><span class="dl">"</span><span class="p">)</span>
+                    <span class="p">},</span>
+                    <span class="na">update</span><span class="p">:</span><span class="kd">function</span><span class="p">(){</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">当被绑定元素所在模板更新时调用</span><span class="dl">"</span><span class="p">);</span>
+                    <span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。</li>
+</ul>
+
+<p><img src="/public/images/vue2_3.png" class="img_man" /></p>
+
+<ul>
+  <li>unbind: 只调用一次， 指令与元素解绑时调用。</li>
+</ul>
+
+<h4 id="钩子函数的参数">钩子函数的参数</h4>
+
+<ul>
+  <li>el: 指令所绑定的元素，可以用来直接操作 DOM 。</li>
+  <li>binding:一个对象
+    <ul>
+      <li>name: 指令名，不包括 v- 前缀。</li>
+      <li>value：指令的绑定值,例如： v-my-directive=”1 + 1”, value 的值是 2。</li>
+      <li>oldValue: 指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。</li>
+      <li>expression: 绑定值的表达式或变量名。 例如 v-my-directive=”1 + 1” ， expression 的值是 “1 + 1”。</li>
+      <li>arg: 传给指令的参数。例如 v-my-directive:foo， arg 的值是 “foo”。</li>
+      <li>modifiers: 一个包含修饰符的对象。 例如： v-my-directive.foo.bar, 修饰符对象 modifiers 的值是 { foo: true, bar: true }</li>
+    </ul>
+  </li>
+  <li>vnode: Vue 编译生成的虚拟节点。</li>
+  <li>oldVnode: 上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;p</span> <span class="na">v-name:html.a.b=</span><span class="s">"m"</span><span class="nt">&gt;</span>我是p标签<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">v-model=</span><span class="s">"m"</span><span class="nt">&gt;</span>
+       
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="kd">var</span> <span class="nx">vm</span><span class="o">=</span><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+            <span class="na">el</span><span class="p">:</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:{</span>
+                <span class="na">m</span><span class="p">:</span><span class="dl">"</span><span class="s2">true</span><span class="dl">"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="na">directives</span><span class="p">:{</span>
+                <span class="na">name</span><span class="p">:{</span>
+                    <span class="na">inserted</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">,</span><span class="nx">binding</span><span class="p">,</span><span class="nx">vnode</span><span class="p">){</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name:</span><span class="dl">"</span><span class="p">,</span><span class="nx">binding</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">value:</span><span class="dl">"</span><span class="p">,</span><span class="nx">binding</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">expression:</span><span class="dl">"</span><span class="p">,</span><span class="nx">binding</span><span class="p">.</span><span class="nx">expression</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">arg:</span><span class="dl">"</span><span class="p">,</span><span class="nx">binding</span><span class="p">.</span><span class="nx">arg</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">modifiers:</span><span class="dl">"</span><span class="p">,</span><span class="nx">binding</span><span class="p">.</span><span class="nx">modifiers</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vnode</span><span class="p">)</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+        <span class="p">})</span>
+    <span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h4 id="自定义指令省略钩子函数">自定义指令省略钩子函数</h4>
+<p><img src="/public/images/vue2_4.png" class="img_man" /></p>
+:ET

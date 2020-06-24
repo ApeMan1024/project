@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客日记</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <script src="/public/lib/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/public/js/snowy.js"></script>
+    <link rel="stylesheet" href="/public/css/see.css">
+    <script src="/public/js/see.js"></script>
+</head>
+
+<body>
+    <div class="snow-container"></div>
+    <header class="navbar  nav_h" role="navigation">
+        <div class="container_nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">猿人博客</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/index.html">网站首页</a></li>
+                    
+                    <li class="active"><a href="/markdown/2019/12/27/markdown.html">文章阅读</a></li>
+                    
+                    <li><a href="#">设计心得</a></li>
+                    <li><a href="#">给我留言</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="blo_left">
+            <div class="browse">
+                <div class="browse_1">
+                    <span>个人博客</span>
+                    <p><i>你现在的位置是：</i><a href="/index.html">首页</a><i>&gt;</i><a href="/markdown/2019/12/27/markdown.html">个人博客</a></p>
+                </div>
+                <span class="bo glyphicon glyphicon-play-circle" title="语音播放"></span>
+                <div class="browse_2">
+                    <h1>markdown语法之换行与段落</h1>
+                    <h5><span class="user_img"></span><span>作者：</span><span class="user">猿人</span></h5>
+                </div>
+
+                <div class="browse_4">
+                 <p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。
+Markdown 能被使用来撰写电子书，如：Gitbook。
+当前许多网站都广泛使用 Markdown 来撰写帮助文档或是用于论坛上发表消息。例如：GitHub、简书、reddit、Diaspora、Stack Exchange、OpenStreetMap 、SourceForge等。</p>
+
+<h3 id="11-关于换行">1.1 关于换行</h3>
+
+<p><img src="/public/images/markdown1.png" class="img_man" /></p>
+
+<p>在a b c 的c后面,如果a b c 与d之间不空行,或者只在c后面空一格,在这个时候,按下回车的话,编辑的第二行d,会与a b c在同一行里 要想实现换行,需要至少需要在c的后面空两个空格但是由于markdown编辑器的不同,可能在一行字后面,直接换行回车,也能实现换行,但是在Visual Studio Code上,想要换行必须得在一行字后面空两个格子才行.</p>
+
+<h3 id="12-关于空行">1.2 关于空行</h3>
+
+<p><img src="/public/images/markdown2.png" class="img_man" /></p>
+
+<p>无论第一行的a b c 与第二行的a b c 在编辑的时候有多少个空行(只要这一行只有回车或者space没有其他的字符就算空行),在渲染之后,只隔着一行.</p>
+
+<h3 id="13-关于段落">1.3 关于段落</h3>
+
+<p>在markdown语言中,唯一决定两行文字是否是段落的,就在于这两行文字之间是否有空行.</p>
+
+<p>如果这两行文字之间,有空行了,就代表,这两行文字为两个段落,如果这两行文字之间,没有空行,仅仅换行,就代表这两行文字是属于同一个段落.</p>
+
+<p>即使是在一行文字中的末尾,添加了两个空格之后换行,这两个行文字依旧是一个段落.</p>
+
+<p><img src="/public/images/markdown3.png" class="img_man" /></p>
+
+<p>我在第一行的a b c 与第二行的a b c 之间仅仅只是换行,两行文字之间,没有空的行,可以看到,markdown在渲染的时候,将两行渲染为了一段.</p>
+
+<p>学习markdown语言,在windows客户端上,强烈推荐Visual Studio Code编辑器,即使没有网络,也能实时预览渲染的格式.在左边编写原格式,右边就能实时看到效果.Visual Studio Code还支持下载各种插件,支持在Markdown中使用LaTeX格式的数学表达式等功能.</p>
+
+
+                </div>
+                <div class="browse_3">
+                    <i><img src="/public/images/browse1_3.png" alt=""></i>
+                    <span class="span1">程序猿</span> <span class="time">2019-12-27</span><span
+                        class="title1">[markdown]</span>
+                </div>
+                <div class="browse_5">
+                    <ul>
+                        
+                        <li><span>上一篇：</span><a href="/java/2019/12/27/javaweb1.html">javaweb与javaEE的区别</a></li>
+                        
+                        
+                        <li><span>下一篇：</span><a href="/markdown/2019/12/27/markdown2.html">markdown基本语法</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="blo_right">
+            <div class="lbox">
+                <div class="box_1"><p>本站推荐</p></div>
+                <div class="box_2">
+                    
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                            <a href="/vue/2020/01/06/vue1.html" class="xia">
+                                <img src="/public/images/wen6.jpg" alt="wen6">
+                                <p class="p1">vue修饰符</p>
+                            </a>
+                            
+                </div>
+                <div class="box_3">
+                    
+                        
+                        
+                        
+                            
+                        
+                            
+                        
+                        
+                            
+                   
+                    <ul>
+                   
+                        
+   
+                            <li>
+                                <a href="/react/2020/05/15/react_basics.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen1.jpg" alt="wen1">
+                                    </div>
+                                    <span>React基础学习</span>
+                                </a>
+                            </li>
+                        
+   
+                            <li>
+                                <a href="/java/2019/12/27/javaweb1.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen2.jpg" alt="wen2">
+                                    </div>
+                                    <span>javaweb与javaEE的区别</span>
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="lbox_1">
+                <div class="bo_1">
+                    <img src="/public/images/lbox5_1.jpg" alt="lbox5_1">
+                </div>
+            </div>
+            <div class="lbox_2">
+                <div class="box_1"><p>标签云</p></div>
+                <div class="bo_2">
+                   <span>程序员</span>
+                   <span class="oc">旅游</span>
+                   <span>幽默</span>
+                   <span>爱玩</span>
+                   <span >勤奋</span>
+                   <span class="oc">梦想</span>
+                   <span  class="oc">努力</span>
+                   <span>珍惜</span>
+                   <span>朋友</span>
+                   <span>随缘</span>
+                   <span>2020</span>
+                   <span class="oc">爱生活</span>
+                   <span>风景</span>
+                   <span >修行</span >
+                   <span class="oc">人生</span>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

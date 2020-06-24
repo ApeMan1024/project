@@ -1,0 +1,1069 @@
+I"^�<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。
+Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。
+Node.js 的包管理器 npm，是全球最大的开源库生态系统。</p>
+
+<h3 id="node中的模块导入和导出">node中的模块导入和导出</h3>
+
+<ul>
+  <li>
+    <p>在node中使用<code class="highlighter-rouge">module.exports</code>导出一个模块</p>
+  </li>
+  <li>
+    <p>在node中使用<code class="highlighter-rouge">require</code>导入一个模块</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">a</span><span class="o">+</span><span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">add</span><span class="c1">//导出一个模块</span>
+  
+<span class="kd">const</span> <span class="nx">add</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./index</span><span class="dl">"</span><span class="p">)</span><span class="c1">//导入一个模块，其中require是一个函数，接收一个路径作为参数</span>
+<span class="kd">const</span> <span class="nx">sum</span><span class="o">=</span><span class="nx">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sum</span><span class="p">)</span>
+  
+<span class="c1">//在导入模块的过程中可以按需导入，前提是导出的是一个对象=&gt;es6中的解构赋值</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">name</span><span class="p">,</span><span class="nx">add</span><span class="p">}</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./index</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="在node中创建一个http服务">在node中创建一个http服务</h3>
+
+<ul>
+  <li>
+    <p>通过<code class="highlighter-rouge">http</code>模块创建一个http服务</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//http.createServer创建一个http服务</span>
+<span class="c1">//获取请求头req.headers["content-type"]</span>
+<span class="kd">const</span> <span class="nx">server</span><span class="o">=</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="c1">// writeHead()方法用于设置响应数据的响应头headers</span>
+    <span class="c1">//第一个参数为响应的状态码，第二个参数为响应头</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,{</span><span class="dl">"</span><span class="s2">content-type</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">text/html</span><span class="dl">"</span><span class="p">})</span><span class="c1">//设置响应数据的响应头</span>
+  
+    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;h1&gt;hello word&lt;/h1&gt;</span><span class="dl">"</span><span class="p">)</span><span class="c1">//发送响应信息</span>
+<span class="p">})</span>
+  
+<span class="c1">//监听一个3000端口</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">创建一个http服务成功</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>处理get请求</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">http</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">querystring</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">querystring</span><span class="dl">"</span><span class="p">);</span>
+  
+<span class="kd">const</span> <span class="nx">server</span><span class="o">=</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">)</span><span class="c1">//返回请求的方式</span>
+    <span class="kd">const</span> <span class="nx">url</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">请求的url地址:</span><span class="dl">"</span><span class="o">+</span><span class="nx">url</span><span class="p">);</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="o">=</span><span class="nx">querystring</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span><span class="c1">//parse默认使用&amp;分割查询字符串</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span>
+        <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span><span class="c1">//向前端返回json格式的数据</span>
+    <span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">创建服务成功</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>处理post请求</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">http</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">);</span>
+  
+<span class="kd">const</span> <span class="nx">server</span><span class="o">=</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="o">===</span><span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">){</span>
+        <span class="c1">//req的数据格式</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">req content-type：</span><span class="dl">"</span><span class="o">+</span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">'</span><span class="s1">content-type</span><span class="dl">'</span><span class="p">])</span>
+    <span class="p">}</span>
+    <span class="c1">//接收到的数据</span>
+    <span class="kd">let</span> <span class="nx">postData</span><span class="o">=</span><span class="dl">""</span><span class="p">;</span>
+  
+    <span class="c1">//监听请求数据的发送</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span><span class="nx">chunk</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="nx">postData</span><span class="o">+=</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">})</span>
+    <span class="c1">//监听数据发送结束</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,()</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">postData</span><span class="p">)</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="dl">"</span><span class="s2">请求发送成功</span><span class="dl">"</span><span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>node综合处理get和post请求</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">http</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">querystring</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">querystring</span><span class="dl">"</span><span class="p">);</span>
+  
+<span class="kd">const</span> <span class="nx">server</span><span class="o">=</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+<span class="kd">const</span> <span class="nx">method</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">;</span><span class="c1">//获取请求的方式</span>
+  
+<span class="kd">const</span> <span class="nx">url</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span><span class="c1">//获取前端请求的url地址</span>
+  
+<span class="kd">const</span> <span class="nx">path</span><span class="o">=</span><span class="nx">url</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="c1">//获取前端的网页地址</span>
+  
+<span class="kd">const</span> <span class="nx">query</span><span class="o">=</span><span class="nx">querystring</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span><span class="c1">//获取查询字符串</span>
+  
+   <span class="c1">//设置返回的数据为json</span>
+  
+   <span class="c1">//设置响应数据的响应头</span>
+   <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-type</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+   <span class="c1">//返回的数据</span>
+    <span class="kd">const</span> <span class="nx">resData</span><span class="o">=</span><span class="p">{</span>
+        <span class="nx">method</span><span class="p">,</span><span class="nx">url</span><span class="p">,</span><span class="nx">path</span><span class="p">,</span><span class="nx">query</span>
+    <span class="p">}</span>
+  
+    <span class="k">if</span><span class="p">(</span><span class="nx">method</span><span class="o">===</span><span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">){</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span>
+            <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">resData</span><span class="p">)</span><span class="c1">//设置返回字符串的格式</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">method</span><span class="o">===</span><span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">){</span>
+        <span class="kd">let</span> <span class="nx">postData</span><span class="o">=</span><span class="dl">""</span>
+        <span class="c1">//监听前端发送过来的数据，当前端有数据发送过来时，传递给chunk</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,(</span><span class="nx">chunk</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="nx">postData</span><span class="o">=</span><span class="nx">chunk</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+        <span class="p">})</span>
+  
+        <span class="c1">//监听前端发送数据结束，执行回调函数</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,()</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="nx">resData</span><span class="p">.</span><span class="nx">postData</span><span class="o">=</span><span class="nx">postData</span><span class="p">;</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span>
+                <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">resData</span><span class="p">)</span><span class="c1">//设置返回字符串的格式</span>
+            <span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+  
+<span class="p">})</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="nodemon使用">nodemon使用</h3>
+
+<ul>
+  <li>
+    <p>nodemon检测文件变化，自动重启node</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//安装nodemon     cnpm i nodemon -g</span>
+<span class="c1">//安装cross-env   cnpm i cross-env -S</span>
+  
+<span class="c1">//配置</span>
+<span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">dev</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">cross-env NODE_ENV=dev nodemon ./bin/www.js</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">prd</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">cross-env NODE_ENV=production nodemon ./bin/www.js</span><span class="dl">"</span>
+<span class="p">}</span>
+  
+<span class="c1">//创建响应文件 ./bin/www.js</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">cross-env</code>是用来设置不同的运行环境</p>
+  </li>
+</ul>
+
+<h3 id="node中的cookie和session">node中的cookie和session</h3>
+
+<h4 id="cookie">cookie</h4>
+
+<ul>
+  <li>存储在浏览器中的一段字符串(最大5kb)</li>
+  <li>跨域不共享</li>
+</ul>
+
+<h4 id="server操作cookie">server操作cookie</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//获取cookie</span>
+<span class="c1">//解析cookie</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">cookie</span><span class="o">=</span><span class="p">{}</span>
+<span class="kd">const</span> <span class="nx">cookieStr</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">cookie</span><span class="o">||</span><span class="dl">""</span><span class="c1">//cookie的格式是k1=1;k2=2;k3=3</span>
+<span class="nx">cookieStr</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">;</span><span class="dl">"</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">item</span><span class="p">){</span>
+        <span class="k">return</span> 
+    <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">arr</span><span class="o">=</span><span class="nx">item</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">key</span><span class="o">=</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="kd">const</span> <span class="nx">val</span><span class="o">=</span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nx">req</span><span class="p">.</span><span class="nx">cookie</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="o">=</span><span class="nx">val</span>
+<span class="p">})</span>
+
+<span class="c1">//设置cookie的值，path参数表示这个cookie可以在所有的网页都能访问，httpOnly参数限制cookie不能修改</span>
+<span class="c1">//expires参数设置cookie的过期时间</span>
+<span class="kd">const</span> <span class="nx">getCookieExpire</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">setTime</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toGMTString</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Set-Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`username=</span><span class="p">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span><span class="s2">;path=/;httpOnly;expires=</span><span class="p">${</span><span class="nx">getCookieExpire</span><span class="p">()}</span><span class="s2">`</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="session">session</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SESSION_DATA</span> <span class="o">=</span> <span class="p">{}</span>
+ <span class="c1">//解析session</span>
+<span class="kd">let</span> <span class="nx">needSetCookie</span><span class="o">=</span><span class="kc">false</span><span class="c1">//标志userid是否已经存在</span>
+<span class="kd">let</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">cookie</span><span class="p">.</span><span class="nx">userid</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">SESSION_DATA</span><span class="p">[</span><span class="nx">userId</span><span class="p">])</span> <span class="p">{</span>
+        <span class="nx">SESSION_DATA</span><span class="p">[</span><span class="nx">userId</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="nx">needSetCookie</span><span class="o">=</span><span class="kc">true</span>
+    <span class="nx">userId</span> <span class="o">=</span> <span class="s2">`</span><span class="p">${</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()}</span><span class="s2">_</span><span class="p">${</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()}</span><span class="s2">`</span>
+    <span class="nx">SESSION_DATA</span><span class="p">[</span><span class="nx">userId</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">session</span> <span class="o">=</span> <span class="nx">SESSION_DATA</span><span class="p">[</span><span class="nx">userId</span><span class="p">]</span>
+<span class="c1">//设置数据</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">username</span><span class="o">=</span><span class="nx">data</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">realName</span><span class="o">=</span><span class="nx">data</span><span class="p">.</span><span class="nx">realName</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="redis">redis</h3>
+
+<ul>
+  <li>web server最常用的缓存数据库，数据存放在内存中</li>
+  <li>相比于mysql，访问速度快（内存和硬盘不是一个数量级的）</li>
+  <li>成本高，可存储的数据量小</li>
+  <li>安装redis<code class="highlighter-rouge"> https://github.com/microsoftarchive/redis/releases </code></li>
+  <li>
+    <p>启动redis</p>
+
+    <ul>
+      <li>打开一个cmd窗口进入redis安装目录<code class="highlighter-rouge">redis-server.exe redis.windows.conf</code></li>
+      <li>在redis目录下再打开一个cmd<code class="highlighter-rouge">redis-cli.exe -h 127.0.0.1 -p 6379</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="node中使用redis">node中使用redis</h3>
+
+<ul>
+  <li>安装redis<code class="highlighter-rouge">cnpm i redis -S</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//导入redis模块</span>
+<span class="kd">const</span> <span class="nx">redis</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">redis</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="c1">//创建redis客户端 端口对应redis启动时的端口号</span>
+<span class="kd">const</span> <span class="nx">redisClient</span><span class="o">=</span><span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">(</span><span class="mi">6379</span><span class="p">,</span><span class="dl">"</span><span class="s2">127.0.0.1</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="c1">//监听redis客户端是否发生异常</span>
+<span class="nx">redisClient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span><span class="nx">err</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">//测试  redis.print设置了这个参数会打印出设置是否成功</span>
+<span class="c1">//向redis中添加数据</span>
+<span class="nx">redisClient</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">myname</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">张三</span><span class="dl">"</span><span class="p">,</span><span class="nx">redis</span><span class="p">.</span><span class="nx">print</span><span class="p">)</span>
+
+<span class="c1">//获取redis中的数据</span>
+<span class="nx">redisClient</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">myname</span><span class="dl">"</span><span class="p">,(</span><span class="nx">err</span><span class="p">,</span><span class="nx">val</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+
+    <span class="c1">//退出</span>
+    <span class="nx">redisClient</span><span class="p">.</span><span class="nx">quit</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>对获取数据和设置数据的封装</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//测试 redis.print设置了这个参数会打印出设置是否成功</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">val</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">redisClient</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">,</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">print</span><span class="p">)</span>
+<span class="p">}</span>
+  
+<span class="kd">function</span> <span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">redisClient</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+            <span class="p">}</span>
+  
+            <span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  
+                <span class="k">return</span> <span class="nx">resolve</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+            <span class="p">}</span>
+  
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nx">resolve</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="nginx">nginx</h3>
+
+<ul>
+  <li>
+    <p><a href="https://blog.csdn.net/u011418717/article/details/52776090">基本使用方式</a></p>
+  </li>
+  <li>
+    <p>高性能的web服务器，开源免费</p>
+  </li>
+  <li>
+    <p>一般用于做静态服务，负载均衡</p>
+  </li>
+  <li>
+    <p>反向代理(对客户端不可见的代理,实现前后端跨域访问)</p>
+  </li>
+  <li>
+    <p>测试配置文件格式是否正确<code class="highlighter-rouge">nginx -t</code></p>
+  </li>
+  <li>
+    <p>启动<code class="highlighter-rouge"> start nginx </code>，重启<code class="highlighter-rouge">nginx -s reload</code></p>
+  </li>
+  <li>
+    <p>停止<code class="highlighter-rouge">nginx -s top</code></p>
+  </li>
+  <li>
+    <p>配置</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//通过server属性配置多个服务器的地址，当一个服务器不能使用，nginx自动检索下一个</span>
+<span class="nx">upstream</span> <span class="nx">local_tomcat</span> <span class="p">{</span>  
+    <span class="nx">server</span> <span class="nx">localhost</span><span class="p">:</span><span class="mi">8001</span><span class="p">;</span>  
+    <span class="nx">server</span> <span class="nx">localhost</span><span class="p">:</span><span class="mi">4000</span><span class="p">;</span>  
+<span class="p">}</span> 
+<span class="nx">server</span> <span class="p">{</span>
+    <span class="nx">listen</span>       <span class="mi">8080</span><span class="p">;</span><span class="c1">//nginx服务器的端口号</span>
+    <span class="nx">server_name</span>  <span class="nx">localhost</span><span class="p">;</span>
+  
+    <span class="nx">location</span> <span class="o">/</span><span class="p">{</span>
+        <span class="nx">proxy_pass</span> <span class="na">http</span><span class="p">:</span><span class="c1">//localhost:8001;//当访问127.0.0.1:8080/时nginx服务器代理默认跳到http://localhost:8001</span>
+        <span class="err">#</span><span class="nx">proxy_pass</span> <span class="na">http</span><span class="p">:</span><span class="c1">//local_tomcat =&gt;upstream的使用</span>
+    <span class="p">}</span>
+    <span class="nx">location</span> <span class="o">/</span><span class="nx">api</span><span class="o">/</span><span class="p">{</span>
+        <span class="nx">proxy_pass</span> <span class="na">http</span><span class="p">:</span><span class="c1">//localhost:8000;//当访问127.0.0.1:8080/api/时nginx服务器代理默认跳到http://localhost:8000</span>
+        <span class="nx">proxy_set_header</span> <span class="nx">Host</span> <span class="nx">$host</span><span class="p">;</span><span class="c1">//由于访问的地址是localhost:8080/api/...,而实际需要访问的地址是http://localhost:8000/api/...,两个的请求头localhost:8080(localhost:8000)不相同，如果后端设置有请求头限制比如只能访问localhost:8000，那么就会报错，所以设置proxy_set_header Host $host就是为了当在向后端发送请求时，指定请求头为 proxy_pass指定的值</span>
+    <span class="p">}</span>
+  
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="node操作文件">node操作文件</h3>
+
+<ul>
+  <li>读取文件</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//读取文件的模块</span>
+<span class="kd">const</span> <span class="nx">fs</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//拼接文件路径的模块</span>
+<span class="kd">const</span> <span class="nx">path</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">)</span><span class="c1">//用于拼接路径，由于不能的系统路径不一样，因此使用这个模块，能够保证路径的统一</span>
+<span class="kd">const</span> <span class="nx">filename</span><span class="o">=</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="dl">"</span><span class="s2">data.txt</span><span class="dl">"</span><span class="p">)</span><span class="c1">//获取当前目录下的data.txt文件的路径名</span>
+
+<span class="c1">//读取文件内容</span>
+<span class="c1">//参数1为文件的路径，参数2为回调函数</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">,(</span><span class="nx">err</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>写入文件</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">path</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">)</span><span class="c1">//用于拼接路径，由于不能的系统路径不一样，因此使用这个模块，能够保证路径的统一</span>
+
+<span class="kd">const</span> <span class="nx">filename</span><span class="o">=</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="dl">"</span><span class="s2">data.txt</span><span class="dl">"</span><span class="p">)</span><span class="c1">//获取当前目录下的data.txt文件的路径名</span>
+
+<span class="c1">//写入文件</span>
+<span class="kd">const</span> <span class="nx">content</span><span class="o">=</span><span class="dl">"</span><span class="s2">11111111111111111111111111111111</span><span class="dl">"</span>
+<span class="kd">const</span> <span class="nx">opt</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">flag</span><span class="p">:</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span><span class="c1">//追加写入,覆盖用'w'</span>
+<span class="p">}</span>
+<span class="c1">//参数1是写入文件的路径，</span>
+<span class="c1">//参数2为向文件写入的内容，</span>
+<span class="c1">//参数3为写入的方式，a表示追加写入，w覆盖写入</span>
+<span class="c1">//参数4是一个回调函数</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span><span class="nx">content</span><span class="p">,</span><span class="nx">opt</span><span class="p">,(</span><span class="nx">err</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>判断文件是否存在</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//判断文件是否存在</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">filename</span><span class="p">,(</span><span class="nx">exist</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">exist</span><span class="p">)</span><span class="c1">//文件存在返回true，否则为false</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>stream操作文件</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//被读取的文件路径</span>
+<span class="kd">const</span> <span class="nx">filename1</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">"</span><span class="s2">data1.txt</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//写入内容的文件路径</span>
+<span class="kd">const</span> <span class="nx">filename2</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">"</span><span class="s2">data2.txt</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="c1">//读取文件的stream对象</span>
+<span class="kd">const</span> <span class="nx">readStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="nx">filename1</span><span class="p">);</span>
+<span class="c1">//写入文件的stream对象</span>
+<span class="kd">const</span> <span class="nx">writeStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="nx">filename2</span><span class="p">);</span>
+
+<span class="c1">//执行拷贝，通过pipe</span>
+<span class="nx">readStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">writeStream</span><span class="p">);</span>
+<span class="c1">//拷贝结束</span>
+<span class="nx">readStream</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,(</span><span class="nx">err</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>请求读取文件</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">fs</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">http</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">filename1</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">"</span><span class="s2">data1.txt</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">filename2</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">"</span><span class="s2">data2.txt</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="o">===</span><span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">){</span>
+        <span class="kd">let</span> <span class="nx">postData</span><span class="o">=</span><span class="dl">""</span><span class="p">;</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">,</span><span class="nx">chuck</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="nx">postData</span><span class="o">=</span><span class="nx">chuck</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="c1">//json格式的字符串</span>
+        <span class="p">})</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">end</span><span class="dl">"</span><span class="p">,()</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="nx">postData</span><span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">postData</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">postData</span><span class="p">.</span><span class="nx">filename</span><span class="o">===</span><span class="dl">"</span><span class="s2">data1</span><span class="dl">"</span><span class="p">){</span>
+                <span class="c1">//读取文件的stream对象</span>
+                <span class="kd">const</span> <span class="nx">readStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="nx">filename1</span><span class="p">);</span>
+                <span class="nx">readStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+               <span class="c1">//读取文件的stream对象</span>
+               <span class="kd">const</span> <span class="nx">readStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="nx">filename2</span><span class="p">);</span>
+               <span class="nx">readStream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> 
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>node向文件中写日志</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fs</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">path</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//写日志</span>
+<span class="kd">function</span> <span class="nx">writeLog</span><span class="p">(</span><span class="nx">writeStream</span><span class="p">,</span><span class="nx">log</span><span class="p">){</span>
+    <span class="nx">writeStream</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">log</span><span class="o">+</span><span class="dl">"</span><span class="se">\n</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">//生成write Stream</span>
+<span class="kd">function</span> <span class="nx">createWriteStream</span><span class="p">(</span><span class="nx">fileName</span><span class="p">){</span>
+    <span class="c1">//日志文件的存储地址</span>
+    <span class="kd">const</span> <span class="nx">fullFileName</span><span class="o">=</span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="dl">"</span><span class="s2">../</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">../</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">logs</span><span class="dl">"</span><span class="p">,</span><span class="nx">fileName</span><span class="p">)</span>
+    <span class="kd">const</span> <span class="nx">writeStream</span><span class="o">=</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="nx">fullFileName</span><span class="p">,{</span><span class="na">flags</span><span class="p">:</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">})</span>
+    <span class="k">return</span> <span class="nx">writeStream</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//写访问日志</span>
+<span class="kd">const</span> <span class="nx">accessWriteStream</span><span class="o">=</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="dl">'</span><span class="s1">access.log</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">function</span> <span class="nx">access</span><span class="p">(</span><span class="nx">log</span><span class="p">){</span>
+    <span class="nx">writeLog</span><span class="p">(</span><span class="nx">accessWriteStream</span><span class="p">,</span><span class="nx">log</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="o">=</span><span class="p">{</span>
+    <span class="nx">access</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="node中的md5加密">node中的md5加密</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">crypto</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">crypto</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">//密匙</span>
+<span class="kd">const</span> <span class="nx">SECRET_KEY</span><span class="o">=</span><span class="dl">"</span><span class="s2">123456</span><span class="dl">"</span>
+
+<span class="c1">//md5加密</span>
+<span class="kd">function</span> <span class="nx">md5</span><span class="p">(</span><span class="nx">content</span><span class="p">){</span>
+    <span class="kd">let</span> <span class="nx">md5</span><span class="o">=</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">createHash</span><span class="p">(</span><span class="dl">"</span><span class="s2">md5</span><span class="dl">"</span><span class="p">);</span><span class="c1">//创建一个hash对象，创建hash对象使用的算法是md5</span>
+    <span class="c1">//md5.update(content)使用给定的content更新hash对象的内容，.digest("hex")使用相应的字符编码返回hash值</span>
+    <span class="k">return</span> <span class="nx">md5</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">content</span><span class="p">).</span><span class="nx">digest</span><span class="p">(</span><span class="dl">"</span><span class="s2">hex</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">//加密函数</span>
+<span class="kd">function</span> <span class="nx">getPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">){</span>
+    <span class="kd">const</span> <span class="nx">str</span><span class="o">=</span><span class="s2">`password=</span><span class="p">${</span><span class="nx">password</span><span class="p">}</span><span class="s2">&amp;key=</span><span class="p">${</span><span class="nx">SECRET_KEY</span><span class="p">}</span><span class="s2">`</span>
+    <span class="k">return</span> <span class="nx">md5</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getPassword</span><span class="p">(</span><span class="mi">123</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="node中连接数据库">node中连接数据库</h3>
+
+<ul>
+  <li>
+    <p>安装mysql模块<code class="highlighter-rouge">cnpm i mysql -S</code></p>
+  </li>
+  <li>
+    <p><a href="https://www.cnblogs.com/zjx2011/p/6380579.html#establishing-connect">mysql模块的简介</a></p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//导入mysql模块</span>
+<span class="kd">const</span> <span class="nx">mysql</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">mysql</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//创建数据库连接对象</span>
+<span class="kd">const</span> <span class="nx">conn</span><span class="o">=</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">({</span>
+    <span class="na">host</span><span class="p">:</span><span class="dl">"</span><span class="s2">localtion</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">host</span><span class="p">:</span><span class="dl">"</span><span class="s2">localhost</span><span class="dl">"</span><span class="p">,</span><span class="c1">//数据库连接的ip地址</span>
+    <span class="na">user</span><span class="p">:</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">,</span><span class="c1">//连接数据库的用户名</span>
+    <span class="na">password</span><span class="p">:</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">,</span><span class="c1">//连接数据库的密码</span>
+    <span class="na">port</span><span class="p">:</span><span class="dl">"</span><span class="s2">3306</span><span class="dl">"</span><span class="p">,</span><span class="c1">//数据库的端口号</span>
+    <span class="na">database</span><span class="p">:</span><span class="dl">"</span><span class="s2">myblog</span><span class="dl">"</span><span class="c1">//数据库的名称</span>
+<span class="p">})</span>
+<span class="c1">//开始连接数据库</span>
+<span class="nx">conn</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="c1">//封装的一个进行增删改查的函数</span>
+<span class="kd">function</span> <span class="nx">exec</span><span class="p">(</span><span class="nx">sql</span><span class="p">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="nx">con</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,(</span><span class="nx">err</span><span class="p">,</span><span class="nx">result</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="express框架">express框架</h3>
+
+<h4 id="安装express">安装express</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cnpm i express-generator -g //安装express脚手架
+express express-test //创建express应用
+npm start //运行应用
+</code></pre></div></div>
+
+<h4 id="中间件">中间件</h4>
+
+<ul>
+  <li>使用<code class="highlighter-rouge">app.use()</code>注册中间件</li>
+  <li><code class="highlighter-rouge">next()</code>上一个中间件触发下一个中间件</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">cookieParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">cookie-parser</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">app</span><span class="o">=</span><span class="nx">express</span><span class="p">()</span>
+
+<span class="c1">//处理表单提交数据,将处理后的数据挂载到req.body中</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">urlencoded</span><span class="p">({</span> <span class="na">extended</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}))</span>
+
+<span class="c1">//处理json格式的数据</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+
+<span class="c1">//处理cookie</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cookieParser</span><span class="p">())</span>
+
+<span class="c1">//创建一个路由</span>
+<span class="kd">const</span> <span class="nx">router</span><span class="o">=</span><span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+
+<span class="c1">//注册路由</span>
+<span class="kd">const</span> <span class="nx">blogRouter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./routes/blog</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/blog</span><span class="dl">'</span><span class="p">,</span> <span class="nx">blogRouter</span><span class="p">);</span>
+
+<span class="c1">//通过express-session处理session数据</span>
+<span class="c1">//安装 cnpm i express-session -S</span>
+<span class="c1">//注册</span>
+
+<span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express-session</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">cookieParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">cookie-parser</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cookieParser</span><span class="p">());</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">secret</span><span class="p">:</span><span class="dl">"</span><span class="s2">qwe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cookie</span><span class="p">:{</span>
+    <span class="na">path</span><span class="p">:</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span><span class="c1">//任意路径都能访问</span>
+    <span class="na">httpOnly</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="c1">//是否允许修改</span>
+    <span class="na">maxAge</span><span class="p">:</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">1000</span><span class="c1">//过期时间</span>
+  <span class="p">}</span>
+<span class="p">}))</span>
+<span class="c1">//获取session</span>
+<span class="nx">req</span><span class="p">.</span><span class="nx">session</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>路由</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">express</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span>
+  
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/list</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  	<span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+          
+    <span class="p">})</span>
+<span class="p">});</span>
+  
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/detail</span><span class="dl">"</span><span class="p">,(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    
+<span class="p">})</span>
+  
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="使用redis">使用redis</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//安装redis connect-redis模块</span>
+<span class="c1">//cnpm i redis connect-redis -S</span>
+
+<span class="c1">//redis的配置</span>
+<span class="nx">REDIS_CONF</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">port</span><span class="p">:</span><span class="mi">6379</span><span class="p">,</span>
+    <span class="na">host</span><span class="p">:</span><span class="dl">"</span><span class="s2">127.0.0.1</span><span class="dl">"</span>
+<span class="p">}</span>
+<span class="c1">//创建redis客户端</span>
+<span class="kd">const</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">redis</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">REDIS_CONF</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">../config/db</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//创建客户端</span>
+<span class="kd">const</span> <span class="nx">redisClient</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">(</span><span class="nx">REDIS_CONF</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="nx">REDIS_CONF</span><span class="p">.</span><span class="nx">host</span><span class="p">)</span>
+<span class="c1">//监听redis客户端是否产生异常</span>
+<span class="nx">redisClient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">,</span> <span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="o">=</span><span class="nx">redisClient</span>
+
+<span class="c1">//将redis与session进行关联</span>
+<span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express-session</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">RedisStore</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">connect-redis</span><span class="dl">"</span><span class="p">)(</span><span class="nx">session</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">redisClient</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./db/redis</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">sessionStore</span><span class="o">=</span><span class="k">new</span> <span class="nx">RedisStore</span><span class="p">({</span>
+  <span class="na">client</span><span class="p">:</span><span class="nx">redisClient</span>
+<span class="p">})</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">secret</span><span class="p">:</span><span class="dl">"</span><span class="s2">qwe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cookie</span><span class="p">:{</span>
+    <span class="na">path</span><span class="p">:</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span><span class="c1">//任意路径都能访问</span>
+    <span class="na">httpOnly</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="c1">//是否允许修改</span>
+    <span class="na">maxAge</span><span class="p">:</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">1000</span><span class="c1">//过期时间</span>
+  <span class="p">},</span>
+  <span class="na">store</span><span class="p">:</span><span class="nx">sessionStore</span>
+<span class="p">}))</span>
+</code></pre></div></div>
+
+<h4 id="日志">日志</h4>
+
+<ul>
+  <li>
+    <p>使用模块<code class="highlighter-rouge">morgan</code>完成日志的输出</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//morgan的简介https://github.com/expressjs/morgan</span>
+<span class="kd">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">morgan</span><span class="dl">'</span><span class="p">);</span>
+<span class="cm">/*
+	环境类型
+	"scripts": {
+    "start": "node ./bin/www",
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+    "prd": "cross-env NODE_ENV=production nodemon ./bin/www.js"
+  }
+*/</span>
+  
+<span class="kd">const</span> <span class="nx">ENV</span><span class="o">=</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span><span class="c1">//获取环境类型</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">ENV</span><span class="o">!==</span><span class="dl">"</span><span class="s2">production</span><span class="dl">"</span><span class="p">){</span>
+   <span class="c1">//开发环境/测试环境</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">(</span><span class="dl">'</span><span class="s1">dev</span><span class="dl">'</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+    <span class="c1">//线上环境</span>
+  <span class="kd">const</span> <span class="nx">logFilename</span><span class="o">=</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="dl">"</span><span class="s2">logs</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">access.log</span><span class="dl">"</span><span class="p">)</span><span class="c1">//拼接文件路径</span>
+  <span class="kd">const</span> <span class="nx">writeStream</span><span class="o">=</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="nx">logFilename</span><span class="p">,{</span>
+    <span class="na">flags</span><span class="p">:</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span>
+  <span class="p">})</span><span class="c1">//创建一个文件日志写入流</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">(</span><span class="dl">"</span><span class="s2">combined</span><span class="dl">"</span><span class="p">,{</span>
+    <span class="na">stream</span><span class="p">:</span><span class="nx">writeStream</span><span class="c1">//将日志写文件</span>
+  <span class="p">}))</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="express实现原理">express实现原理</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">http</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">slice</span><span class="o">=</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">LikeExpress</span><span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(){</span>
+        <span class="c1">//存放中间件的列表</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="o">=</span><span class="p">{</span>
+            <span class="na">all</span><span class="p">:[],</span><span class="c1">//存放使用use注册的中间件</span>
+            <span class="na">get</span><span class="p">:[],</span><span class="c1">//存放使用get注册的中间件</span>
+            <span class="na">post</span><span class="p">:[]</span><span class="c1">//存放使用post注册的中间件</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">register</span><span class="p">(</span><span class="nx">path</span><span class="p">){</span>
+        <span class="kd">const</span> <span class="nx">info</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">path</span><span class="o">===</span><span class="dl">"</span><span class="s2">string</span><span class="dl">"</span><span class="p">){</span>
+            <span class="nx">info</span><span class="p">.</span><span class="nx">path</span><span class="o">=</span><span class="nx">path</span><span class="p">;</span>
+
+            <span class="c1">//从第二个函数开始，转换为数组，存入stack中</span>
+            <span class="nx">info</span><span class="p">.</span><span class="nx">stack</span><span class="o">=</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">//数组</span>
+
+
+            <span class="c1">//arguments是类数组对象，有一些数组中的方法它们是没有的</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="nx">info</span><span class="p">.</span><span class="nx">path</span><span class="o">=</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span>
+            <span class="c1">//从第二个函数开始，转换为数组，存入stack中</span>
+            <span class="nx">info</span><span class="p">.</span><span class="nx">stack</span><span class="o">=</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1">//数组</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">info</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">use</span><span class="p">(){</span>
+        <span class="kd">const</span> <span class="nx">info</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">all</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">get</span><span class="p">(){</span>
+        <span class="kd">const</span> <span class="nx">info</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">post</span><span class="p">(){</span>
+        <span class="kd">const</span> <span class="nx">info</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">register</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">post</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">match</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="nx">url</span><span class="p">){</span>
+        <span class="kd">let</span> <span class="nx">stack</span><span class="o">=</span><span class="p">[]</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">url</span><span class="o">===</span><span class="dl">'</span><span class="s1">/favicon.ico</span><span class="dl">'</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nx">stack</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//获取routes</span>
+        <span class="kd">let</span> <span class="nx">curRoutes</span><span class="o">=</span><span class="p">[]</span>
+        <span class="nx">curRoutes</span><span class="o">=</span><span class="nx">curRoutes</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">all</span><span class="p">)</span>
+        <span class="nx">curRoutes</span><span class="o">=</span><span class="nx">curRoutes</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">[</span><span class="nx">method</span><span class="p">])</span>
+
+
+        <span class="nx">curRoutes</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span><span class="o">===</span><span class="mi">0</span><span class="p">){</span>
+                <span class="nx">stack</span><span class="o">=</span><span class="nx">stack</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">stack</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+
+        <span class="k">return</span> <span class="nx">stack</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//核心的next机制</span>
+    <span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">stack</span><span class="p">){</span>
+        <span class="kd">const</span> <span class="nx">next</span><span class="o">=</span><span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="c1">//第一个匹配的中间件</span>
+            <span class="kd">const</span> <span class="nx">middleware</span><span class="o">=</span><span class="nx">stack</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nx">middleware</span><span class="p">){</span>
+                <span class="c1">//执行中间件函数</span>
+                <span class="nx">middleware</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">next</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nx">next</span><span class="p">()</span>
+    <span class="p">}</span>
+
+
+    <span class="nx">callback</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="o">=</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-type</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">)</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span>
+                    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+
+            <span class="kd">const</span> <span class="nx">url</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span>
+            <span class="kd">const</span> <span class="nx">method</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+
+
+            <span class="kd">const</span> <span class="nx">resultList</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="nx">url</span><span class="p">)</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">,</span><span class="nx">resultList</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">listen</span><span class="p">(...</span><span class="nx">args</span><span class="p">){</span>
+        <span class="kd">const</span> <span class="nx">server</span><span class="o">=</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">callback</span><span class="p">())</span>
+        <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1">//工厂函数</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="o">=</span><span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">LikeExpress</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="c1">//流程前端发送请求-&gt;listen-&gt;callback-&gt;match-&gt;handle</span>
+</code></pre></div></div>
+
+<h3 id="koa2框架">koa2框架</h3>
+
+<ul>
+  <li>express中间件是异步回调，koa2原生支持<code class="highlighter-rouge">async/await</code></li>
+  <li><a href="https://koa.bootcss.com/">简介</a></li>
+</ul>
+
+<h4 id="安装">安装</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">koa2</span><span class="err">的脚手架</span> <span class="nx">npm</span> <span class="nx">i</span> <span class="nx">koa</span><span class="o">-</span><span class="nx">generator</span> <span class="o">-</span><span class="nx">g</span>
+<span class="err">初始化环境</span> <span class="nx">Koa2</span> <span class="nx">koa2</span><span class="o">-</span><span class="nx">test</span><span class="p">(</span><span class="err">文件架名字</span><span class="p">)</span>
+<span class="err">启动</span> <span class="nx">npm</span> <span class="nx">i</span> <span class="o">&amp;</span> <span class="nx">npm</span> <span class="nx">run</span> <span class="nx">dev</span> 
+</code></pre></div></div>
+
+<h4 id="中间件-1">中间件</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Koa</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">koa</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Koa</span><span class="p">()</span>
+
+<span class="c1">//出路json格式数据</span>
+<span class="kd">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">koa-json</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">//错误处理</span>
+<span class="kd">const</span> <span class="nx">onerror</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">koa-onerror</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">//处理表单提交的数据</span>
+<span class="kd">const</span> <span class="nx">bodyparser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">koa-bodyparser</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">// 日志美化</span>
+<span class="kd">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">koa-logger</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">//引入路由</span>
+<span class="kd">const</span> <span class="nx">blog</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">./routes/blog</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="c1">// error handler</span>
+<span class="nx">onerror</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span>
+
+<span class="c1">// 处理表单提交</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyparser</span><span class="p">({</span>
+  <span class="na">enableTypes</span><span class="p">:[</span><span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">form</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">]</span>
+<span class="p">}))</span>
+
+<span class="c1">//处理json格式数据</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">json</span><span class="p">())</span>
+
+<span class="c1">//处理日志</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">())</span>
+
+
+<span class="c1">// 日志处理</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+  <span class="k">await</span> <span class="nx">next</span><span class="p">()</span>
+  <span class="kd">const</span> <span class="nx">ms</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="nx">start</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">method</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">url</span><span class="p">}</span><span class="s2"> - </span><span class="p">${</span><span class="nx">ms</span><span class="p">}</span><span class="s2">ms`</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 路由注册</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">blog</span><span class="p">.</span><span class="nx">routes</span><span class="p">(),</span> <span class="nx">blog</span><span class="p">.</span><span class="nx">allowedMethods</span><span class="p">())</span>
+
+<span class="c1">// 错误处理</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">server error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span>
+<span class="p">});</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">app</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>路由</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">koa-router</span><span class="dl">'</span><span class="p">)()</span>
+  
+<span class="nx">router</span><span class="p">.</span><span class="nx">prefix</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/blog</span><span class="dl">"</span><span class="p">);</span><span class="c1">//设置请求路径的前缀</span>
+  
+<span class="nx">router</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">/list</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">query</span><span class="p">;</span><span class="c1">//相等于req.query返回查询字符串</span>
+    <span class="nx">ctx</span><span class="p">.</span><span class="nx">body</span> <span class="o">=</span> <span class="p">{</span><span class="c1">//相当于</span>
+        <span class="na">error</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">query</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">获取博客列表</span><span class="dl">"</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+  
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">router</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="koa中的session">koa中的session</h4>
+
+<ul>
+  <li>
+    <p>基于koa-generic-session和koa-redis</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//安装插件 cnpm i koa-generic-session koa-redis redis -S</span>
+  
+<span class="c1">//处理session</span>
+<span class="kd">const</span> <span class="nx">session</span> <span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">koa-generic-session</span><span class="dl">"</span><span class="p">)</span>
+  
+<span class="c1">//处理redis，这个模块依赖redis</span>
+<span class="kd">const</span> <span class="nx">redisStore</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">koa-redis</span><span class="dl">"</span><span class="p">)</span>
+  
+<span class="c1">// 设置签名的密钥</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">keys</span><span class="o">=</span><span class="p">[</span><span class="dl">"</span><span class="s2">123</span><span class="dl">"</span><span class="p">]</span>
+<span class="c1">//设置session，并将session与redis关联</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">cookie</span><span class="p">:{</span>
+    <span class="na">path</span><span class="p">:</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">,</span><span class="c1">//所有的路由都能使用</span>
+    <span class="na">httpOnly</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="c1">//不允许前端修改</span>
+    <span class="na">maxAge</span><span class="p">:</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">1000</span><span class="c1">//有效时间</span>
+  <span class="p">},</span>
+  <span class="na">store</span><span class="p">:</span><span class="nx">redisStore</span><span class="p">({</span>
+    <span class="na">all</span><span class="p">:</span><span class="dl">'</span><span class="s1">127.0.0.1:6379</span><span class="dl">'</span>
+  <span class="p">})</span><span class="c1">//配置redis</span>
+<span class="p">}))</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="日志-1">日志</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//安装兼容模块（morgan是express中的模块）cnpm i koa-morgan -S</span>
+<span class="cm">/*
+	环境类型
+	"scripts": {
+    "start": "node ./bin/www",
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+    "prd": "cross-env NODE_ENV=production nodemon ./bin/www.js"
+  }
+*/</span>
+<span class="kd">const</span> <span class="nx">path</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">fs</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">fs</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">morgan</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">koa-morgan</span><span class="dl">"</span><span class="p">)</span>
+
+<span class="kd">const</span> <span class="nx">ENV</span><span class="o">=</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">ENV</span><span class="o">!==</span><span class="dl">"</span><span class="s2">production</span><span class="dl">"</span><span class="p">){</span>
+  <span class="c1">//开发环境</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">morgan</span><span class="p">(</span><span class="dl">'</span><span class="s1">dev</span><span class="dl">'</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+  <span class="c1">//线上环境</span>
+
+  <span class="kd">const</span> <span class="nx">logFilename</span><span class="o">=</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="dl">"</span><span class="s2">logs</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">access.log</span><span class="dl">"</span><span class="p">)</span>
+  <span class="kd">const</span> <span class="nx">writeStream</span><span class="o">=</span><span class="nx">fs</span><span class="p">.</span><span class="nx">createWriteStream</span><span class="p">(</span><span class="nx">logFilename</span><span class="p">,{</span>
+    <span class="na">flags</span><span class="p">:</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span>
+  <span class="p">})</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">morgan</span><span class="p">(</span><span class="dl">"</span><span class="s2">combined</span><span class="dl">"</span><span class="p">,{</span>
+    <span class="na">stream</span><span class="p">:</span><span class="nx">writeStream</span>
+  <span class="p">}))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="koa2实现原理">koa2实现原理</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">http</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">)</span>
+<span class="c1">//组合中间件</span>
+<span class="kd">function</span> <span class="nx">compose</span><span class="p">(</span><span class="nx">middlewareList</span><span class="p">){</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ctx</span><span class="p">){</span>
+        <span class="c1">//中间的调用</span>
+
+        <span class="kd">function</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">i</span><span class="p">){</span>
+            <span class="kd">const</span> <span class="nx">fn</span><span class="o">=</span><span class="nx">middlewareList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+
+            <span class="k">try</span><span class="p">{</span>
+                <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span>
+                    <span class="nx">fn</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">dispatch</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="p">)</span>
+            <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span>
+                    <span class="nx">err</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">dispatch</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">LikeKoa2</span><span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">middlewareList</span><span class="o">=</span><span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="nx">use</span><span class="p">(</span><span class="nx">fn</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">middlewareList</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+
+    <span class="nx">createContext</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+        <span class="kd">const</span> <span class="nx">ctx</span><span class="o">=</span><span class="p">{</span>
+            <span class="nx">req</span><span class="p">,</span><span class="nx">res</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+    <span class="nx">handleRequest</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">fn</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">callback</span><span class="p">(){</span>
+        <span class="kd">const</span> <span class="nx">fn</span><span class="o">=</span><span class="nx">compose</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">middlewareList</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">ctx</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleRequest</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">fn</span><span class="p">)</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">listen</span><span class="p">(...</span><span class="nx">args</span><span class="p">){</span>
+        <span class="kd">const</span> <span class="nx">server</span><span class="o">=</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">callback</span><span class="p">())</span>
+
+        <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="o">=</span><span class="nx">LikeKoa2</span>
+</code></pre></div></div>
+
+:ET

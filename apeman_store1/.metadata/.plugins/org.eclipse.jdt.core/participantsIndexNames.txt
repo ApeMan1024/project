@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+E:\猿人\自学编程\项目\apeman_store\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2178691084.index
+\apeman_store\src

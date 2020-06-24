@@ -1,0 +1,6 @@
+paginate: 5
+# 分页保存目录格式 
+paginate_path: "page:num"
+# 加载分页插件 
+plugins: [jekyll-paginate]
+

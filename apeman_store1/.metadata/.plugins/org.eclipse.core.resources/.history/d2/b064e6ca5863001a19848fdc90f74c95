@@ -1,0 +1,319 @@
+package com.apeman1024.sql;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.apeman1024.Isql.IAdministrator;
+import com.apeman1024.entity.Admin;
+import com.apeman1024.entity.Ping;
+import com.apeman1024.util.Md5;
+import com.apeman1024.util.Sql_util;
+
+public class Administrator implements IAdministrator {
+	Connection conn=Sql_util.getConn();
+	@Override
+	public Admin pd(Admin admin) {
+		String sql="select * from admin where username=? and password=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, admin.getPassword());
+			pre.setString(2, Md5.getMD5(admin.getPassword()));
+			ResultSet exe = pre.executeQuery();
+			Admin admin2=new Admin();
+			if(exe.next()) {
+				admin2.setHead(exe.getString("head"));
+				admin2.setOccu(exe.getString("occu"));
+				admin2.setPhone(exe.getString("phone"));
+				admin2.setUsername(exe.getString("username"));
+				return admin2;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public boolean cong(String username, String card, String qian) {
+		String sql="select * from card where username=? and card=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1,username);
+			pre.setString(2, card);
+			ResultSet exe = pre.executeQuery();
+			if(exe.next()) {
+				String sql1="update card set balance=balance+? where username=? and card=?";
+				PreparedStatement pre1 = conn.prepareStatement(sql1);
+				pre1.setDouble(1, Double.parseDouble(qian));
+				pre1.setString(2, username);
+				pre1.setString(3, card);
+				int exe2 = pre1.executeUpdate();
+				if(exe2>0)return true;
+				else return false;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public boolean getID(String guid) {
+		String sql="select * from com where id=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, guid);
+			ResultSet exe = pre.executeQuery();
+			if(exe.next())return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public boolean addCom(Map<String, Object> map) {
+		String sql="insert into com(id,src,name,qian,count,title) value(?,?,?,?,?,?)";
+		String sql1="select * from classify where title=?";
+		String sql2="insert into img(id,img) value(?,?)";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setObject(1, map.get("id"));
+			pre.setObject(2, map.get("src"));
+			pre.setObject(3, map.get("name"));
+			pre.setObject(4, map.get("qian"));
+			pre.setObject(5, 0);
+			pre.setObject(6, map.get("title"));
+			int exe = pre.executeUpdate();
+			if(exe>0) {
+				if(!map.get("xian").equals("0")) {
+					String sql3="insert into discount(id,name,xian,qian,src) value(?,?,?,?,?)";
+					PreparedStatement pre1 = conn.prepareStatement(sql3);
+					pre1.setObject(1, map.get("id"));
+					pre1.setObject(2, map.get("name"));
+					pre1.setObject(3, map.get("xian"));
+					pre1.setObject(4, map.get("qian"));
+					pre1.setObject(5, map.get("src"));
+					int exe2 = pre1.executeUpdate();
+				}
+				PreparedStatement pre2 = conn.prepareStatement(sql1);
+				pre2.setObject(1, map.get("title"));
+				ResultSet exe3 = pre2.executeQuery();
+				if(!exe3.next()) {
+					String sql4="insert into classify(title,num,count) value(?,?,?)";
+					PreparedStatement pre4 = conn.prepareStatement(sql4);
+					pre4.setObject(1, map.get("title"));
+					pre4.setObject(2, 0);
+					pre4.setObject(3, 0);
+					int exe4 = pre4.executeUpdate();
+				}else {
+					String sql4="update classify set num=num+1 where title=?";
+					PreparedStatement pre4 = conn.prepareStatement(sql4);
+					pre4.setObject(1, map.get("title"));
+					int exe4 = pre4.executeUpdate();
+				}
+				PreparedStatement pre5 = conn.prepareStatement(sql2);
+				pre5.setObject(1, map.get("id"));
+				pre5.setObject(2, map.get("list"));
+				int exe5 = pre5.executeUpdate();
+				if(exe5>0) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public List<Map<String, Object>> getCom(int start, int len) {
+		String sql="select * from com limit ?,?";
+		String sql1="select xian from discount where id=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setInt(1, start);
+			pre.setInt(2, len);
+			ResultSet exe = pre.executeQuery();
+			List<Map<String, Object>>list=new ArrayList<Map<String,Object>>();
+			Map<String, Object>map=null;
+			while(exe.next()) {
+				map=new HashMap<String, Object>();
+				map.put("id",exe.getObject("id"));
+				map.put("name", exe.getObject("name"));
+				map.put("src", exe.getObject("src"));
+				map.put("qian", exe.getObject("qian"));
+				map.put("count", exe.getObject("count"));
+				map.put("title", exe.getObject("title"));
+				map.put("xian", 0);
+				PreparedStatement pre1 = conn.prepareStatement(sql1);
+				pre1.setString(1, exe.getString("id"));
+				ResultSet exe1 = pre1.executeQuery();
+				if(exe1.next()) {
+					map.put("xian",exe1.getString("xian"));
+				}
+				list.add(map);
+			}
+			if(!list.isEmpty())return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public List<Map<String, Object>> getPing(int start, int len) {
+		String sql="select * from ping limit ?,?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setInt(1, start);
+			pre.setInt(2,len);
+			ResultSet exe = pre.executeQuery();
+			List<Map<String, Object>>list=new ArrayList<Map<String,Object>>();
+			Map<String, Object>map=null;
+			while (exe.next()) {
+				map=new HashMap<String, Object>();
+				map.put("id", exe.getObject("id"));
+				map.put("username", exe.getObject("username"));
+				map.put("head", exe.getObject("head"));
+				map.put("nei", exe.getObject("nei"));
+				map.put("time", exe.getObject("time"));
+				list.add(map);
+			}
+			if(!list.isEmpty()) {
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public boolean delPing(Ping ping) {
+		String sql="delete from ping where id=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setInt(1, ping.getId());
+			int exe = pre.executeUpdate();
+			if(exe>0)return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public boolean delCom(String id,String title) {
+		String sql="delete from discount where id=?";
+		String sql2="delete from img where id=?";
+		String sql3="update classify set num=num-1 where title=?";
+		String sql4="delete from com where id=?";
+		try {
+			PreparedStatement pre1 = conn.prepareStatement(sql);
+			pre1.setString(1, id);
+			int exe = pre1.executeUpdate();
+			PreparedStatement pre2 = conn.prepareStatement(sql2);
+			pre2.setString(1, id);
+			int exe2 = pre2.executeUpdate();
+			PreparedStatement pre3 = conn.prepareStatement(sql3);
+			pre3.setString(1, title);
+			int exe3 = pre3.executeUpdate();
+			PreparedStatement pre4 = conn.prepareStatement(sql4);
+			pre4.setString(1, id);
+			int exe4 = pre4.executeUpdate();
+			if(exe3>0&&exe4>0)return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	@Override
+	public List<Map<String, Object>> getMap(int start, int len) {
+		String sql="select * from com limit ?,?";
+		String sql1="select * from discount where id=?";
+		try {
+			PreparedStatement pre1 = conn.prepareStatement(sql);
+			pre1.setInt(1, start);
+			pre1.setInt(2, len);
+			ResultSet exe = pre1.executeQuery();
+			Map<String, Object>map=null;
+			List<Map<String, Object>>list=new ArrayList<Map<String,Object>>();
+			while (exe.next()) {
+				map=new HashMap<String, Object>();
+				map.put("id", exe.getObject("id"));
+				map.put("name", exe.getObject("name"));
+				map.put("title", exe.getObject("title"));
+				map.put("qian", exe.getObject("qian"));
+				map.put("src", exe.getObject("src"));
+				map.put("bool", false);
+				map.put("xian", "");
+				PreparedStatement pre2 = conn.prepareStatement(sql1);
+				pre2.setString(1, exe.getString("id"));
+				ResultSet exe2 = pre2.executeQuery();
+				if(exe2.next())map.put("xian", exe2.getObject("xian"));
+				list.add(map);
+			}
+			if(!list.isEmpty())return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public boolean addMiao(String data, String time, List<Map<String, Object>> zhuan) {
+		String sql="select id from miao where data=? and time=?";
+		String sql_1="select * from discount where id=?";
+		String sql_2="update discount set time=?,xian=?,data=? where id=?";
+		String sql_3="insert into discount(id,name,time,xian,qian,src,data) value(?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement pre1 = conn.prepareStatement(sql);
+			pre1.setString(1, data);
+			pre1.setString(2, time);
+			ResultSet exe = pre1.executeQuery();
+			if(!exe.next()) {
+				String sql1="insert into miao(time,data) value(?,?)";
+				PreparedStatement pre2 = conn.prepareStatement(sql1);
+				pre2.setString(1, time);
+				pre2.setString(2, data);
+				int exe1 = pre2.executeUpdate();
+			}
+			for(Map<String, Object>map :zhuan) {
+				PreparedStatement pre3 = conn.prepareStatement(sql_1);
+				pre3.setString(1, map.get("id").toString());
+				ResultSet exe3 = pre3.executeQuery();
+				if(exe3.next()) {
+					PreparedStatement pre4 = conn.prepareStatement(sql_2);
+					pre4.setObject(1, time);
+					pre4.setObject(2, map.get("xian"));
+					pre4.setObject(3, data);
+					pre4.setObject(4, map.get("id"));
+					int exe4 = pre4.executeUpdate();
+				}else {
+					PreparedStatement pre5 = conn.prepareStatement(sql_3);
+					pre5.setObject(1, map.get("id"));
+					pre5.setObject(2, map.get("name"));
+					pre5.setObject(3, map.get("time"));
+					pre5.setObject(4, map.get("xian"));
+					pre5.setObject(5, map.get("qian"));
+					pre5.setObject(6, map.get("src"));
+					pre5.setObject(7, map.get("data"));
+					int exe5 = pre5.executeUpdate();
+				}
+			}
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+}

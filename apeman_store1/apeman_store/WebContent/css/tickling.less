@@ -1,0 +1,98 @@
+@import "/css/css-1/hun.css";
+@import "/css/css-1/head.css";
+nav{
+    #logo{
+        transform-origin: center 46%;
+        position: relative;
+        a{
+            position: absolute;
+            width:100px;
+            height:100px;
+            background:red;
+            top:0px;
+            left:0px;
+            opacity: 0;
+        }
+    }
+}
+main{
+    width:100%;
+    overflow: hidden;
+    .ma1{
+        border:2px solid #ddd;
+        p{
+            margin:0px;
+            padding:0px;
+        }
+        textarea{
+            width:100%;
+            height:60px;
+            resize:none;
+        }
+        button{
+            width:100px;
+            height:34px;
+            float: left;
+            &:nth-of-type(2){
+                float: right;
+                vertical-align: bottom;
+            }
+            
+        }
+        span{
+            display: inline-block;
+            font-size: 2em;
+            margin-left:590px;
+            color:mediumturquoise;
+        }
+    }
+    .lie{
+        margin:10px 0;
+        ul{
+            list-style: none;
+            li{
+                border:1px solid #ccc;
+                padding:5px;
+                height:120px;
+                p{
+                    display: inline-block;
+                    &:nth-of-type(1){
+                        text-align: center;
+                        img{
+                            width:100px;
+                            height:100px;
+                            border-radius: 50%;
+                            display: block;
+                        }
+                    }
+                    &:nth-of-type(2){
+                        vertical-align: top;
+                        margin:20px;
+                        width:640px;
+                        >span{
+                            display:block;
+                            &:nth-of-type(2){
+                                overflow:hidden; 
+                                text-overflow:ellipsis;
+                                display:-webkit-box;
+                                -webkit-box-orient:vertical;
+                                -webkit-line-clamp:2; 
+                                word-break: break-all;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .box{
+        width:600px;
+        height:500px;
+        margin:auto;
+        margin-top:25px;
+        img{
+            width:inherit;
+            height:inherit;
+        }
+    }
+}

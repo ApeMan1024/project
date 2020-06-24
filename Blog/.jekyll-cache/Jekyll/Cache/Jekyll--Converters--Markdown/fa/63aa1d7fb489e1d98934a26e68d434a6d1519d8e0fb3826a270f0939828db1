@@ -1,0 +1,42 @@
+I"�<p>MD5信息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。这套算法的程序在 RFC 1321 标准中被加以规范。1996年后该算法被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如SHA-2。2004年，证实MD5算法无法防止碰撞（collision），因此不适用于安全性认证，如SSL公开密钥认证或是数字签名等用途。</p>
+
+<ol>
+  <li>
+    <h4 id="解密">解密</h4>
+    <p>复制密码到该网站解密：<a href="https://www.somd5.com/" class="xia">md5密码解密</a></p>
+  </li>
+  <li>
+    <h4 id="加密--所需jar包commons-codecjar">加密  所需jar包：commons-codec.jar</h4>
+    <ul>
+      <li>方法1
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  import org.apache.commons.codec.digest.DigestUtils;
+      public static String encryptToMD5(String  str){
+          //str待加密的字符串
+          return DigestUtils.md5Hex(str);
+      } 
+</code></pre></div>        </div>
+      </li>
+      <li>方法2
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  public static String  encryptToMD5(String  str){
+          //str待加密的字符串
+          String hexStr="";//加密后的16进制字符串
+          try{
+              //MessageDigest类为应用程序提供信息摘要算法的功能
+              MessageDigest md5=MessageDigest.getInstance("MD5");
+              //转换为MD5码
+              byte[] digest=md5.digest(str.getBytes("utf-8"));
+              hexStr=ByteUtils.toHexString(digest);
+          }catch(Exception e){
+              e.printStackTrace();
+          }
+          return hexStr;
+      }
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="java常用架包"><a href="https://pan.baidu.com/s/10SinC4ThymuXjgW5iSU0Rw" class="xia">java常用架包</a></h4>
+  </li>
+</ol>
+:ET

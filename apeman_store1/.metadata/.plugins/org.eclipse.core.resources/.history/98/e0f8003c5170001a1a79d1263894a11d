@@ -1,0 +1,13 @@
+package com.apeman1024.Isql;
+
+import com.apeman1024.entity.User;
+
+public interface IHome {
+
+	public boolean register(User user);
+
+	public User login(User user);
+
+	public User perfect(User user);
+
+}

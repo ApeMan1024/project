@@ -1,0 +1,206 @@
+I"�<p>排序算法：交换排序（冒泡排序，快速排序），插入排序（直接插入排序，希尔排序），选择排序（简单选择排序，堆排序）</p>
+
+<p>冒泡排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.Arrays;
+	public class Paixu {
+		public static void main(String[] args) {
+				int []arr=new int[] {3,1,5,7,3,4,0,10,7,8,2};
+				System.out.println(Arrays.toString(arr));
+				bubbleSort(arr);
+				System.out.println(Arrays.toString(arr));
+		}
+
+		public static void bubbleSort(int[] arr) {
+			for (int i = 0; i &lt; arr.length - 1; i++) {
+				boolean bool = true;
+				for (int j = 1; j &lt;= arr.length - 1 - i; j++) {
+					if (arr[j-1] &gt; arr[j]) {
+						bool = false;
+						int temp = arr[j-1];
+						arr[j-1] = arr[j];
+						arr[j] = temp;
+					}
+				}
+				if (bool) {
+					break;
+				}
+			}
+
+		}
+	}
+</code></pre></div></div>
+<p>快速排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static void quictsort(int []arr,int i,int j) {
+	if(i&lt;j) {
+		int k=arr[i];
+		int low=i;
+		int hight=j;
+		while(low&lt;hight) {
+			while(low&lt;hight&amp;&amp;arr[hight]&gt;=k)hight--;
+			arr[low]=arr[hight];
+			while(low&lt;hight&amp;&amp;arr[low]&lt;=k)low++;
+			arr[hight]=arr[low];
+		}
+		arr[low]=k;
+		quictsort(arr, i,low-1);
+		quictsort(arr, low+1, j);
+	}
+    }
+</code></pre></div></div>
+
+<p>直接插入排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static void insertSort(int arr[]) {
+		for(int i=1;i&lt;arr.length;i++) {
+			if(arr[i]&lt;arr[i-1]) {
+				int k=arr[i];
+				int j=0;
+				for(j=i-1;j&gt;=0&amp;&amp;k&lt;arr[j];j--) {
+					arr[j+1]=arr[j];
+				}
+				arr[j+1]=k;
+			}
+		}
+    }
+</code></pre></div></div>
+
+<p>希尔排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	public static void shellSort(int []arr) {
+		for(int i=arr.length/2;i&gt;0;i/=2) {
+			
+			for(int j=i;j&lt;arr.length;j++) {
+				
+				for(int k=j-i;k&gt;=0;k-=i) {
+					
+					if(arr[k]&gt;arr[k+i]) {
+						int temp=arr[k];
+						arr[k]=arr[k+i];
+						arr[k+i]=temp;
+					}
+				}
+			}
+		}
+	}
+</code></pre></div></div>
+
+<p>简单选择排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	public static void selectSort(int arr[]) {
+		for(int i=0;i&lt;arr.length;i++) {
+			int min=i;
+			int j=0;
+			for(j=i+1;j&lt;arr.length;j++) {
+				if(arr[min]&gt;arr[j]){
+					min=j;
+				}
+			}
+			if(min!=i) {
+				int temp=arr[i];
+		
+				arr[i]=arr[min];
+				
+				arr[min]=temp;
+			}
+		}
+	}
+</code></pre></div></div>
+
+<p>归并排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	public static void marge(int []arr ,int low ,int meddle,int high) {
+		int[] arr1=new int[high-low+1];
+		int i=low;
+		int j=meddle+1;
+		int index=0;
+		while(i&lt;=meddle&amp;&amp;j&lt;=high) {
+			if(arr[i]&lt;arr[j]) {
+				arr1[index]=arr[i];
+				index++;
+				i++;
+			}else {
+				arr1[index]=arr[j];
+				index++;
+				j++;
+			}
+		}
+		while(i&lt;=meddle) {
+			arr1[index]=arr[i];
+			index++;
+			i++;
+		}
+		while(j&lt;=high) {
+			arr1[index]=arr[j];
+			index++;
+			j++;
+		}
+		for(int k=0;k&lt;arr1.length;k++) {
+			arr[k+low]=arr1[k];
+		}
+	}
+	
+	public static void margeSort(int []arr,int low,int high) {
+		int temp=(low+high)/2;
+		if(low&lt;high) {
+			margeSort(arr, low, temp);
+			margeSort(arr, temp+1, high);
+			marge(arr, low, temp, high);
+		}
+	
+	}	
+</code></pre></div></div>
+
+<p>基数排序：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.	public static void redixSort(int []arr) {
+		int max=Integer.MIN_VALUE;
+		for(int i=0;i&lt;arr.length;i++) {
+			if(arr[i]&gt;max) {
+				max=arr[i];
+			}
+		}
+		int n=(max+"").length();
+		int [][]temp=new int[10][arr.length];
+		int [] counts=new int[10];
+		for(int i=0,m=1;i&lt;n;i++,m*=10) {
+			for(int j=0;j&lt;arr.length;j++) {
+				int k=arr[j]/m%10;
+				temp[k][counts[k]++]=arr[j];
+			}
+			int index=0;
+			for(int d=0;d&lt;counts.length;d++) {
+				if(counts[d]!=0) {
+					for(int l=0;l&lt;counts[d];l++) {
+						arr[index++]=temp[d][l];
+					}
+					counts[d]=0;
+				}
+				
+			}
+		}
+		
+	}
+2.	public static void redixQueueSort(int []arr) {
+		int max=Integer.MIN_VALUE;
+		for(int i=0;i&lt;arr.length;i++) {
+			if(arr[i]&gt;max) {
+				max=arr[i];
+			}
+		}
+		int n=(max+"").length();
+		LinkedList&lt;LinkedList&lt;Integer&gt;&gt; linkedList=new LinkedList&lt;LinkedList&lt;Integer&gt;&gt;();
+		for(int i=0;i&lt;10;i++) {
+			LinkedList&lt;Integer&gt; linkedList1=new LinkedList&lt;Integer&gt;();
+			linkedList.add(linkedList1);
+		}
+		for(int i=0,m=1;i&lt;n;i++,m*=10) {
+			for(int j=0;j&lt;arr.length;j++) {
+				int k=arr[j]/m%10;
+				linkedList.get(k).add(arr[j]);
+			}
+			int index=0;
+			for(LinkedList&lt;Integer&gt;linkedList2:linkedList) {
+				while(!linkedList2.isEmpty()) {
+					arr[index++]=linkedList2.poll();
+				}
+			}
+		}
+		
+	}
+</code></pre></div></div>
+:ET

@@ -1,0 +1,579 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  overflow-x: hidden;
+  min-width: 1400px;
+}
+.left {
+  float: left;
+  width: 320px;
+  background: url(../images/admin.jpg) no-repeat;
+  background-size: 100% 100%;
+  height: 720px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.left .tao {
+  width: 320px;
+  height: 120px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #999;
+}
+.left .tao .images {
+  display: inline-block;
+  width: 120px;
+  vertical-align: top;
+}
+.left .tao .images img {
+  width: inherit;
+  vertical-align: top;
+}
+.left .tao ul {
+  display: inline-block;
+  list-style: none;
+}
+.left .tao ul li {
+  width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 40px;
+}
+.left .tao ul li span:nth-child(1) {
+  display: inline-block;
+  width: 60px;
+  text-align-last: justify;
+  text-align: justify;
+  text-justify: distribute-all-lines;
+}
+.left .ul ul {
+  list-style: none;
+}
+.left .ul ul li {
+  line-height: 50px;
+  border-bottom: 1px solid #ccc;
+  transition: all 0.5s;
+}
+.left .ul ul li span {
+  font-size: 20px;
+}
+.left .ul ul li span a {
+  text-decoration: none;
+  color: #000;
+}
+.left .ul ul li:hover {
+  box-shadow: 1px 1px 8px #ccc;
+}
+.right {
+  float: left;
+  width: calc(100% - 322px);
+  background: url("../images/right.jpg") no-repeat;
+  background-size: 100% 100%;
+  height: 720px;
+  overflow: hidden;
+}
+.right .box {
+  display: inline-block;
+  background: #F1F0EE;
+  padding: 10px;
+  margin-left: 480px;
+  margin-top: 240px;
+  border-radius: 5px;
+}
+.right .box p {
+  line-height: 40px;
+}
+.right .box p label {
+  display: inline-block;
+  width: 80px;
+  line-height: 25px;
+  text-align-last: justify;
+  text-align: justify;
+  text-justify: distribute-all-lines;
+}
+.right .box p input {
+  line-height: 25px;
+}
+.right .box p input[type='submit'] {
+  width: 240px;
+  height: 30px;
+  color: #fff;
+  background: red;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
+.right .box1 {
+  background: #F1F0EE;
+  padding: 10px;
+  height: 100%;
+}
+.right .box1 ul {
+  list-style: none;
+  display: inline-block;
+}
+.right .box1 ul li {
+  display: inline-block;
+  padding: 2px;
+}
+.right .box1 ul li label {
+  display: inline-block;
+  width: 70px;
+  line-height: 20px;
+}
+.right .box1 ul li input {
+  width: 130px;
+  line-height: 20px;
+}
+.right .box1 ul li > span {
+  background: rgba(0, 0, 0, 0.2);
+}
+.right .box1 ul li .tu {
+  display: inline-block;
+  width: 160px;
+  height: 150px;
+  background: #999;
+  position: relative;
+  margin-top: 10px;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+.right .box1 ul li .tu input {
+  width: 160px;
+  height: 150px;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+}
+.right .box1 ul li .tu > span {
+  position: absolute;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 70px;
+  text-align: center;
+  margin: -40px 0 0 -40px;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+}
+.right .box1 ul li .tu img {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  z-index: 1;
+}
+.right .box1 .jie {
+  width: 520px;
+  height: 412px;
+  border: 1px solid #999;
+  overflow: hidden;
+}
+.right .box1 .jie p {
+  border-bottom: 1px solid #999;
+  line-height: 30px;
+  font-weight: bold;
+}
+.right .box1 .jie .imag {
+  padding: 10px;
+}
+.right .box1 .jie .imag .im1 {
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  background: #999;
+  position: relative;
+  vertical-align: top;
+}
+.right .box1 .jie .imag .im1 input {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  opacity: 0;
+}
+.right .box1 .jie .imag .im1 span {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 120px;
+  text-align: center;
+}
+.right .box1 .jie .imag ul {
+  list-style: none;
+}
+.right .box1 .jie .imag ul li {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+.right .box1 .jie .imag ul li img {
+  height: inherit;
+  width: inherit;
+  vertical-align: top;
+}
+.right .box1 .jie .imag ul li .qu {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  text-align: center;
+  line-height: 20px;
+}
+.right .box1 button {
+  width: 300px;
+  line-height: 30px;
+  border: none;
+  background: red;
+  margin-top: 10px;
+  color: #fff;
+  letter-spacing: 1em;
+}
+.right .box2 > p {
+  background: #F1F0EE;
+  text-align: center;
+  line-height: 30px;
+  padding: 10px;
+}
+.right .box2 > p input {
+  vertical-align: top;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  height: 24px;
+}
+.right .box2 > p input#te {
+  width: 120px;
+  border: 3px solid #ccc;
+}
+.right .box2 > p input[type='time'] {
+  border: 3px solid #ccc;
+}
+.right .box2 > p button {
+  width: 270px;
+  background: red;
+  border: none;
+  line-height: 30px;
+  color: #fff;
+  letter-spacing: 1em;
+}
+.right .box2 > p label {
+  line-height: 20px;
+  display: inline-block;
+  background: red;
+  padding: 5px;
+}
+.right .host {
+  margin: 10px 0;
+}
+.right .host > ul {
+  min-height: 510px;
+}
+.right .host > ul:nth-child(1) {
+  list-style: none;
+}
+.right .host > ul:nth-child(1) > li {
+  border: 1px solid #ccc;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) {
+  list-style: none;
+  display: inline-block;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li {
+  display: inline-block;
+  vertical-align: top;
+  height: 100px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li img {
+  width: 100px;
+  height: inherit;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(1) {
+  line-height: 100px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) {
+  width: 200px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  margin-top: 26px;
+  cursor: pointer;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p > span {
+  line-height: 20px;
+  display: inline-block;
+  background: red;
+  border-radius: 2px;
+  padding: 0 2px;
+  font-size: 10px;
+  margin-right: 5px;
+  color: #fff;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p a {
+  text-decoration: none;
+  color: #000;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p a:hover {
+  color: red;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(3) {
+  width: 200px;
+  margin-left: 28px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(3) p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  margin-top: 26px;
+  text-align: center;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li.li1 {
+  line-height: 100px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(1) li.li1 input {
+  line-height: 20px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(2) {
+  list-style: none;
+  float: right;
+  margin-right: 10px;
+  line-height: 100px;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(2) li {
+  display: inline-block;
+  margin: 0 25px;
+  width: 100px;
+  text-align: center;
+}
+.right .host > ul:nth-child(1) > li ul:nth-child(2) li button {
+  width: 100px;
+  background: red;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  line-height: 30px;
+  color: #fff;
+}
+.right .host .left1 {
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: url(../images/zuo.png) no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.right .host .right1 {
+  float: right;
+  width: 50px;
+  height: 50px;
+  background: url(../images/you.png) no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.right .lie {
+  min-height: 660px;
+}
+.right .lie ul {
+  list-style: none;
+}
+.right .lie ul li {
+  border: 1px solid #ccc;
+  padding: 5px;
+  height: 120px;
+}
+.right .lie ul li p {
+  display: inline-block;
+}
+.right .lie ul li p:nth-of-type(1) {
+  text-align: center;
+}
+.right .lie ul li p:nth-of-type(1) img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+}
+.right .lie ul li p:nth-of-type(2) {
+  vertical-align: top;
+  margin: 20px;
+  width: 640px;
+}
+.right .lie ul li p:nth-of-type(2) > span {
+  display: block;
+}
+.right .lie ul li p:nth-of-type(2) > span:nth-of-type(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+.right .lie ul li .cao {
+  vertical-align: top;
+  line-height: 120px;
+  float: right;
+  margin-right: 10px;
+}
+.right .lie ul li .cao button {
+  width: 100px;
+  line-height: 30px;
+  background: red;
+  border: none;
+  color: #fff;
+}
+.right .lie .left1 {
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: url(../images/zuo.png) no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.right .lie .right1 {
+  float: right;
+  width: 50px;
+  height: 50px;
+  background: url(../images/you.png) no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.right .host1 > ul {
+  min-height: 612px;
+}
+.right .host1 > ul:nth-child(1) {
+  list-style: none;
+}
+.right .host1 > ul:nth-child(1) > li {
+  border: 1px solid #ccc;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) {
+  list-style: none;
+  display: inline-block;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li {
+  display: inline-block;
+  vertical-align: top;
+  height: 100px;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li img {
+  width: 100px;
+  height: inherit;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(1) {
+  line-height: 100px;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) {
+  width: 200px;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  margin-top: 26px;
+  cursor: pointer;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p > span {
+  line-height: 20px;
+  display: inline-block;
+  background: red;
+  border-radius: 2px;
+  padding: 0 2px;
+  font-size: 10px;
+  margin-right: 5px;
+  color: #fff;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p a {
+  text-decoration: none;
+  color: #000;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(2) p a:hover {
+  color: red;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(3) {
+  width: 230px;
+  margin-left: 28px;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(1) li:nth-of-type(3) p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  margin-top: 26px;
+  text-align: center;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(2) {
+  list-style: none;
+  float: right;
+  margin-right: 10px;
+  line-height: 100px;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(2) li {
+  display: inline-block;
+  margin: 0 25px;
+  width: 100px;
+  text-align: center;
+}
+.right .host1 > ul:nth-child(1) > li ul:nth-child(2) li button {
+  width: 100px;
+  line-height: 30px;
+  background: red;
+  border: none;
+  color: #fff;
+}
+.right .host1 .left1 {
+  float: left;
+  width: 50px;
+  height: 50px;
+  background: url(../images/zuo.png) no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.right .host1 .right1 {
+  float: right;
+  width: 50px;
+  height: 50px;
+  background: url(../images/you.png) no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}

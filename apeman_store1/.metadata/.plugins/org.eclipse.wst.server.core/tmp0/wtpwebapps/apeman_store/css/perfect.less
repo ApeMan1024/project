@@ -1,0 +1,101 @@
+@import "/css/css-1/hun.css";
+@import "/css/css-1/head.css";
+html,body{
+    background:url("/images/index/lun2.jpg") no-repeat;
+    background-size: 100% 100%;
+    height:100%;
+    overflow: hidden;
+}
+main{
+    overflow: auto;
+    >div{
+        display: inline-block;
+        background:#fff;
+        padding:10px;
+        width:500px;
+        box-shadow: 1px 1px 8px #ccc;
+        margin:10px 470px;
+        ul{
+            list-style: none;
+            li{
+                margin:30px 0;
+                text-align: center;
+                label{
+                    display: inline-block;
+                    width:95px;
+                    line-height: 25px;
+                    text-align-last:justify;
+                    text-align:justify;
+                    text-justify:distribute-all-lines; 
+                   
+                }
+                input{
+                    width:200px;
+                    height:25px;
+                }
+                >span{
+                    &:nth-of-type(1){
+                        width:200px;
+                        display: inline-block;
+                        background:#999;
+                    }
+                }
+                button{
+                    width:296px;
+                    height:30px;
+                    background:red;
+                    margin:0px;
+                    padding:0px;
+                    border:none;
+                    font-weight: bold;
+                    letter-spacing: 1em;
+                    color:#fff;
+                }
+                div{
+                    display: inline-block;
+                    width:100px;
+                    height:100px;
+                    position: relative;
+                    top:1px;
+                    position: relative;
+                    border:1px solid #ccc;
+                    background:#ddd;
+                    input{
+                        width:100px;
+                        height:100px;
+                        position: absolute;
+                        left:0px;
+                        top:0px;
+                        margin:0px;
+                        padding:0px;
+                        border: none;
+                        opacity: 0;
+                        z-index: 3;
+                    }
+                    span{
+                        font-weight: bold;
+                        color:#fff;
+                        font-size: 2em;
+                        height:50px;
+                        width:50px;
+                        position: absolute;
+                        left:0px;
+                        top:0px;
+                        margin:-25px 0 0 -25px;
+                        left:50%;
+                        top:50%;
+                        z-index: 0;
+                    }
+                    img{
+                        width:inherit;
+                        height:inherit;
+                        position: absolute;
+                        z-index: 1;
+                        left:0px;
+                        top:0px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+package apeman1024;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Zuo1 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int year = sc.nextInt();
+		int mouth=sc.nextInt();
+		int day=sc.nextInt();
+		
+		pd(year, mouth, day);
+	}
+	public static void pd(int year,int mouth,int day) {
+		if(year<1912||year>2050) {
+			System.out.println("year越界异常");
+			return;
+		}else if(mouth<1||mouth>12) {
+			System.out.println("mouth越界异常");
+			return ;
+		}else if(day<1||day>31){
+			System.out.println("day越界异常");
+			return ;
+		}
+		
+		int tian = tian(mouth, year);
+		if(mouth==2) {
+			//2月需要进行闰年判断
+			if(day>28) {
+				if(!leap(year)) {
+					System.out.println("数据错误");
+					return;
+				}
+				else {
+					if(day>29) {
+						System.out.println("数据错误");
+						return;
+					}
+				}
+			}
+		}
+		
+		if(day+1>tian) {
+			System.out.println((mouth+1)+"."+1);
+		}else {
+			System.out.println(mouth+"."+(day+1));
+		}
+	
+	}
+	/**
+	 * 闰年判断
+	 * @param year
+	 * @return
+	 */
+	public static boolean leap(int year) {
+		if(year%4==0&&year%100!=0) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * 获取天数
+	 * @param mouth
+	 * @param year
+	 * @return
+	 */
+	public static int tian(int mouth,int year) {
+		int[] arr1= {1,3,5,7,8,10,12};
+		if(Arrays.binarySearch(arr1,mouth)>=0) {
+			return 31;
+		}else {
+			if(mouth==2) {
+				if (leap(year)) {
+					return 29;
+				}else {
+					return 28;
+				}
+			}
+			return 30;
+		}
+	}
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.IShopping">
+	<select id="getCar" resultType="Car">
+		select * from car where
+		username=#{username}
+	</select>
+
+	<update id="setCar">
+		update Car set bool=#{bool} where id=#{id} and
+		username=#{username}
+	</update>
+
+	<update id="setBool">
+		update Car set bool=#{bool} where
+		username=#{username}
+	</update>
+
+	<update id="setCar1">
+		update Car set num=#{num} where id=#{id} and
+		username=#{username}
+	</update>
+
+	<delete id="delCar">
+		delete from car where username=#{username}
+		<if test="id != null">
+			and id=#{id}
+		</if>
+	</delete>
+	
+	<select id="getNum" resultType="int">
+		select count(*) count from car where username=#{username}
+	</select>
+</mapper>

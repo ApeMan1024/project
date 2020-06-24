@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>猿人博客</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <script src="/public/lib/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/index.css">
+    <script src="/public/js/snowy.js"></script>
+    <script src="/public/js/script.js"></script>
+</head>
+
+<body>
+    <div class="snow-container"></div>
+    <header class="navbar  nav_h" role="navigation">
+        <div class="container_nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">猿人博客</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html">网站首页</a></li>
+                    <li><a href="/node/2020/05/27/node.html">文章阅读</a></li>
+                    <li><a href="#">设计心得</a></li>
+                    <li><a href="#">给我留言</a></li>
+                    <li><a href="javascript:;" class="glyphicon glyphicon-search" id="ser"></a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <article>
+        <div id="art_top">
+            <p id="art_p1">
+                <input type="text" name="text" id="text"><input type="button" value="搜索" id="btn_btn">
+            </p>
+            <span class="glyphicon glyphicon-remove" id="span_g"></span>
+        </div>
+        <div class="blo_left">
+            <div class="lbox">
+                <div id="myCarousel" class="carousel slide lbox_1" data-ride="carousel" data-interval="2000">
+                    <!-- 轮播（Carousel）指标 -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                    </ol>
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="/public/images/lun1.jpg" alt="lun1">
+                        </div>
+                        <div class="item">
+                            <img src="/public/images/lun2.jpg" alt="lun2">
+                        </div>
+                        <div class="item">
+                            <img src="/public/images/lun3.jpg" alt="lun3">
+                        </div>
+                        <div class="item">
+                            <img src="/public/images/lun4.jpg" alt="lun4">
+                        </div>
+                        <div class="item">
+                            <img src="/public/images/lun5.jpg" alt="lun5">
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="left carousel-control " href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left ca1" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control ca2" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="lbox_2">
+                    <div class="lbox_r">
+                        <div class="l_top">
+                            
+                            <a href="/node/2020/05/27/node.html">
+                                <img src="/public/images/wen1.jpg" alt="wen1">
+                                <p>node基本语法</p>
+                            </a>
+                        </div>
+                        <div class="l_bu">
+                            
+                            <a href="/react/2020/05/15/react_basics.html">
+                                <img src="/public/images/wen2.jpg" alt="wen2">
+                                <p>React基础学习</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lbox_3">
+                    <div class="lbox_3t">
+                        <ul>
+                            <li class="opt">个人博客</li>
+                        </ul>
+
+                    </div>
+                    <div class="lbox_3b">
+                        <div class="b_left">
+                            <ul>
+                                
+                                <li>
+                                    <a href="/css/2020/05/15/less_css.html">
+                                        <img src="/public/images/wen3.jpg" alt="wen2">
+                                        <span>less与css</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="/vue/2020/01/06/vue3.html">
+                                        <img src="/public/images/wen4.jpg" alt="wen4">
+                                        <span>vue组件</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="b_right"><ul>
+    <li class="ac">
+    
+        <i>1</i>
+        <a href="/vue/2020/01/06/vue1.html">vue修饰符</a><p>在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。为了解决这个问题,Vue.js 为 v-on 提供了事件修饰符。</p>
+</li>
+    <li>
+    
+        <i>2</i>
+        <a href="/tips/2019/12/28/tips.html">小知识大世界</a><p>小知识日积月累就是大知识，程序员的道路越走越踏实</p>
+</li>
+    <li>
+    
+        <i>3</i>
+        <a href="/git/2019/12/28/git_fen.html">git分支</a><p>几乎每一种版本控制系统都以某种形式支持分支。使用分支意味着你可以从开发主线上分离开来，然后在不影响主线的同时继续工作。有人把 Git 的分支模型称为必杀技特性，而正是因为它，将 Git 从版本控制系统家族里区分出来</p>
+</li>
+    <li>
+    
+        <i>4</i>
+        <a href="/css3/2019/12/28/css3_attr1.html">css3之常用的属性下篇</a><p>css3中animation动画和transition过渡</p>
+</li>
+    <li>
+    
+        <i>5</i>
+        <a href="/css3/2019/12/28/css3_attr.html">css3之常用的属性上篇</a><p>css3中3d旋转和2d旋转</p>
+</li></ul>
+</div>
+                    </div>
+                </div>
+                <div class="lbox_4">
+                    <div class="box_1">
+                        <ul>
+                            <li>特别推荐</li>
+                        </ul>
+                    </div>
+                    <div class="box_2">
+                        <ul class="clearfix">
+                            
+                            
+                            <li>
+                                <a href="/tips/2019/12/28/tips.html" class="a1">
+                                    <div class="img_1">
+                                        <img src="/public/images/wen1.jpg" alt="wen1">
+                                    </div>
+                                </a>
+                                <b>小知识大世界</b>
+                                <span class="span1">小知识日积月累就是大知识，程序员的道路越走越踏实
+</span>
+                                <a href="/tips/2019/12/28/tips.html" class="a2">
+                                    <i>+</i>&nbsp;<span class="span2">文章阅读</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="/git/2019/12/28/git_fen.html" class="a1">
+                                    <div class="img_1">
+                                        <img src="/public/images/wen2.jpg" alt="wen2">
+                                    </div>
+                                </a>
+                                <b>git分支</b>
+                                <span class="span1">几乎每一种版本控制系统都以某种形式支持分支。使用分支意味着你可以从开发主线上分离开来，然后在不影响主线的同时继续工作。有人把 Git 的分支模型称为必杀技特性，而正是因为它，将 Git 从版本控制系统家族里区分出来
+</span>
+                                <a href="/git/2019/12/28/git_fen.html" class="a2">
+                                    <i>+</i>&nbsp;<span class="span2">文章阅读</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="/css3/2019/12/28/css3_attr.html" class="a1">
+                                    <div class="img_1">
+                                        <img src="/public/images/wen3.jpg" alt="wen3">
+                                    </div>
+                                </a>
+                                <b>css3之常用的属性上篇</b>
+                                <span class="span1">css3中3d旋转和2d旋转
+</span>
+                                <a href="/css3/2019/12/28/css3_attr.html" class="a2">
+                                    <i>+</i>&nbsp;<span class="span2">文章阅读</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="/css3/2019/12/27/css3_flex.html" class="a1">
+                                    <div class="img_1">
+                                        <img src="/public/images/wen4.jpg" alt="wen4">
+                                    </div>
+                                </a>
+                                <b>css3之flex布局</b>
+                                <span class="span1">弹性盒子是 CSS3 的一种新的布局模式。CSS3 弹性盒（ Flexible Box 或 flexbox），是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式。引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间。
+</span>
+                                <a href="/css3/2019/12/27/css3_flex.html" class="a2">
+                                    <i>+</i>&nbsp;<span class="span2">文章阅读</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="/data_structure/2019/12/27/sort_algorithm.html" class="a1">
+                                    <div class="img_1">
+                                        <img src="/public/images/wen5.jpg" alt="wen5">
+                                    </div>
+                                </a>
+                                <b>java排序算法</b>
+                                <span class="span1">排序算法：交换排序（冒泡排序，快速排序），插入排序（直接插入排序，希尔排序），选择排序（简单选择排序，堆排序）
+</span>
+                                <a href="/data_structure/2019/12/27/sort_algorithm.html" class="a2">
+                                    <i>+</i>&nbsp;<span class="span2">文章阅读</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="/javascript/2019/12/27/carousel.html" class="a1">
+                                    <div class="img_1">
+                                        <img src="/public/images/wen6.jpg" alt="wen6">
+                                    </div>
+                                </a>
+                                <b>三种实现轮播的方式</b>
+                                <span class="span1">三种实现轮播的方式：animation，bootstrap，原生js
+</span>
+                                <a href="/javascript/2019/12/27/carousel.html" class="a2">
+                                    <i>+</i>&nbsp;<span class="span2">文章阅读</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="lbox_5">
+                    
+                    <a class="p5_1" title="上一页" href="/"></a>
+                    
+                    
+                    <a class="p5_2" title="下一页" href="/page3"></a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="blo_right">
+            <div class="head">
+                <img src="/public/images/lbox4_1.jpg" alt="">
+                <div class="port"></div>
+                <b>专注程序开发</b>
+                <span>一匹真正的好马，即使在鞭子的影子下，也能飞奔</span>
+            </div>
+            <div class="lb_1">
+                <h2><span class="glyphicon glyphicon-time"></span>流行语</h2>
+                <div id="tagbox">
+                    <a class="yellow" href="javascript:;"
+                        style="left: 80.9797px; top: 174.342px; font-size: 13px; opacity: 0.273696; z-index: 0;">2019</a>
+                    <a href="javascript:;" class="tag1"
+                        style="left: 78.553px; top: 196.172px; font-size: 14px; opacity: 0.517649; z-index: 1;">程序员</a>
+                    <a class="yellow" href="javascript:;"
+                        style="left: 40.4355px; top: 161.515px; font-size: 14px; opacity: 0.626099; z-index: 2;">女神</a>
+                    <a href="javascript:;" class="tag2"
+                        style="left: 36.1147px; top: 123.912px; font-size: 14px; opacity: 0.390843; z-index: 3;">前方高能</a>
+                    <a class="red" href="javascript:;"
+                        style="left: 70.562px; top: 119.767px; font-size: 13px; opacity: 0.187188; z-index: 4;">勤奋</a>
+                    <a class="blue" href="javascript:;"
+                        style="left: 114.959px; top: 148.288px; font-size: 13px; opacity: 0.140938; z-index: 5;">爱生活</a>
+                    <a href="javascript:;"
+                        style="left: 141.136px; top: 186.532px; font-size: 13px; opacity: 0.251736; z-index: 6;">幽默</a>
+                    <a class="blue" href="javascript:;"
+                        style="left: 137.352px; top: 210.419px; font-size: 14px; opacity: 0.522635; z-index: 7;">随缘</a>
+                    <a href="javascript:;"
+                        style="left: 106.375px; top: 205.706px; font-size: 15px; opacity: 0.91178; z-index: 8;">2020</a>
+                    <a href="javascript:;" class="tag1"
+                        style="left: 66.0671px; top: 174.31px; font-size: 16px; opacity: 1.1882; z-index: 9;">风景</a>
+                    <a class="blue" href="javascript:;"
+                        style="left: 34.4277px; top: 129.668px; font-size: 16px; opacity: 1.0751; z-index: 10;">自由</a>
+                    <a class="blue" href="javascript:;"
+                        style="left: 27.2055px; top: 89.4252px; font-size: 15px; opacity: 0.716141; z-index: 11;">旅行</a>
+                    <a class="yellow" href="javascript:;"
+                        style="left: 46.0543px; top: 67.1969px; font-size: 14px; opacity: 0.394097; z-index: 12;">修行</a>
+                    <a class="blue" href="javascript:;"
+                        style="left: 84.4911px; top: 68.5243px; font-size: 13px; opacity: 0.197805; z-index: 13;">爱玩</a>
+                    <a href="javascript:;" class="tag1"
+                        style="left: 130.774px; top: 92.868px; font-size: 13px; opacity: 0.119138; z-index: 14;">梦想</a>
+                    <a class="red" href="javascript:;"
+                        style="left: 169.265px; top: 129.46px; font-size: 13px; opacity: 0.145474; z-index: 15;">知识</a><a
+                        class="blue" href="javascript:;"
+                        style="left: 181.29px; top: 167.122px; font-size: 13px; opacity: 0.284124; z-index: 16;">努力</a>
+                    <a href="javascript:;"
+                        style="left: 189.81px; top: 193.348px; font-size: 14px; opacity: 0.565866; z-index: 17;">时间</a>
+                    <a class="tag2" href="javascript:;"
+                        style="left: 166.702px; top: 198.46px; font-size: 16px; opacity: 1.02697; z-index: 18;">心态</a><a
+                        href="javascript:;"
+                        style="left: 129.033px; top: 180.924px; font-size: 18px; opacity: 1.6035; z-index: 19;">人生</a><a
+                        class="red" href="javascript:;"
+                        style="left: 80.1744px; top: 144.342px; font-size: 19px; opacity: 1.9342; z-index: 20;">珍惜</a><a
+                        href="javascript:;"
+                        style="left: 59.9858px; top: 99.6203px; font-size: 18px; opacity: 1.67386; z-index: 21;">朋友</a><a
+                        class="yellow" href="javascript:;"
+                        style="left: 50.4725px; top: 58.2367px; font-size: 16px; opacity: 1.11821; z-index: 22;">心情</a><a
+                        class="yellow" href="javascript:;"
+                        style="left: 65.2608px; top: 32.3512px; font-size: 14px; opacity: 0.653248; z-index: 23;">浪漫</a>
+                </div>
+
+            </div>
+        </div>
+    </article>
+    
+    <footer>
+        <p>
+            <span>博客已经上线了:</span><span class="spa" id="day">000</span><span>天</span><span class="spa"
+                id="hour">00</span><span>时</span>
+            <span class="spa" id="branch">00</span><span>分</span><span class="spa" id="second">00</span><span>秒</span>
+        </p>
+    </footer>
+    <div id="tab">
+        <table>
+            
+            <tr>
+                <td>1</td>
+                <td>node基本语法</td>
+                <td>猿人</td>
+                <td>2020-05-27</td>
+                
+                <td>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。
+Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。
+Node.js 的包管理器 npm，是全球最大的开源库生态系统。
+</td>
+                
+                <td>node</td>
+                <td>/node/2020/05/27/node.html</td>
+            </tr>
+            
+            <tr>
+                <td>2</td>
+                <td>React基础学习</td>
+                <td>猿人</td>
+                <td>2020-05-15</td>
+                
+                <td>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。做出来以后，发现这套东西很好用，就在2013年5月开源了
+</td>
+                
+                <td>React</td>
+                <td>/react/2020/05/15/react_basics.html</td>
+            </tr>
+            
+            <tr>
+                <td>3</td>
+                <td>less与css</td>
+                <td>猿人</td>
+                <td>2020-05-15</td>
+                
+                <td>Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展。Less 可以运行在 Node 或浏览器端
+</td>
+                
+                <td>css</td>
+                <td>/css/2020/05/15/less_css.html</td>
+            </tr>
+            
+            <tr>
+                <td>4</td>
+                <td>vue组件</td>
+                <td>程序猿</td>
+                <td>2020-01-06</td>
+                
+                <td>组件是可复用的 Vue 实例，且带有一个名字,因为组件是可复用的 Vue 实例，所以它们与 new Vue 接收相同的选项，例如 data、computed、watch、methods 以及生命周期钩子等。仅有的例外是像 el 这样根实例特有的选项。
+</td>
+                
+                <td>vue</td>
+                <td>/vue/2020/01/06/vue3.html</td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>vue自定义指令</td>
+                <td>程序猿</td>
+                <td>2020-01-06</td>
+                
+                <td>除了核心功能默认内置的指令 (v-model 和 v-show)，Vue 也允许注册自定义指令。注意，在 Vue2.0 中，代码复用和抽象的主要形式是组件。然而，有的情况下，你仍然需要对普通 DOM 元素进行底层操作，这时候就会用到自定义指令
+</td>
+                
+                <td>vue</td>
+                <td>/vue/2020/01/06/vue2.html</td>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>vue修饰符</td>
+                <td>程序猿</td>
+                <td>2020-01-06</td>
+                
+                <td>在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。为了解决这个问题,Vue.js 为 v-on 提供了事件修饰符。
+</td>
+                
+                <td>vue</td>
+                <td>/vue/2020/01/06/vue1.html</td>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>小知识大世界</td>
+                <td>程序猿</td>
+                <td>2019-12-28</td>
+                
+                <td>小知识日积月累就是大知识，程序员的道路越走越踏实
+</td>
+                
+                <td>tips</td>
+                <td>/tips/2019/12/28/tips.html</td>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>git分支</td>
+                <td>程序猿</td>
+                <td>2019-12-28</td>
+                
+                <td>几乎每一种版本控制系统都以某种形式支持分支。使用分支意味着你可以从开发主线上分离开来，然后在不影响主线的同时继续工作。有人把 Git 的分支模型称为必杀技特性，而正是因为它，将 Git 从版本控制系统家族里区分出来
+</td>
+                
+                <td>git</td>
+                <td>/git/2019/12/28/git_fen.html</td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>css3之常用的属性下篇</td>
+                <td>程序猿</td>
+                <td>2019-12-28</td>
+                
+                <td>css3中animation动画和transition过渡
+</td>
+                
+                <td>css3</td>
+                <td>/css3/2019/12/28/css3_attr1.html</td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>css3之常用的属性上篇</td>
+                <td>程序猿</td>
+                <td>2019-12-28</td>
+                
+                <td>css3中3d旋转和2d旋转
+</td>
+                
+                <td>css3</td>
+                <td>/css3/2019/12/28/css3_attr.html</td>
+            </tr>
+            
+            <tr>
+                <td>11</td>
+                <td>java排序算法</td>
+                <td>猿人</td>
+                <td>2019-12-27</td>
+                
+                <td>排序算法：交换排序（冒泡排序，快速排序），插入排序（直接插入排序，希尔排序），选择排序（简单选择排序，堆排序）
+</td>
+                
+                <td>data_structure</td>
+                <td>/data_structure/2019/12/27/sort_algorithm.html</td>
+            </tr>
+            
+            <tr>
+                <td>12</td>
+                <td>java实现md5加密</td>
+                <td>猿人</td>
+                <td>2019-12-27</td>
+                
+                <td>MD5信息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。MD5由美国密码学家罗纳德·李维斯特（Ronald Linn Rivest）设计，于1992年公开，用以取代MD4算法。这套算法的程序在 RFC 1321 标准中被加以规范。1996年后该算法被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如SHA-2。2004年，证实MD5算法无法防止碰撞（collision），因此不适用于安全性认证，如SSL公开密钥认证或是数字签名等用途。
+</td>
+                
+                <td>java</td>
+                <td>/java/2019/12/27/md5encryption.html</td>
+            </tr>
+            
+            <tr>
+                <td>13</td>
+                <td>markdown基本语法</td>
+                <td>猿人</td>
+                <td>2019-12-27</td>
+                
+                <td>md语法直接兼容html标签 可以直接用html语法
+</td>
+                
+                <td>markdown</td>
+                <td>/markdown/2019/12/27/markdown2.html</td>
+            </tr>
+            
+            <tr>
+                <td>14</td>
+                <td>markdown语法之换行与段落</td>
+                <td>猿人</td>
+                <td>2019-12-27</td>
+                
+                <td>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。
+Markdown 能被使用来撰写电子书，如：Gitbook。
+当前许多网站都广泛使用 Markdown 来撰写帮助文档或是用于论坛上发表消息。例如：GitHub、简书、reddit、Diaspora、Stack Exchange、OpenStreetMap 、SourceForge等。
+</td>
+                
+                <td>markdown</td>
+                <td>/markdown/2019/12/27/markdown.html</td>
+            </tr>
+            
+            <tr>
+                <td>15</td>
+                <td>javaweb与javaEE的区别</td>
+                <td>程序猿</td>
+                <td>2019-12-27</td>
+                
+                <td>谈起JavaWeb，就想到另一个词：JavaEE。很多时候，这两个词是混用的，两者的概念并不能精确描述
+</td>
+                
+                <td>java</td>
+                <td>/java/2019/12/27/javaweb1.html</td>
+            </tr>
+            
+            <tr>
+                <td>16</td>
+                <td>github常用指令</td>
+                <td>程序猿</td>
+                <td>2019-12-27</td>
+                
+                <td>git init:创建仓库
+
+git clone url:克隆仓库,url(可以本地仓库的地址，可以远程仓库的地址)
+</td>
+                
+                <td>git</td>
+                <td>/git/2019/12/27/git2.html</td>
+            </tr>
+            
+            <tr>
+                <td>17</td>
+                <td>github上传文件</td>
+                <td>程序猿</td>
+                <td>2019-12-27</td>
+                
+                <td>GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，故名GitHub
+GitHub于2008年4月10日正式上线，除了Git代码仓库托管及基本的 Web管理界面以外，还提供了订阅、讨论组、文本渲染、在线文件编辑器、协作图谱（报表）、代码片段分享（Gist）等功能。目前，其注册用户已经超过350万，托管版本数量也是非常之多，其中不乏知名开源项目 Ruby on Rails、jQuery、python 等。
+</td>
+                
+                <td>git</td>
+                <td>/git/2019/12/27/git1.html</td>
+            </tr>
+            
+            <tr>
+                <td>18</td>
+                <td>css3之flex布局</td>
+                <td>程序猿</td>
+                <td>2019-12-27</td>
+                
+                <td>弹性盒子是 CSS3 的一种新的布局模式。CSS3 弹性盒（ Flexible Box 或 flexbox），是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式。引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间。
+</td>
+                
+                <td>css3</td>
+                <td>/css3/2019/12/27/css3_flex.html</td>
+            </tr>
+            
+            <tr>
+                <td>19</td>
+                <td>三种实现轮播的方式</td>
+                <td>程序猿</td>
+                <td>2019-12-27</td>
+                
+                <td>三种实现轮播的方式：animation，bootstrap，原生js
+</td>
+                
+                <td>javascript</td>
+                <td>/javascript/2019/12/27/carousel.html</td>
+            </tr>
+            
+        </table>
+    </div>
+</body>
+
+</html>

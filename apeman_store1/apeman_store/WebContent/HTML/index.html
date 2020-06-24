@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>电商网站后台登录系统</title>
+<script src="./lib/vue.js"></script>
+<script src="./lib/axios.js"></script>
+<link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="./lib/font.css">
+</head>
+<body>
+<div id="app">
+    <div class="login">
+        <form action="javascript:;" method="post" @submit.prevent="re">
+            <p class="test" v-if="bool">用户名或密码错误</p>
+            <div class="box">
+                <p><label for="username" class="iconfont icon-ren"></label><input type="text" placeholder="输入用户名" required  autocomplete="off" name="username" id="username" v-model="user.username"/></p>
+                <p><label for="password" class="iconfont icon-suo"></label><input type="password" placeholder="输入密码" required  autocomplete="off" name="password" id="password" v-model="user.password"/></p>
+                <p><button>登录</button></p>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="./js/index.js"></script>
+</body>
+</html>

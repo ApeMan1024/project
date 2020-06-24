@@ -1,0 +1,120 @@
+package com.apeman1024.web;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
+import org.json.JSONArray;
+
+import com.apeman1024.Isql.IAdministrator;
+import com.apeman1024.sql.Administrator;
+
+@WebServlet("/recharge2")
+public class Recharge2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+    public Recharge2() {
+        super();
+        
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<String, Object> map = getMap(request);	
+		IAdministrator ia=new Administrator();
+		boolean bool=ia.addCom(map);
+		response.getWriter().print(bool);
+		
+	}
+	
+	public Map<String, Object> getMap(HttpServletRequest request){
+		Map<String, Object>map=new HashMap<String, Object>();
+		String path=Index.class.getClassLoader().getResource("../../HTML/images").getPath();
+		File foder=new File(path);
+		if(!foder.exists()) {
+			foder.mkdirs();
+		}
+		DiskFileItemFactory factory=new DiskFileItemFactory();//创建工厂
+		ServletFileUpload upload=new ServletFileUpload(factory);
+		try {
+			List<FileItem> list = upload.parseRequest(request);
+			FileItem item1=null;
+			List<FileItem>arr1=new ArrayList<FileItem>();
+			for (FileItem item :list) {
+				if(!item.isFormField()) {
+					if(item.getFieldName().equals("src")) {
+						item1=item;
+					}else {
+						arr1.add(item);
+					}
+					
+				}
+				else {
+					map.put(item.getFieldName(), item.getString("utf-8"));
+				}
+				
+				
+			}
+			if(item1!=null) {
+				String name = item1.getName();
+				name=name.substring(name.lastIndexOf("\\")+1);
+				String suffixName = FilenameUtils.getExtension(name);
+				InputStream is=item1.getInputStream();
+				String pathname=path+"/"+map.get("id")+"."+suffixName;
+				File file= new File(pathname);
+				FileOutputStream fos=new FileOutputStream(file);
+				byte[] buffer=new byte[1024];
+				int len=0;
+				while((len=(is.read(buffer)))>-1) {
+					fos.write(buffer,0,len);
+				}
+				fos.close();
+				is.close();
+				map.put("src",request.getContextPath()+"/HTML/images/"+map.get("id")+"."+suffixName);
+			}
+			List<String>list2=new ArrayList<String>();
+			for(FileItem item : arr1) {
+				String name = item.getName();
+				InputStream is=item.getInputStream();
+				String pathname=path+"/"+name;
+				File file= new File(pathname);
+				FileOutputStream fos=new FileOutputStream(file);
+				byte[] buffer=new byte[1024];
+				int len=0;
+				while((len=(is.read(buffer)))>-1) {
+					fos.write(buffer,0,len);
+				}
+				fos.close();
+				is.close();
+				list2.add(request.getContextPath()+"/HTML/images/"+name);
+			}
+			map.put("list",new JSONArray(list2).toString());
+			return map;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

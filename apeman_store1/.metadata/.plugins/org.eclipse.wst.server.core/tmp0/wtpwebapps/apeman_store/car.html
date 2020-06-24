@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <script src="./lib/vue.js"></script>
+    <link rel="stylesheet" href="./lib/font.css">
+    <link rel="stylesheet" href="./css/car.css">
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <script src="./lib/axios.js"></script>
+    
+</head>
+<body>
+    <div id="app">
+        <header>
+            <ul>
+                <li v-for="item in arr" :key="item.id">
+                    <a :href="item.url">{{item.name}}</a>
+                </li>
+            </ul>
+        </header>
+        <nav>
+            <div id="logo">
+                <img :src="src" alt="猿人商城图标">
+                <a href="./index.html"></a>
+            </div>
+            <div id="search">
+                <ul>
+                    <li>
+                        <input type="text" placeholder="输入要查询的商品信息" v-model="sear"><button @click="search">搜索</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <template v-if="arr1.length!==0">
+                
+                <div class="less">
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="check" v-model="check"><span>全选</span>
+                        </li>
+                        <li>
+                            <span>商品</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span>单价</span></li>
+                        <li><span>数量</span></li>
+                        <li><span>小计</span></li>
+                        <li><span>操作</span></li>
+                    </ul>
+                </div>
+                <div class="host">
+                    <ul>
+                        <li v-for="(item,index) in arr1" :key="item.id">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" name="check1" id="check1" v-model="item.bool" @change="re(index)">
+                                </li>
+                                <li>
+                                    <img :src="item.src" :alt="item.nei">
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>猿人商城</span><a :href="'./details.html?id='+item.id"><span>{{item.name}}</span></a>
+                                    </p>
+                                </li>
+                            </ul>
+                            <ul>
+                                <template v-if="item.xian===0">
+                                    <li><span>￥{{item.qian}}</span></li>
+                                </template>
+                                <template v-else>
+                                    <li><span>￥{{item.xian}}</span></li>
+                                </template>
+                                <li><button @click="re1('-',index)">-</button><input type="text" name="shu"  v-model.number="item.num"><button  @click="re1('+',index)">+</button></li>
+                                <template v-if="item.xian===0">
+                                    <li><span>￥{{parseFloat(item.qian)*item.num}}</span></li>
+                                </template>
+                                <template v-else>
+                                    <li><span>￥{{parseFloat(item.xian)*item.num}}</span></li>
+                                </template>
+                                <li><a href="javascript:;" @click.prevent="re2(index)">删除</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="less1">
+                    <div class="left1">
+                        <p><input type="checkbox" name="check2" id="check2" v-model="check"><span>全选</span></p>
+                        <p><a href="javascript:;" @click.prevent="re3()">清理购物车</a></p>
+                    </div>
+                    <div class="right1">
+    
+                        <p><span>已选商品</span><span>{{num}}</span><span>件</span></p>
+                        <p><span>总价</span><span>￥{{qian}}</span></p>
+                        <p><a href="javascript:;" @click.prevent="re4">结算</a></p>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="kong"> 
+                    <img src="./images/index/kong.gif" alt="空购物车">
+                </div>
+            </template>
+        </main>
+    </div>
+    <script src="./js/js-1/click.js"></script>
+    <script src="./js/car.js"></script>
+</body>
+</html>

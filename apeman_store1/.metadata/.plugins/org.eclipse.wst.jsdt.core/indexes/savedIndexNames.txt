@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+E:\猿人\自学编程\项目\apeman_store1\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4283957741.index
+472456348.index
+2874297121.index
+3440665146.index
+889329116.index
+1209438606.index
+2686372138.index

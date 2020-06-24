@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.ICommodity">
+	<!-- 获取所有的商品类型 -->
+	<select id="getTitle" resultType="string">
+		select title from classify
+	</select>
+
+	<select id="getComs" resultType="Com">
+		select * from com where
+		title=#{title}
+	</select>
+
+	<select id="getDis" resultType="hashmap">
+		select * from discount
+		where data=#{data} and time in 
+		(select time from miao where data=#{data})
+	</select>
+
+	<!-- 获取排名靠前的商品 -->
+	<select id="getSales" resultType="hashmap">
+		select * from com order by
+		count desc
+	</select>
+
+	<select id="getSearch" resultType="hashmap">
+		select com.count as count,com.id as id,com.`name` as
+		name,com.qian as qian,com.src as src,com.title as title ,xian
+		from com left join discount on com.id=discount.id and
+		discount.data="2020-03-28" where com.name like '%${parameter}%' or com.title
+		like '%${parameter}%' or com.id=#{parameter}
+	</select>
+</mapper>

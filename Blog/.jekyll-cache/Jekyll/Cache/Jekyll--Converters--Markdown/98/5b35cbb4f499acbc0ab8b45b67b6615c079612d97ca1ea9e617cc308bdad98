@@ -1,0 +1,155 @@
+I"�<p>Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展。Less 可以运行在 Node 或浏览器端</p>
+
+<h3 id="css使用变量">css使用变量</h3>
+
+<ul>
+  <li>
+    <p>声明变量<code class="highlighter-rouge">--</code>关键字</p>
+  </li>
+  <li>
+    <p>使用变量<code class="highlighter-rouge">var()</code>函数</p>
+
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.box</span><span class="p">{</span>
+    <span class="py">--size</span><span class="p">:</span><span class="m">200px</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span><span class="n">var</span><span class="p">(</span><span class="n">--size</span><span class="p">);</span>
+    <span class="nl">height</span><span class="p">:</span><span class="n">var</span><span class="p">(</span><span class="n">--size</span><span class="p">);</span>
+    <span class="nl">background</span><span class="p">:</span><span class="m">#ccc</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="css变量的默认参数">css变量的默认参数</h3>
+
+<ul>
+  <li>
+    <p>使用<code class="highlighter-rouge">var()</code>函数的第二个参数，第二个参数是默认参数，当第一个参数没有定义时，使用默认参数</p>
+
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.box</span><span class="p">{</span>
+    <span class="py">--size</span><span class="p">:</span><span class="m">200px</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span><span class="n">var</span><span class="p">(</span><span class="n">--size</span><span class="p">);</span>
+    <span class="nl">height</span><span class="p">:</span><span class="n">var</span><span class="p">(</span><span class="n">--size</span><span class="p">);</span>
+    <span class="nl">background</span><span class="p">:</span><span class="m">#ccc</span><span class="p">;</span>
+    <span class="py">--color</span><span class="p">:</span><span class="m">#ff0</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span><span class="n">var</span><span class="p">(</span><span class="n">--color</span><span class="p">,</span><span class="no">red</span><span class="p">)</span><span class="c">/* 使用了默认参数 */</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="css中变量的拼接">css中变量的拼接</h3>
+
+<ul>
+  <li>
+    <p>在使用css变量时，一些特殊的字符需要添加双引号，比如中文</p>
+
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.div1</span><span class="nd">:after</span><span class="p">{</span>
+    <span class="py">--wid</span><span class="p">:</span><span class="m">2px</span><span class="p">;</span>
+    <span class="py">--sol</span><span class="p">:</span> <span class="nb">solid</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span><span class="n">var</span><span class="p">(</span><span class="n">--wid</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--sol</span><span class="p">)</span> <span class="m">#ccc</span><span class="p">;</span> 
+    <span class="py">--con</span><span class="p">:</span><span class="s1">"特殊的字符需要添加双引号"</span> <span class="p">;</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--con</span><span class="p">)</span><span class="s1">"伪元素"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="css变量的作用域">css变量的作用域</h3>
+
+<ul>
+  <li>变量只能在<code class="highlighter-rouge">{}</code>中定义，定义的变量元素的子级也能使用，而且变量具有提升的性能</li>
+</ul>
+
+<h3 id="css变量的计算">css变量的计算</h3>
+
+<ul>
+  <li>
+    <p>变量不能直接进行计算，必须结合<code class="highlighter-rouge">calc()</code>函数</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">calc()</code>函数支持<code class="highlighter-rouge">+, -, *, /, mod</code>运算</p>
+
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">width</span><span class="nd">:calc</span><span class="o">(</span><span class="nt">50</span><span class="o">%</span> <span class="nt">-</span> <span class="nt">200px</span><span class="o">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">calc()</code>中的参数必须都带单位，而且参数与运算符之间必须都有空格隔开，不然无法运算</p>
+  </li>
+</ul>
+
+<h3 id="less中的变量">less中的变量</h3>
+
+<ul>
+  <li>
+    <p>声明变量<code class="highlighter-rouge">@变量名</code>，使用变量<code class="highlighter-rouge">@变量名</code></p>
+
+    <pre><code class="language-less">@bgColor:aqua;
+.box{
+    width:100px;
+    height:100px;
+    background:@bgColor;
+}
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="less混合">less混合</h3>
+
+<ul>
+  <li>
+    <p>声明函数<code class="highlighter-rouge">.函数名(参数)</code></p>
+
+    <pre><code class="language-less">.setColor(@c){
+    background:@c;
+}
+.box{
+    width:100px;
+    height:100px;
+    .setColor(red)
+}
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="less中的嵌套">less中的嵌套</h3>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">&amp;</code>代表当前选择器的父级，<code class="highlighter-rouge">&gt;</code>选取直接子元素</p>
+
+    <pre><code class="language-less">.box{
+    &gt;p{
+        span{
+           color:red 
+        }
+        &amp;:nth-child(2){
+            span{
+                color:mediumblue;
+            }
+        }
+    }
+}
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="less中循环">less中循环</h3>
+
+<ul>
+  <li>
+    <p>less的循环相当于一个递归函数(自己调用自己)，其中<code class="highlighter-rouge">when</code>关键字是用来设置退出循环的条件的</p>
+
+    <pre><code class="language-less">.loop(@index) when(@index&lt;4){
+    .div@{index}{
+        width:100px;
+        height:100px;
+        background:red;
+        margin-top:10px; 
+    }
+    .loop(@index + 1);
+}
+.loop(1);
+</code></pre>
+  </li>
+</ul>
+:ET

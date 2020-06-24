@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.IHome">
+	<!-- 判断用户名是否存在 -->
+	<select id="pdUser" resultType="Boolean">
+		select username from user where username=#{username} 
+	</select>
+
+	<!--注册用户  -->
+	<insert id="register" >
+		insert into user(username,pass1,email,phone,address,head) value(#{username},#{pass1},#{email},#{phone},#{address},#{head})
+	</insert>
+	
+	<!--用户登录  -->
+	<select id="login" resultType="User">
+		select * from user where username=#{username} and pass1=#{pass1}
+	</select>
+	
+	<update id="perfect">
+		update user set email=#{email} ,phone=#{phone},address=#{address},card=#{card},pass2=#{pass2},head=#{head} where username=#{username} 
+	</update>
+	
+	<insert id="insertCard">
+		insert into card(username,card,pass) value(#{username},#{card},#{pass})
+	</insert>
+</mapper>

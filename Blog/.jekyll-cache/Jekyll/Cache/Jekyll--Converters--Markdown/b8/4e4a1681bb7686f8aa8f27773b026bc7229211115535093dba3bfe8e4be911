@@ -1,0 +1,89 @@
+I"G<p>md语法直接兼容html标签 可以直接用html语法</p>
+
+<ol>
+  <li>
+    <h4 id="基本字符------------">基本字符  *   -  +  .  &gt;</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 以基本符号开头的标记，注意基本符号后有一个用于分割标记符和内容的空格
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="链接">链接</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> [链接的文字提示](链接地址 "链接的title属性值")
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="图片">图片</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ![图片的alt](图片地址 "图片的title属性值")
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="标题">标题</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 几个 # 就是几级标题，最小到六级=&gt;对应html中的h1~h6
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="无序列表">无序列表</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 无序列表*    -   +开头
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="有序列表">有序列表</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> a. 1.~n.  开头
+     b. 默认是有序排列，不管是否编辑时错乱顺序
+     c. 数字后面的点只能是英文的点，有序列表的序号是根据第一行列表的数字顺序来的
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="斜体与粗体">斜体与粗体</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> *斜体*     **粗体**   ***加粗斜体***
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="删除线">删除线</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ~~删除线~~
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="分割线">分割线</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 三个或者三个以上的 - 或者 * 都可以。
+     ---
+     ----
+     ***
+     *****
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="引用">引用</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&gt;&gt;或n个
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="表格">表格</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|表头|表头|表头|
+    |---|:--:|---:|
+    |内容|内容|内容|
+    |内容|内容|内容|
+
+    第二行分割表头和内容。
+    - 有一个就行，为了对齐，多加了几个
+    文字默认居左
+    -两边加：表示文字居中
+    -右边加：表示文字居右
+    注：原生的语法两边都要用 | 包起来。此处省略
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <h4 id="代码">代码</h4>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>单行代码：代码之间分别用一个反引号包起来如： `代码内容`
+    代码块：代码之间分别用三个反引号包起来如下
+        (```)
+        代码...
+        代码...
+        代码...
+        (```)
+    为了防止转译，前后三个反引号处加了小括号，实际是没有的。这里只是用来演示，实际中去掉两边小括号即可。
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+:ET

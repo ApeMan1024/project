@@ -1,0 +1,108 @@
+@import "./css-1/hun.css";
+@import "./css-1/head.css";
+nav #logo {
+  transform-origin: center 46%;
+  position: relative;
+}
+nav #logo a {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: red;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+main {
+  margin: 10px 20%;
+}
+main .to1 {
+  display: inline-block;
+}
+main .to1 .fang .ge {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 5px;
+}
+main .to1 .fang .ge img {
+  width: 300px;
+  height: 300px;
+  display: block;
+}
+main .to1 .fang .box {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  display: inline-block;
+  border-radius: 50%;
+}
+main .to1 .fang .box .img {
+  width: 600px;
+  height: 600px;
+  background: url("../images/index/logo.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+main .to2 {
+  display: inline-block;
+  vertical-align: top;
+}
+main .to2 p {
+  margin-bottom: 56px;
+  margin-left: 10px;
+}
+main .to2 p:nth-child(1) {
+  width: 420px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+main .to2 p .jia {
+  color: red;
+  font-size: 20px;
+}
+main .to2 p .xian {
+  margin-left: 20px;
+}
+main .to2 p button {
+  width: 40px;
+  height: 44px;
+  line-height: 44px;
+  margin: 0px;
+  padding: 0px;
+  vertical-align: top;
+  font-size: 20px;
+}
+main .to2 p input {
+  width: 2em;
+  height: 40px;
+  vertical-align: top;
+  text-align: center;
+}
+main .to2 p:nth-child(4) span:nth-child(2) {
+  display: inline-block;
+  width: 100px;
+  height: 44px;
+  background: red;
+  line-height: 44px;
+  text-align: center;
+  margin-left: 100px;
+  cursor: pointer;
+  color: #fff;
+}
+main .jian p {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #ddd;
+}
+main .jian ul {
+  margin: 20px 0;
+  padding: 0px;
+  list-style: none;
+}
+main .jian ul li {
+  width: 100%;
+}
+main .jian ul li img {
+  width: inherit;
+  max-height: 500px;
+}

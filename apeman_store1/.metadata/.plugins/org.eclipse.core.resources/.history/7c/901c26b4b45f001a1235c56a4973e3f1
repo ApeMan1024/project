@@ -1,0 +1,48 @@
+package com.apeman1024.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.apeman1024.Isql.IAdministrator;
+import com.apeman1024.entity.Admin;
+import com.apeman1024.sql.Administrator;
+
+
+@WebServlet("/queen")
+public class Queen extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public Queen() {
+        super();
+        
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher(request.getContextPath()+"/HTMl/index.jsp");
+		doPost(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("username");
+		String password=request.getParameter("password");
+		Admin admin=new Admin(username, password);
+		IAdministrator admini=new Administrator();
+		boolean bool=admini.pd(admin);
+		if(!bool) {
+			request.setAttribute("err", "用户名或密码错误");
+			doGet(request, response);
+		}
+		else {
+			response.sendRedirect("/HTML/admin.jsp");
+		}
+	}
+
+}

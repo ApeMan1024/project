@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户结算</title>
+    <link rel="stylesheet" href="./css/kink.css">
+    <link rel="stylesheet" href="./lib/font.css">
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-router.js"></script>
+    <script src="./lib/axios.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <header>
+            <ul>
+                <li v-for="item in arr" :key="item.id">
+                    <a :href="item.url">{{item.name}}</a>
+                </li>
+            </ul>
+        </header>
+        <nav>
+            <div id="logo">
+                <img :src="src" alt="猿人商城图标">
+                <a href="./index.html"></a>
+            </div>
+            <div id="search">
+                <ul>
+                    <li>
+                        <input type="text" placeholder="输入要查询的商品信息" v-model="sear"><button @click="search">搜索</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div class="login">
+                <div class="form">
+                    <p>欢迎你进入猿人商城</p>
+                    <p><span>你当前的结算金额是：</span><span>{{num}}元</span></p>
+                    <form action="javascript:;" method="post" @submit="re">
+                        <div class="lu1">
+                            <p>
+                                <span class="iconfont icon-ren"></span><input type="text" name="username" placeholder="请入卡号" required v-model="user.card" autocomplete="off">
+                            </p>
+                            <p>
+                                <span class="iconfont icon-suo"></span><input type="password" name="password" placeholder="请入密码" required v-model="user.pass2" autocomplete="off">
+                            </p>
+                            <p>
+                                <button>支付</button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="./js/kink.js"></script>
+    <script src="./js/js-1/click.js"></script>
+</body>
+</html>

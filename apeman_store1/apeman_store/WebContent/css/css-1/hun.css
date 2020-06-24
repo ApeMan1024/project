@@ -1,0 +1,8 @@
+.box1 {
+  width: 30px;
+  height: 20px;
+  background: url("../../images/index/xing.png");
+  background-size: 100% 100%;
+  position: absolute;
+  z-index: 999;
+}

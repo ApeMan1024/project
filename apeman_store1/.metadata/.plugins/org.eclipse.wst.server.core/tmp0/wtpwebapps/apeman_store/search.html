@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品信息</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./css/search.css">
+    <script src="./lib/axios.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <ul>
+                <li v-for="item in arr" :key="item.id">
+                    <a :href="item.url">{{item.name}}</a>
+                </li>
+            </ul>
+        </header>
+        <nav>
+            <div id="logo">
+                <img :src="src" alt="猿人商城图标">
+                <a href="./index.html"></a>
+            </div>
+            <div id="search">
+                <ul>
+                    <li>
+                        <input type="text" placeholder="输入要查询的商品信息" v-model="sear"><button @click="search">搜索</button>
+                    </li>
+                    <li>
+                        <div class="car">
+                            <span class="iconfont icon-gouwuchekong"></span>
+                            <span>购物车</span>
+                            <span>{{num?num:""}}</span>
+                            <a href="./car.html"></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div class="host">
+                <ul>
+                    <li v-for="(item,index) in arr1" :key="item.id">
+                        <ul>
+                            <li>
+                                <img :src="item.src" :alt="item.name">
+                            </li>
+                            <li>
+                                <p>
+                                    <span>猿人商城</span><a :href="'./details.html?id='+item.id"><span>{{item.name}}</span></a>
+                                </p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <template v-if="item.xian!=''">
+                                    <span><del>￥{{item.qian}}<del></span><span>￥{{item.xian}}</span>
+                                </template>
+                                <template v-else>
+                                    <span>￥{{item.qian}}</span>
+                                </template>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    <script src="./js/js-1/click.js"></script>
+    <script src="./js/search.js"></script>
+</body>
+</html>

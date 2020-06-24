@@ -1,0 +1,90 @@
+package com.apeman1024.web;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.apeman1024.Isql.IAdministrator;
+import com.apeman1024.entity.Ping;
+import com.apeman1024.sql.Administrator;
+import com.apeman1024.util.Rand;
+
+
+@WebServlet("/recharge")
+public class Recharge extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+    public Recharge() {
+        super();
+        
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pa = request.getParameter("flag");
+		if(pa.equals("1")) {
+			String username = request.getParameter("username");
+			String card = request.getParameter("card");
+			String qian = request.getParameter("qian");
+			IAdministrator ia=new Administrator();
+			boolean cong = ia.cong(username,card,qian);
+			response.getWriter().print(cong);
+		}
+		else if(pa.equals("2")) {
+			String guid = Rand.getGUID();
+			IAdministrator ia = new Administrator();
+			boolean bool=ia.getID(guid);
+			while(bool) {
+				guid = Rand.getGUID();
+				bool=ia.getID(guid);
+			}
+			
+			response.getWriter().print(guid);
+		}
+		else if(pa.equals("3")) {
+			IAdministrator ia = new Administrator();
+			int start=0,len=12;
+			List<Map<String, Object>> list=ia.getCom(start,len);
+			response.getWriter().print(new JSONArray(list).toString());
+		}
+		else if(pa.equals("4")) {
+			IAdministrator ia = new Administrator();
+			List<Map<String, Object>> list=ia.getCom(Integer.parseInt(request.getParameter("start")), Integer.parseInt(request.getParameter("len")));
+			response.getWriter().print(new JSONArray(list).toString());
+		}
+		else if(pa.equals("5")) {
+			IAdministrator ia = new Administrator();
+			int start=0,len=10;
+			List<Map<String, Object>> list=ia.getPing(start,len);
+			response.getWriter().print(new JSONArray(list).toString());
+			
+		}
+		else if(pa.equals("6")) {
+			IAdministrator ia = new Administrator();
+			Ping ping=new Ping();
+			ping.setHead(request.getParameter("head"));
+			ping.setId(Integer.parseInt(request.getParameter("id")));
+			ping.setNei(request.getParameter("nei"));
+			ping.setTime(request.getParameter("time"));
+			ping.setUsername(request.getParameter("username"));
+			boolean bool=ia.delPing(ping);
+			response.getWriter().print(bool);
+		}
+	}
+
+}

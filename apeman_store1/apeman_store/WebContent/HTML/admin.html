@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>管理员页面</title>
+<script src="./lib/vue.js"></script>
+<script src="./lib/vue-router.js"></script>
+<script src="./lib/axios.js"></script>
+<script src="./lib/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="./css/admin.css">
+<link rel="stylesheet" href="./lib/font.css">
+</head>
+<body>
+	<div id="app">
+        <div class="left">
+            <div class="tao">
+                <div class="images"> <img :src="user.head" alt=""></div>
+                <ul>
+                    <li><span>用户名 :</span><span>{{user.username}}</span></li>
+                    <li><span>职业 :</span><span>{{user.occu}}</span></li>
+                    <li><span>号码 :</span><span>{{user.phone}}</span></li>
+                </ul>
+            </div>
+            <div class="ul">
+                <ul>
+                    <li v-for="item in arr"><span :class="'iconfont '+item.lei"></span><span><router-link :to="item.url">{{item.name}}</router-link></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <router-view></router-view>
+            
+        </div>
+    </div>
+    <template id="card">
+        <div class="box">
+            <form action="javascript:;" method="post" @submit.prevent="pd">
+            	<p><label for="username">用户名:</label><input type="text" id="username" name="username" required autocomplete="off" v-model="obj.username"></p>
+            	<p><label for="username">猿人卡号:</label><input type="text" id="card" name="card" required autocomplete="off" v-model="obj.card"></p>
+            	<p><label for="username">充值金额:</label><input type="text" id="qian" name="qian" required autocomplete="off" v-model="obj.qian"></p>
+            	<p><input type="submit" value="立即充值"/></p>
+            </form>
+        </div>
+    </template>
+    <template id="add">
+        <div class="box1">   
+            <form action="javascript:;" method="post" @submit.prevent="re2">
+                <ul>
+                    <li><label for="id">商品编号:</label>
+                        <template v-if="com.id==''">
+                            <input type="button" name="id" id="id" value="获取编号" @click="re3">
+                        </template>
+                        <template v-else>
+                            <span>{{com.id}}</span>
+                        </template>
+                    </li>
+                    <li><label for="name">商品名称:</label><input type="text" name="name" id="name" required autocomplete="off" v-model="com.name"></li>
+                    <li><label for="qian">商品价钱:</label><input type="text" name="qian" id="qian" required autocomplete="off" v-model="com.qian"></li>
+                    <li><label for="xian">折扣价:</label><input type="text" name="xian" id="xian" required autocomplete="off" v-model="com.xian"></li>
+                    <li><label for="title">商品类型:</label><input type="text" name="title" id="title" required autocomplete="off" v-model="com.title"></li>
+                    <li><div class="tu" title="商品图标"><input type="file" name="src" id="src" required autocomplete="off" ref="inp" @change="re"><span>+</span><img :src="com.src" alt=""></div></li>
+                </ul>
+                <div class="jie">
+                    <p>商品简介</p>
+                    <div class="imag">
+                        <ul>
+                            <li v-for="(item,index) in arr"><img :src="item" alt=""><span class="qu iconfont icon-cha" @click="qu(index)"></span></li>
+                        </ul>
+                        <div class="im1">
+                            <input type="file" name="file" id="file" @change="re1" ref="inp1" multiple="multiple">
+                            <span>+</span>
+                        </div>
+                    </div>
+                </div>
+                <button >添加商品</button>
+            </form>
+        </div>
+    </template>
+    <template id="miao">
+        <div class="box2">
+            <p>
+                <label for="te">秒杀时间:</label><input type="text" id="te" v-model.lazy="te" required placeholder="例如：2020-03-01" autocomplete="off"><input type="time" name="time" id="time" required v-model="time" autocomplete="off">
+            </p> 
+            <p>
+                <button @click="re4">设置秒杀</button>
+            </p>
+            <div class="host">
+                <ul>
+                    <li v-for="(item,index) in arr1" :key="item.id">
+                        <ul>
+                            <li>
+                                <img :src="item.src" :alt="item.name">
+                            </li>
+                            <li>
+                                <p>
+                                    <span>猿人商城</span><a :href="'../details.html?id='+item.id"><span>{{item.name}}</span></a>
+                                </p>
+                            </li>
+                            <li class="li1">
+                                <span>当前价格:</span><span>￥{{item.qian}}</span>
+                            </li>
+                            <li class="li1">
+                                <span>秒杀价:</span><input type="number" v-model.number="item.xian">
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><button @click="re3(index)"  >{{item.bool?"退选":"选择"}}</button></li>
+                        </ul>
+                    </li>
+                </ul>
+                <template v-if="arr2.length>0">
+                    <span class="left1" @click="re1"></span>
+                </template>
+                <template v-if="arr3.length>5&&(arr2.length+arr1.length)<arr3.length">
+                    <span class="right1" @click="re"></span>
+                </template>
+            </div>
+        </div>
+    </template>
+    <template id="fan">
+        <div class="lie">
+            <ul>
+                <li v-for="(item,index) in arr1">
+                    <p><img :src="item.head" alt="头像"><span>{{item.username}}</span></p>
+                    <p><span><span class="iconfont icon-_fuzhi-"></span><span>{{item.time}}</span></span>
+                        <span>{{item.nei}}</span></p>
+                    <p class="cao"><button @click="remove(index)" :key="item.id">删除</button></p>
+                </li>
+            </ul>
+            <template v-if="arr2.length>0">
+                <span class="left1" @click="re"></span>
+            </template>
+            <template v-if="arr3.length>5&&(arr2.length+arr1.length)<arr3.length">
+                <span class="right1" @click="re1"></span>
+            </template>
+        </div>
+    </template>
+    <template id="shan">
+        <div class="host1">
+            <ul>
+                <li v-for="(item,index) in arr1" :key="item.id">
+                    <ul>
+                        <li>
+                            <img :src="item.src" :alt="item.name">
+                        </li>
+                        <li>
+                            <p>
+                                <span>猿人商城</span><a :href="'../details.html?id='+item.id"><span>{{item.name}}</span></a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <template v-if="item.xian==''||item.xian==0">
+                                    <span>价格:</span><span>￥{{item.qian}}</span>
+                                </template>
+                                <template v-else>
+                                    <span>价格:</span><span>￥{{item.qian}}</span>&nbsp;&nbsp;&nbsp;<span>折扣价:</span><span>￥{{item.xian}}</span>
+                                </template>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><button @click="remove(index)">删除</button></li>
+                    </ul>
+                </li>
+            </ul>
+            <template v-if="arr2.length>0">
+                <span class="left1" @click="re"></span>
+            </template>
+            <template v-if="arr3.length>6&&(arr2.length+arr1.length)<arr3.length">
+                <span class="right1" @click="re1"></span>
+            </template>
+        </div>
+    </template>
+<script src="./js/admin.js"></script>
+</body>
+</html>

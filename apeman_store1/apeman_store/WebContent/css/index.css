@@ -1,0 +1,239 @@
+@import "./css-1/hun.css";
+@import "./css-1/head.css";
+#myCarousel {
+  width: 100%;
+}
+#myCarousel .carousel-inner {
+  width: 100%;
+  position: relative;
+}
+#myCarousel .carousel-inner .item {
+  width: 100%;
+}
+#myCarousel .carousel-inner .item a {
+  position: absolute;
+  top: 0px;
+  height: 400px;
+  width: 100%;
+  opacity: 0;
+}
+#myCarousel .carousel-inner .item img {
+  width: 100%;
+  height: 400px;
+}
+#main1 {
+  margin: 50px 0;
+  margin-left: 10%;
+}
+#main1 .seckill:after {
+  content: "";
+  clear: both;
+  width: 0px;
+  height: 0px;
+  display: block;
+}
+#main1 .seckill .Timewait {
+  float: left;
+  background: #e83632;
+  color: #fff;
+  padding: 5px 30px;
+  text-align: center;
+}
+#main1 .seckill .Timewait p {
+  margin: 0px;
+}
+#main1 .seckill .Timewait p:nth-child(1) {
+  font-size: 20px;
+}
+#main1 .seckill .Timewait p:nth-child(2) {
+  padding: 5px 0;
+}
+#main1 .seckill .Timewait p:nth-child(2) img {
+  width: 100px;
+  height: 120px;
+}
+#main1 .seckill .Timewait p:nth-child(3) span:nth-child(1) {
+  font-size: 20px;
+  padding: 0 5px;
+}
+#main1 .seckill .Timewait p:last-child {
+  padding: 10px 0;
+}
+#main1 .seckill .Timewait p:last-child span {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 20px;
+}
+#main1 .seckill .lun {
+  float: left;
+  height: 244px;
+  overflow: hidden;
+}
+#main1 .seckill .lun ul {
+  list-style: none;
+  position: relative;
+}
+#main1 .seckill .lun ul li {
+  float: left;
+  border-right: 1px solid #999;
+  position: relative;
+}
+#main1 .seckill .lun ul li a {
+  position: absolute;
+  width: 198px;
+  height: 244px;
+  top: 0px;
+  opacity: 0;
+}
+#main1 .seckill .lun ul li:last-child {
+  border-right: none;
+}
+#main1 .seckill .lun ul li .box {
+  height: 244px;
+  width: 198px;
+  background: #fff;
+  padding: 20px;
+}
+#main1 .seckill .lun ul li .box div {
+  text-align: center;
+}
+#main1 .seckill .lun ul li .box div:nth-child(1) {
+  height: 150px;
+  width: 100px;
+  margin-left: 30px;
+  background: #999;
+}
+#main1 .seckill .lun ul li .box div:nth-child(1) img {
+  transition: all 0.5s;
+  opacity: 0.5;
+  height: inherit;
+  width: inherit;
+}
+#main1 .seckill .lun ul li .box div:last-child {
+  margin-top: 5px;
+}
+#main1 .seckill .lun ul li .box div:last-child p {
+  display: inline-block;
+}
+#main1 .seckill .lun ul li .box div:last-child p:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  width: 150px;
+}
+#main1 .seckill .lun ul li .box div:last-child p:last-child {
+  border: 1px solid red;
+}
+#main1 .seckill .lun ul li .box div:last-child p:last-child span {
+  display: inline-block;
+  padding: 0 5px;
+}
+#main1 .seckill .lun ul li .box div:last-child p:last-child span:first-child {
+  border-right: 1px solid #999;
+  background: red;
+  color: #fff;
+}
+#main1 .seckill .lun ul li .box div:last-child p:last-child span:last-child {
+  font-style: italic;
+  color: #999;
+}
+#main1 .seckill .lun ul li:hover .box div img {
+  opacity: 1;
+}
+#main1 .seckill .lun ul li:hover .box div:last-child p:first-child {
+  color: red;
+}
+.main {
+  margin: 20px 0;
+  margin-right: 12%;
+}
+.xuan .com {
+  text-align: center;
+  position: relative;
+  left: -20px;
+}
+.xuan .com:before {
+  content: "";
+  background-image: url("../images/index/sprite.png");
+  background-position: 0 0;
+  width: 25px;
+  height: 20px;
+  display: inline-block;
+  margin: 0 5px;
+}
+.xuan .com:after {
+  content: "";
+  display: inline-block;
+  background-image: url("../images/index/sprite.png");
+  background-position: -25px 0;
+  width: 25px;
+  height: 20px;
+  margin: 0 5px;
+}
+.xuan .com1 {
+  width: 1120px;
+  margin: 20px 0;
+  margin-left: 3%;
+}
+.xuan .com1 ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+.xuan .com1 ul li {
+  display: inline-block;
+  vertical-align: top;
+  width: 210px;
+  height: 270px;
+  background: #fff;
+  transition: all 0.5s;
+  margin: 5px;
+  position: relative;
+}
+.xuan .com1 ul li a {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 210px;
+  height: 270px;
+  opacity: 0;
+}
+.xuan .com1 ul li:hover {
+  box-shadow: 1px 1px 8px #ccc;
+}
+.xuan .com1 ul li:hover img {
+  transform: scale(1.5);
+}
+.xuan .com1 ul li .img1 {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  margin-top: 20px;
+  overflow: hidden;
+}
+.xuan .com1 ul li .img1 img {
+  width: inherit;
+  height: inherit;
+  transition: all 0.5s;
+}
+.xuan .com1 ul li .p1 {
+  margin: 5px;
+  margin-top: 10px;
+}
+.xuan .com1 ul li .p1 p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+.xuan .com1 ul li .p2 {
+  color: red;
+  margin: 5px;
+}
+.xuan .com1 ul li .p2 span {
+  font-weight: bold;
+  font-size: 20px;
+}

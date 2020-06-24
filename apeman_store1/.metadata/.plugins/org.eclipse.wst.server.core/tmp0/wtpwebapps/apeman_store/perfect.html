@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./css/perfect.css">
+</head>
+<body>
+    <div id="app">
+
+        <header>
+            <ul>
+                <li v-for="item in arr" :key="item.id">
+                    <a :href="item.url">{{item.name}}</a>
+                </li>
+            </ul>
+        </header>
+        <main>
+            <div class="xiu">
+                <form action="" method="post" @submit.prevent="re2">
+                    <ul>
+                        <li><label>用户名：</label><span>{{user.username}}</span></li>
+                        <li><div class="box" title="头像"><span>+</span><input type="file"  name="file" id="file" accept="image/*" ref="inp" @change="re" autocomplete="off"><img :src="user.head" alt="" ref="tou"></div></li>
+                        <li><label for="">手机号码：</label><input type="text" name="te1" required id="te1" v-model="user.phone" autocomplete="off"></li>
+                        <li><label for="">邮箱：</label><input type="email" name="te2" required id="te2" v-model="user.email" autocomplete="off"></li>
+                        <li><label for="">配送地址：</label><input type="text" required name="te3" id="te3" v-model="user.address" autocomplete="off"></li>
+                        <li><label for="">猿人卡号：</label><input type="text" required name="te4" id="te4" v-model="user.card" autocomplete="off"></li>
+                        <li><label for="">密码：</label><input type="password" required name="te5" id="te5" v-model="user.pass2" autocomplete="off"></li>
+                        <li><label for="">确认密码：</label><input type="password" required name="te6" id="te6" v-model="user.pass_2" autocomplete="off"></li>
+                        <li><button>修改</button></li>
+                    </ul>
+                   
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="./js/js-1/click.js"></script>
+    <script src="./js/perfect.js"></script>
+</body>
+</html>

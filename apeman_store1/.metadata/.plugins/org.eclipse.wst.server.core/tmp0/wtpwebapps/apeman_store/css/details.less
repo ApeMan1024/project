@@ -1,0 +1,120 @@
+@import "/css/css-1/hun.css";
+@import "/css/css-1/head.css";
+nav{
+    #logo{
+        transform-origin: center 46%;
+        position: relative;
+        a{
+            position: absolute;
+            width:100px;
+            height:100px;
+            background:red;
+            top:0px;
+            left:0px;
+            opacity: 0;
+        }
+    }
+}
+main{
+    margin:10px 20%;
+    .to1{
+        display: inline-block;
+        .fang{
+            .ge{
+                border:1px solid #ccc;
+                display: inline-block;
+                padding:5px;
+                img{
+                    width:300px;
+                    height:300px;
+                    display: block;
+                }
+            }
+            .box{
+                width: 100px;
+                height: 100px;
+                display: inline-block;
+                overflow: hidden;
+                position: absolute;
+                display: inline-block;
+                border-radius: 50%;
+                .img{
+                    width:600px;
+                    height:600px;
+                    background:url("/images/index/logo.jpg") no-repeat;
+                    background-size:100% 100%;
+                }
+            }
+        }
+    }
+    .to2{
+        display: inline-block;
+        vertical-align: top;
+        p{
+            &:nth-child(1){
+                width:420px;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+            }
+            margin-bottom: 56px;
+            margin-left:10px;
+            .jia{
+                color:red;
+                font-size: 20px;
+            }
+            .xian{
+                margin-left:20px;
+            }
+            button{
+                width:40px;
+                height:44px;
+                line-height: 44px;
+                margin:0px;
+                padding:0px;
+                vertical-align: top;
+                font-size: 20px;
+            }
+            input{
+                width:2em;
+                height:40px;
+                vertical-align: top;
+                text-align: center;
+            }
+            &:nth-child(4){
+                span{
+                    &:nth-child(2){
+
+                        display: inline-block;
+                        width:100px;
+                        height:44px;
+                        background:red;
+                        line-height: 44px;
+                        text-align: center;
+                        margin-left:100px;
+                        cursor: pointer;
+                        color:#fff;
+                    }
+                }
+            }
+        }
+    }
+    .jian{
+        p{
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+        }
+        ul{
+            margin:20px 0;
+            padding:0px;
+            list-style: none;
+            li{
+                width:100%;
+                img{
+                    width:inherit;
+                    max-height:500px;
+                }
+            }
+        }
+    }
+}

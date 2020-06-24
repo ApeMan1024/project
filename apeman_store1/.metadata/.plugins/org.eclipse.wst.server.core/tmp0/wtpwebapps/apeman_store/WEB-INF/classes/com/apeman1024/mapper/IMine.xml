@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.IMine">
+	<select id="getIndent" resultType="Indent">
+		select * from my where username=#{username}
+	</select>
+
+	<delete id="delIndent">
+		delete  from my where username=#{username} and number=#{number}
+	</delete>
+
+	<delete id="del">
+		delete from my where username=#{username}
+	</delete>
+</mapper>

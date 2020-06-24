@@ -1,0 +1,98 @@
+package com.apeman1024.sql;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.apeman1024.Isql.IHome;
+import com.apeman1024.entity.User;
+import com.apeman1024.util.Sql_util;
+
+public class Home implements IHome{
+	Connection  conn = Sql_util.getConn();
+	public boolean register(User user) {
+		String s="select username from user where username=?";
+		try {
+			PreparedStatement pre = conn.prepareStatement(s);
+			pre.setString(1, user.getUsername());
+			ResultSet executeQuery = pre.executeQuery();
+			if(executeQuery.next()) {
+				return false;
+			}
+			else {
+				String s1="insert into user value(?,?,?,?,?,?)";
+				PreparedStatement pre1 = conn.prepareStatement(s1);
+				pre1.setString(1, user.getUsername());
+				pre1.setString(2, user.getPass1());
+				pre1.setString(3, user.getEmail());
+				pre1.setString(4, user.getPhone());
+				pre1.setString(5, user.getAddress());
+				pre1.setString(6, user.getHead());
+				int e = pre1.executeUpdate();
+				if(e!=0) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	public User login(User user)  {
+		String s="select * from user where username=? and pass1=?";
+		User user1=null;
+		try {
+			PreparedStatement pre = conn.prepareStatement(s);
+			pre.setString(1, user.getUsername());
+			pre.setString(2, user.getPass1());
+			ResultSet query = pre.executeQuery();
+			if(query.next()) {
+				user1=new User();
+				user1.setUsername(query.getString("username"));
+				user1.setEmail(query.getString("email"));
+				user1.setPhone(query.getString("phone"));
+				user1.setAddress(query.getString("address"));
+				user1.setHead(query.getString("head"));
+				user1.setCard(query.getString("card"));
+				return user1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user1;
+	}
+	@Override
+	public User perfect(User user) {
+		String sql="update user set email=? ,phone=?,address=?,card=?,pass2=?,head=? where username=? ";
+		try {
+			PreparedStatement pre = conn.prepareStatement(sql);
+			pre.setString(1, user.getEmail());
+			pre.setString(2, user.getPhone());
+			pre.setString(3, user.getAddress());
+			pre.setString(4, user.getCard());
+			pre.setString(5, user.getPass2());
+			pre.setString(6, user.getHead());
+			pre.setString(7, user.getUsername());
+			int exe = pre.executeUpdate();
+			if(exe>0) {
+				String sql1="insert into card(username,card,pass) value(?,?,?)";
+				PreparedStatement pre1 = conn.prepareStatement(sql1);
+				pre1.setString(1, user.getUsername());
+				pre1.setString(2, user.getCard());
+				pre1.setString(3, user.getPass2());
+				int exe1 = pre1.executeUpdate();
+				if(exe1>0) {
+					user.setPass2("");
+					return user;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}

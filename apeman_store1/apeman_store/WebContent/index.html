@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猿人商城</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <script src="./lib/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./lib/font.css">
+    <link rel="stylesheet" href="./lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">  
+    <script src="./lib/axios.js"></script> 
+</head>
+<body>
+    <div id="app">
+        <header>
+            <ul>
+                <li v-for="item in arr" :key="item.id">
+                    <a :href="item.url">{{item.name}}</a>
+                </li>
+            </ul>
+        </header>
+        <nav>
+            <div id="logo">
+                <img :src="src" alt="猿人商城图标">
+            </div>
+            <div id="search">
+                <ul>
+                    <li>
+                        <input type="text" placeholder="输入要查询的商品信息" v-model.trim="sear"><button @click="search">搜索</button>
+                    </li>
+                    <li>
+                        <div class="car">
+                            <span class="iconfont icon-gouwuchekong"></span>
+                            <span>购物车</span>
+                            <span>{{num==0?"":num}}</span>
+                            <a href="./car.html"></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" :data-slide-to="index" 
+                :class="{active:index===0}" v-for="(item,index) in arr1" :key="item.id">
+                </li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item" v-for="(item,index) in arr1" :class="{active:index===0}" :key="item.id">
+                    <img :src="item.src" :alt="item.name">
+                    <a :href="'./details.html?id='+item.id">{{item.name}}</a>
+                </div>
+            </div>
+        </div>
+        <main id="main1">
+            <template v-if="arr2.length!=0">
+                <div class="seckill">
+                    <div class="Timewait" >
+                        <p>猿人商城秒杀</p>
+                        <p>
+                            <img src="./images/index/clock.png" alt="">
+                        </p>
+                        <p>
+                            <span>{{time}}</span><span>专场&nbsp;&nbsp;倒计时</span>
+                        </p>
+                        <p>
+                            <template v-for="(item,key,index) in obj" v-cloak>
+                                <span >{{item}}</span>{{index!=2?":":""}}
+                            </template>
+                        </p>
+                    </div>
+                   
+                    <div class="lun" @mouseover="re1" @mouseout="re2">
+                        <ul ref="lun">
+                            <li v-for="item in arr2" >
+                                <div class="box">
+                                    <div>
+                                        <img :src="item.src" :alt="item.name">
+                                    </div> 
+                                    <div>
+                                        <p>{{item.name}}</p>
+                                        <p><span>{{item.xian}}元</span><span><del>{{item.qian}}元</del></span></p>
+                                    </div> 
+                                </div>
+                                <a :href="'./details.html?id='+item.id"></a>
+                            </li> 
+    
+                        </ul>
+                    </div>
+                   
+                </div>
+            </template>
+            <div class="main">
+                <xuan :list="list"></xuan>
+            </div>
+        </main>
+    </div>
+    <template id="xuan">
+        <div>
+            <div class="xuan" v-for="item in list">
+                <h1 class="com">{{item.title}}专区</h1>
+                <div class="com1">
+                    <ul>
+                        <li v-for="num in item.obj">
+                            <div class="img1">
+                                <img :src="num.src" alt="">
+                            </div>
+                            <div class="p1">
+                                <p>{{num.name}}</p>
+                            </div>
+                            <p class="p2">
+                                ￥<span>{{num.qian}}</span>
+                            </p>
+                            <a :href="'./details.html?id='+num.id"></a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+        </div>
+    </template>
+    <script src="./js/index.js" ></script>
+    <script src="./js/js-1/click.js"></script>
+</body>
+</html>

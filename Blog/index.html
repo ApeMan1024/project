@@ -1,0 +1,18 @@
+---
+title: 首页
+layout: index
+---
+<ul>
+    {%- assign n=1 -%}
+    {%- for post in paginator.posts-%}
+    {% if forloop.first %}
+    <li class="ac">
+    {% else %}
+    <li>
+    {% endif %}
+        <i>{{forloop.index}}</i>
+        <a href="{{post.url}}">{{ post.title }}</a>
+        {{- post.excerpt -}}
+    </li>
+    {%- endfor -%}
+</ul>

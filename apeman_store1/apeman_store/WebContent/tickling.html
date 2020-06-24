@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>意见反馈</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./css/tickling.css">
+    <link rel="stylesheet" href="./lib/font.css">
+    <script src="./lib/axios.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <ul>
+                <li v-for="item in arr" :key="item.id">
+                    <a :href="item.url">{{item.name}}</a>
+                </li>
+            </ul>
+        </header>
+        <nav>
+            <div id="logo">
+                <img :src="src" alt="猿人商城图标">
+                <a href="./index.html"></a>
+            </div>
+            <div id="search">
+                <ul>
+                    <li>
+                        <input type="text" placeholder="输入要查询的商品信息" v-model="sear"><button @click="search">搜索</button>
+                    </li>
+                    <li>
+                        <div class="car">
+                            <span class="iconfont icon-gouwuchekong"></span>
+                            <span>购物车</span>
+                            <span>{{num?num:""}}</span>
+                            <a href="./car.html"></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <template v-if="user!=''">
+                <div class="ma1">
+                    <p>
+                       <textarea name="text" v-model="text" placeholder="欢迎对猿人商店进行评论"></textarea>
+                    </p>
+                    <p>
+                        <button @click="re1">评论</button>
+                        <span class="iconfont icon-_fuzhi-"></span>
+                        <button @click="text=''">重置</button>
+                    </p>
+                </div>
+                <div class="lie">
+                    <ul>
+                        <li v-for="item in arr1">
+                            <p><img :src="item.head" alt="头像"><span>{{item.username}}</span></p>
+                            <p><span><span class="iconfont icon-_fuzhi-"></span><span>{{item.time}}</span></span>
+                                <span>{{item.nei}}</span></p>
+                        </li>
+                    </ul>
+                </div>
+            </template>
+            <template v-else>
+                <div class="box">
+                    <img src="./images/index/ping.jpg" alt="">
+                </div >
+            </template>
+        </main>
+    </div>
+    <script src="./js/js-1/click.js"></script>
+    <script src="./js/tickling.js"></script>
+</body>
+</html>

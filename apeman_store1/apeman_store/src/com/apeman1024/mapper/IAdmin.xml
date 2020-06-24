@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apeman1024.mapper.IAdministrator">
+	<!--管理员登录  -->
+	<select id="pd" resultType="Admin">
+		select * from admin where
+		username=#{username} and password=#{password}
+	</select>
+	<!-- 判断当前id是否已经存在 -->
+	<select id="getID" resultType="Boolean">
+		select * from com where id=#{id}
+	</select>
+	
+	<!--查询商品信息  -->
+	<select id="getCom" resultType="hashmap">
+		select com.count as count,com.id
+		as id,com.`name` as name ,com.qian as qian,com.src as src ,com.title
+		as title,discount.xian from com left join discount on
+		com.id=discount.id and discount.`data`=#{data}
+	</select>
+	<!--查询评论信息  -->
+	<select id="getPing" resultType="Ping">
+		select * from ping
+	</select>
+	<!-- 修改某种类型的商品数量 -->
+	<update id="updateTitle">
+		update classify set num=num+1 where title=#{title}
+	</update>
+	<!--为猿人卡充值  -->
+	<update id="cong">
+		update card set balance=balance+#{balance} where
+		username=#{username} and card=#{card}
+	</update>
+	<!--增加一种新的类型商品  -->
+	<insert id="inserClassify">
+		insert into classify(title,num,count) value(#{title},#{num},#{count})
+	</insert>
+	<!-- 增加一种新的商品简介 -->
+	<insert id="inserImg">
+		insert into img(id,img) value(#{id},#{img})
+	</insert>
+	<!-- 打折商品设置 -->
+	<insert id="insertDiscount">
+		insert into discount(id,name,xian,qian,src) value(#{id},#{name},#{xian},#{qian},#{src})
+	</insert>
+	<!-- 添加一种商品 -->
+	<insert id="addCom">
+		insert into com(id,src,name,qian,count,title) value(#{id},#{src},#{name},#{qian},#{count},#{title})
+	</insert>
+	<!-- 删除评论 -->
+	<delete id="delPing">
+		delete from ping where id=#{id}
+	</delete>
+	
+	<!-- 删除商品 -->
+	<delete id="delCom">
+		delete from img where id=#{id};
+		delete from discount where id=#{id};
+		delete from com where id=#{id};
+	</delete>
+	
+	<update id="updateCom">
+		update classify set num=num-1 where title=#{title}
+	</update>
+	
+	<delete id="delClass">
+		delete from classify where title=#{title} and num=0
+	</delete>
+	
+	<!-- 判断秒杀时间是否存在 -->
+	<select id="pdMiao" resultType="Boolean">
+		select id from miao where data=#{data} and time=#{time}
+	</select>
+	
+	<!--插入新的秒杀时间  -->
+	<insert id="tianMiao">
+		insert into miao(time,data) value(#{time},#{data})
+	</insert>
+	<!-- 修改秒杀商品的价钱 -->
+	<update id="setDiscount">
+		update discount set time=#{time},xian=#{xian},data=#{data} where id=#{id} and data=#{data} and time=#{time}
+	</update>
+	
+	<!-- 添加秒杀商品 -->
+	<insert id="addMiao">
+		insert into discount(id,name,time,xian,qian,src,data) value(#{id},#{name},#{time},#{xian},#{qian},#{src},#{data})
+	</insert> 
+	
+</mapper>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客日记</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <script src="/public/lib/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/public/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/public/js/snowy.js"></script>
+    <link rel="stylesheet" href="/public/css/see.css">
+    <script src="/public/js/see.js"></script>
+</head>
+
+<body>
+    <div class="snow-container"></div>
+    <header class="navbar  nav_h" role="navigation">
+        <div class="container_nav">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">猿人博客</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/index.html">网站首页</a></li>
+                    
+                    <li class="active"><a href="/vue/2020/01/06/vue1.html">文章阅读</a></li>
+                    
+                    <li><a href="#">设计心得</a></li>
+                    <li><a href="#">给我留言</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="blo_left">
+            <div class="browse">
+                <div class="browse_1">
+                    <span>个人博客</span>
+                    <p><i>你现在的位置是：</i><a href="/index.html">首页</a><i>&gt;</i><a href="/vue/2020/01/06/vue1.html">个人博客</a></p>
+                </div>
+                <span class="bo glyphicon glyphicon-play-circle" title="语音播放"></span>
+                <div class="browse_2">
+                    <h1>vue修饰符</h1>
+                    <h5><span class="user_img"></span><span>作者：</span><span class="user">程序猿</span></h5>
+                </div>
+
+                <div class="browse_4">
+                 <p>在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。尽管我们可以在方法中轻松实现这点，但更好的方式是：方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。为了解决这个问题,Vue.js 为 v-on 提供了事件修饰符。</p>
+
+<h4 id="lazy">.lazy:</h4>
+<p>在默认情况下，v-model 在每次 input 事件触发后将输入框的值与数据进行同步 。你可以添加 lazy 修饰符，从而转变为使用 change 事件进行同步
+<img src="/public/images/vue1_1.png" class="img_cen" /></p>
+
+<h4 id="number">.number:</h4>
+<p>如果想自动将用户的输入值转为数值类型，可以给 v-model 添加 number 修饰符
+<img src="/public/images/vue1_2.png" class="img_cen" /></p>
+
+<h4 id="trim">.trim</h4>
+<p>如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符
+<img src="/public/images/vue1_3.png" class="img_cen" /></p>
+
+<h4 id="事件修饰符">事件修饰符</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"re"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- 阻止单击事件继续传播 --&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span> <span class="err">@</span><span class="na">click.stop=</span><span class="s">"re1"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+            <span class="c">&lt;!-- 修饰符可以串联 --&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span> <span class="err">@</span><span class="na">click.stop.prevent=</span><span class="s">"re1"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+            <span class="c">&lt;!-- 点击事件将只会触发一次 --&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span> <span class="err">@</span><span class="na">click.once=</span><span class="s">"re1"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="c">&lt;!-- 提交事件不再刷新页面  --&gt;</span>
+        <span class="nt">&lt;form</span>  <span class="na">method=</span><span class="s">"get"</span> <span class="err">@</span><span class="na">submit.prevent=</span><span class="s">"re2"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="nt">&gt;</span>提交<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+
+
+    <span class="nt">&lt;/div&gt;</span>
+
+</code></pre></div></div>
+<p>使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 v-on:click.prevent.self 会阻止所有的点击，而 v-on:click.self.prevent 只会阻止对元素自身的点击</p>
+
+<h4 id="按键修饰符">按键修饰符</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- 在键盘码对应键按下时触发事件 --&gt;</span>
+       <span class="nt">&lt;input</span> <span class="err">@</span><span class="na">keyup.65=</span><span class="s">"re"</span><span class="nt">&gt;</span>
+
+       <span class="nt">&lt;input</span> <span class="err">@</span><span class="na">keyup.left=</span><span class="s">"re1"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;/div&gt;</span>
+
+</code></pre></div></div>
+<h5 id="vue为最常用的按键提供了别名">Vue为最常用的按键提供了别名</h5>
+
+<ul>
+  <li>.enter</li>
+  <li>.tab</li>
+  <li>.delete (捕获“删除”和“退格”键)</li>
+  <li>.esc</li>
+  <li>.space</li>
+  <li>.up</li>
+  <li>.down</li>
+  <li>.left</li>
+  <li>.right</li>
+</ul>
+
+<h4 id="系统修饰符">系统修饰符</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+
+       <span class="c">&lt;!--两个键同时按下才触发且ctrl先left后  --&gt;</span>
+       <span class="nt">&lt;input</span> <span class="err">@</span><span class="na">keyup.ctrl.left=</span><span class="s">"re2"</span><span class="nt">&gt;</span>
+   
+			<span class="c">&lt;!--只要有一个键按下释放都会触发  --&gt;</span>
+      <span class="nt">&lt;input</span> <span class="err">@</span><span class="na">keyup.17.left=</span><span class="s">"re2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    
+</code></pre></div></div>
+<h5 id="常用的系统键修饰符">常用的系统键修饰符</h5>
+
+<ul>
+  <li>.ctrl</li>
+  <li>.alt</li>
+  <li>.shift</li>
+  <li>.meta</li>
+  <li>
+    <p>注意：在 Mac 系统键盘上，meta 对应 command 键 (⌘)。在 Windows 系统键盘 meta 对应 Windows 徽标键 (⊞)。在 Sun 操作系统键盘上，meta 对应实心宝石键 (◆)。在其他特定键盘上，尤其在 MIT 和 Lisp 机器的键盘、以及其后继产品，比如 Knight 键盘、space-cadet 键盘，meta 被标记为“META”。在 Symbolics 键盘上，meta 被标记为“META”或者“Meta”。</p>
+  </li>
+  <li>请注意修饰键与常规按键不同，在和 keyup 事件一起用时，事件触发时修饰键必须处于按下状态。换句话说，只有在按住 ctrl 的情况下释放其它按键，才能触发 keyup.ctrl。而单单释放 ctrl 是不会触发事件的。如果你想要释放ctrl也出发事件，请为 ctrl 换用 keyCode：keyup.17。</li>
+</ul>
+
+                </div>
+                <div class="browse_3">
+                    <i><img src="/public/images/browse1_3.png" alt=""></i>
+                    <span class="span1">程序猿</span> <span class="time">2020-01-06</span><span
+                        class="title1">[vue]</span>
+                </div>
+                <div class="browse_5">
+                    <ul>
+                        
+                        <li><span>上一篇：</span><a href="/tips/2019/12/28/tips.html">小知识大世界</a></li>
+                        
+                        
+                        <li><span>下一篇：</span><a href="/vue/2020/01/06/vue2.html">vue自定义指令</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="blo_right">
+            <div class="lbox">
+                <div class="box_1"><p>本站推荐</p></div>
+                <div class="box_2">
+                    
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                            <a href="/git/2019/12/27/git2.html" class="xia">
+                                <img src="/public/images/wen16.jpg" alt="wen16">
+                                <p class="p1">github常用指令</p>
+                            </a>
+                            
+                </div>
+                <div class="box_3">
+                    
+                        
+                        
+                        
+                            
+                        
+                            
+                        
+                        
+                            
+                   
+                    <ul>
+                   
+                        
+   
+                            <li>
+                                <a href="/react/2020/05/15/react_basics.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen1.jpg" alt="wen1">
+                                    </div>
+                                    <span>React基础学习</span>
+                                </a>
+                            </li>
+                        
+   
+                            <li>
+                                <a href="/markdown/2019/12/27/markdown2.html" class="xia">
+                                    <div class="li_img">
+                                        <img src="/public/images/wen2.jpg" alt="wen2">
+                                    </div>
+                                    <span>markdown基本语法</span>
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="lbox_1">
+                <div class="bo_1">
+                    <img src="/public/images/lbox5_1.jpg" alt="lbox5_1">
+                </div>
+            </div>
+            <div class="lbox_2">
+                <div class="box_1"><p>标签云</p></div>
+                <div class="bo_2">
+                   <span>程序员</span>
+                   <span class="oc">旅游</span>
+                   <span>幽默</span>
+                   <span>爱玩</span>
+                   <span >勤奋</span>
+                   <span class="oc">梦想</span>
+                   <span  class="oc">努力</span>
+                   <span>珍惜</span>
+                   <span>朋友</span>
+                   <span>随缘</span>
+                   <span>2020</span>
+                   <span class="oc">爱生活</span>
+                   <span>风景</span>
+                   <span >修行</span >
+                   <span class="oc">人生</span>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>
